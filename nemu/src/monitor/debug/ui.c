@@ -38,6 +38,37 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args){
+	if(args==NULL)
+	{
+		cpu_exec(1);
+		return 0;
+	}
+	uint64_t cnt=0;
+	int len=strlen(args);
+	if(!len)
+		cnt=1;
+	else
+	{
+		if(len>2){
+			printf("Unexpected expression.\n");
+			return 0;
+		}
+		else{
+			for(int i=0;i<len;i++)
+			{
+				if('0'<=args[i] && args[i]<='9'){
+					cnt=cnt*10+args[i]-'0';
+				}
+				else
+					printf("Unexpected expression.\n");
+			}
+		}
+	}
+	cpu_exec(cnt);
+	return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -46,7 +77,8 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+  { "si", "Do the next step for N times.Expression should be si N; if not N,just do one step",cmd_si},
+  
   /* TODO: Add more commands */
 
 };
