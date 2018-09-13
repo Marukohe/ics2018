@@ -61,12 +61,35 @@ static int cmd_si(char *args){
 					cnt=cnt*10+args[i]-'0';
 				}
 				else
+				{	
 					printf("Unexpected expression.\n");
+					return 0;
+				}
 			}
 		}
 	}
 	cpu_exec(cnt);
 	return 0;
+}
+
+static int cmd_info(char *args)
+{
+	 if(strcmp(args,"r")==0){
+			printf("\t%x",cpu.eax);
+			printf("\t%x",cpu.ecx);
+			printf("\t%x",cpu.edx);
+			printf("\t%x",cpu.ebx);
+			printf("\t%x",cpu.esp);
+			printf("\t%x",cpu.ebp);
+			printf("\t%x",cpu.esi);
+			printf("\t%x",cpu.edi);
+			return 0;
+	 }
+	 else{
+		/*case "w": watchpoint*/ 
+		printf("Unexpected expression\n");
+		return 0;
+	 }
 }
 
 static struct {
@@ -78,6 +101,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Do the next step for N times.Expression should be si N; if not N,just do one step",cmd_si},
+  {"info", "print the state of program",cmd_info},
   
   /* TODO: Add more commands */
 
