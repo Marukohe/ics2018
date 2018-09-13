@@ -75,14 +75,14 @@ static int cmd_si(char *args){
 static int cmd_info(char *args)
 {
 	 if(strcmp(args,"r")==0){
-			printf("\t%x",cpu.eax);
-			printf("\t%x",cpu.ecx);
-			printf("\t%x",cpu.edx);
-			printf("\t%x",cpu.ebx);
-			printf("\t%x",cpu.esp);
-			printf("\t%x",cpu.ebp);
-			printf("\t%x",cpu.esi);
-			printf("\t%x",cpu.edi);
+			printf("eax\t%-x\t%-d\n",cpu.eax,cpu.eax);
+			printf("ecx\t%-x\t%-d\n",cpu.ecx,cpu.ecx);
+			printf("edx\t%-x\t%-d\n",cpu.edx,cpu.edx);
+			printf("ebx\t%-x\t%-d\n",cpu.ebx,cpu.ebx);
+			printf("esp\t%-x\t%-d\n",cpu.esp,cpu.esp);
+			printf("ebp\t%-x\t%-d\n",cpu.ebp,cpu.ebp);
+			printf("esi\t%-x\t%-d\n",cpu.esi,cpu.esi);
+			printf("edi\t%-x\t%-d\n",cpu.edi,cpu.edi);
 			return 0;
 	 }
 	 else{
