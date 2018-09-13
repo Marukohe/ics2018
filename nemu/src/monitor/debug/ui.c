@@ -75,14 +75,14 @@ static int cmd_si(char *args){
 static int cmd_info(char *args)
 {
 	 if(strcmp(args,"r")==0){
-			printf("eax\t%-x\t%-d\n",cpu.eax,cpu.eax);
-			printf("ecx\t%-x\t%-d\n",cpu.ecx,cpu.ecx);
-			printf("edx\t%-x\t%-d\n",cpu.edx,cpu.edx);
-			printf("ebx\t%-x\t%-d\n",cpu.ebx,cpu.ebx);
-			printf("esp\t%-x\t%-d\n",cpu.esp,cpu.esp);
-			printf("ebp\t%-x\t%-d\n",cpu.ebp,cpu.ebp);
-			printf("esi\t%-x\t%-d\n",cpu.esi,cpu.esi);
-			printf("edi\t%-x\t%-d\n",cpu.edi,cpu.edi);
+			printf("eax\t%-16x%-d\n",cpu.eax,cpu.eax);
+			printf("ecx\t%-16x%-d\n",cpu.ecx,cpu.ecx);
+			printf("edx\t%-16x%-d\n",cpu.edx,cpu.edx);
+			printf("ebx\t%-16x%-d\n",cpu.ebx,cpu.ebx);
+			printf("esp\t%-16x%-d\n",cpu.esp,cpu.esp);
+			printf("ebp\t%-16x%-d\n",cpu.ebp,cpu.ebp);
+			printf("esi\t%-16x%-d\n",cpu.esi,cpu.esi);
+			printf("edi\t%-16x%-d\n",cpu.edi,cpu.edi);
 			return 0;
 	 }
 	 else{
