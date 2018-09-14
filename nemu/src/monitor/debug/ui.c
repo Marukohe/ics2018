@@ -94,8 +94,10 @@ static int cmd_info(char *args)
 }
 
 static int cmd_x(char *args){
-	int a=1;
-	printf("%d\n",a);
+    int n,m;
+	sscanf(args,"%d%d",&n,&m);
+	vaddr_t ori_eip = m;
+	printf("%d\n",ori_eip);
 	return 0;
 }
 
