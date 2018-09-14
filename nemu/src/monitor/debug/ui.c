@@ -96,8 +96,8 @@ static int cmd_info(char *args)
 static int cmd_x(char *args){
     int n,m;
 	sscanf(args,"%d%d",&n,&m);
-	vaddr_t ori_eip = m;
-	printf("%d\n",ori_eip);
+	int cnt=pmem[m];
+	printf("%d\n",cnt);
 	return 0;
 }
 
