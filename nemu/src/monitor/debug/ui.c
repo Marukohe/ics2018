@@ -97,7 +97,7 @@ static int cmd_x(char *args){
     int n,m;
 	sscanf(args,"%d%d",&n,&m);
 	int cnt=pmem[m];
-	printf("%d\n",cnt);
+	printf("%d %d\n",m,cnt);
 	return 0;
 }
 
