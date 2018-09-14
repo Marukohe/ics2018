@@ -83,6 +83,7 @@ static int cmd_info(char *args)
 			printf("ebp\t%-16x%-d\n",cpu.ebp,cpu.ebp);
 			printf("esi\t%-16x%-d\n",cpu.esi,cpu.esi);
 			printf("edi\t%-16x%-d\n",cpu.edi,cpu.edi);
+			printf("eip\t%-16x%-d\n",cpu.eip,cpu.eip);
 			return 0;
 	 }
 	 else{
@@ -90,6 +91,12 @@ static int cmd_info(char *args)
 		printf("Unexpected expression\n");
 		return 0;
 	 }
+}
+
+static int cmd_x(char *args){
+	int a=1;
+	printf("%d\n",a);
+	return 0;
 }
 
 static struct {
@@ -102,7 +109,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Do the next step for N times.Expression should be si N; if not N,just do one step",cmd_si},
   {"info", "print the state of program",cmd_info},
-  
+  {"x","Scan the memory",cmd_x},
   /* TODO: Add more commands */
 
 };
