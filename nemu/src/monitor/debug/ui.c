@@ -96,8 +96,11 @@ static int cmd_info(char *args)
 static int cmd_x(char *args){
     int n,m;
 	sscanf(args,"%d%d",&n,&m);
-	int cnt=pmem[m];
-	printf("%d %d\n",m,cnt);
+	for(int i=0;i<n;i++){
+		int cnt=pmem[m];
+		printf("%d\n",cnt);
+		m++;
+	}
 	return 0;
 }
 
