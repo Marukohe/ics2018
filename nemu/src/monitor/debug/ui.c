@@ -104,6 +104,21 @@ static int cmd_x(char *args){
 	return 0;
 }
 
+uint32_t expr(char *e, bool *success);
+
+static int cmd_p(char *args)
+{
+	bool success = true;
+	if(args==NULL)
+	{
+		printf("Unexpected expression\n");
+		return 0;
+	}
+	uint32_t tmp=expr(args, &success);
+	printf("%u\n",tmp);
+	return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -115,7 +130,7 @@ static struct {
   { "si", "Do the next step for N times.Expression should be si N; if not N,just do one step",cmd_si},
   {"info", "print the state of program",cmd_info},
   {"x","Scan the memory",cmd_x},
- /* {"p","expression evaluation",cmd_p},*/
+  {"p","expression evaluation",cmd_p},
   /* TODO: Add more commands */
 
 };
