@@ -134,6 +134,140 @@ bool check_parentheses(int p,int q)
 	   	return false;
 }
 
+uint32_t eval(int p,int q)
+{
+	if(p>q){
+		printf("Unexpected expression\n");
+		assert(0);
+		return 0;
+	}
+	else if(p==q)
+	{
+		int cnt;
+	    if(tokens[p].type==HEX)
+		{
+			sscanf(tokens[p].str,"%x",&cnt);
+			return cnt;
+		}	
+		else if(tokens[p].type==DEC)
+		{
+			sscanf(tokens[p].str,"%d",&cnt);
+			return cnt;
+		}
+		else if(tokens[p].type==REG)
+		{
+			if(tokens[p].str[0]!='$'||tokens[p].str[1]!='e')
+			{
+				assert(0);
+				return 0;
+			} 
+			else
+			{
+				switch(tokens[p].str[2])
+				{
+					case 'a':
+						return cpu.eax;
+					case 'b':
+						{
+							switch(tokens[p].str[3])
+							{
+								case 'x':
+									return cpu.ebx;
+								case 'p':
+									return cpu.ebp;
+							}
+						}
+					case 'c':
+						return cpu.ecx;
+					case 'd':
+						{
+							switch(tokens[p].str[3])
+							{
+								case 'x':
+									return cpu.edx;
+								case 'i':
+									return cpu.edi;
+							}
+						}
+					case 's':
+						{
+							switch(tokens[p].str[3])
+							{
+								case 'p':
+									return cpu.esp;
+								case 'i':
+									return cpu.esi;
+							}
+						}
+					default:{
+								assert(0);
+								return 0;
+							}
+				}
+			}
+		}
+
+	}
+	else if(check_parentheses(p,q)==true)
+		return eval(p+1,q-1);
+	else
+	{
+		int op=0;
+		int op_type=0;
+		int flag=1;
+		int cnt=0;
+		for(int i=p;i<=q;i++)
+		{
+			if(tokens[i].type=='(')
+			{
+				cnt++;
+			    do{
+					i++;
+					if(tokens[i].type=='(')
+						cnt++;
+					else if(tokens[i].type==')')
+						cnt--;
+				}while(cnt==0);
+			}
+			else if(tokens[i].type=='*'&&flag==1)
+			{
+				op=i;
+				op_type='*';
+			}
+			else if(tokens[i].type=='/'&&flag==1)
+			{
+				op=i;
+				op_type='/';
+			}
+			else if(tokens[i].type=='+')
+			{
+				op=i;
+				op_type='+';
+				flag=0;
+			}
+			else if(tokens[i].type=='-')
+			{
+				op=i;
+				op_type='-';
+				flag=0;
+			}
+		}
+		uint32_t val1,val2;
+		val1=eval(p,op-1);
+		val2=eval(op+1,q);
+		
+		switch(op_type){
+			case '+': return val1+val2;
+			case '-': return val1-val2;
+			case '*': return val1*val2;
+			case '/': return val1/val2;
+			default: assert(0);
+		}
+	}
+	assert(0);
+	return 0;
+}
+
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -141,7 +275,7 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+ /* TODO();*/
 
-  return 0;
+  return eval(0,nr_token-1);
 }
