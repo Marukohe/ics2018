@@ -115,6 +115,7 @@ static struct {
   { "si", "Do the next step for N times.Expression should be si N; if not N,just do one step",cmd_si},
   {"info", "print the state of program",cmd_info},
   {"x","Scan the memory",cmd_x},
+ /* {"p","expression evaluation",cmd_p},*/
   /* TODO: Add more commands */
 
 };

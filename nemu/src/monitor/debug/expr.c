@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ
+  TK_NOTYPE = 256, TK_EQ,REG,HEX,DEC=260
 
   /* TODO: Add more token types */
 
@@ -21,10 +21,18 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
+  {"\\*", '*'},         //mutiply
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
-  {"==", TK_EQ}         // equal
+  {"==", TK_EQ},        // equal
+  {"/", '/'},         //divide
+  {"\\-", '-'},         //minus
+  {"\\$.{2,3}", REG},        //register
+  {"0x[0-9a-fA-F]",HEX}, //hexidecimal
+  {"[0-9]+", DEC},       //decimal
+  {"\\(",'('},           //left bracket
+  {"\\)",')'},           //right bracket
+  
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -80,9 +88,19 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: TODO();
+		    case TK_NOTYPE:
+				break;
+			case '*': case '+': case TK_EQ: case '/': case '-': case REG: case HEX: case DEC: case '(': case ')':
+				tokens[nr_token].type=rules[i].token_type;
+            default: TODO();
         }
-
+        
+		if(tokens[nr_token].type==REG||tokens[nr_token].type==HEX||tokens[nr_token].type==DEC)
+		{
+			strncpy(tokens[nr_token].str,substr_start,substr_len);
+			(tokens[nr_token].str)[substr_len]='\0';
+		}	
+		nr_token++;
         break;
       }
     }
