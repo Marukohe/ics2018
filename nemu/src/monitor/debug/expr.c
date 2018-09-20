@@ -114,6 +114,26 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int p,int q)
+{
+	if((tokens[p].type!='(')||(tokens[q].type!=')'))
+		return false;
+	int cnt=0;
+	for(int i=p;i<=q;i++)
+	{
+		if(tokens[i].type=='(')
+			cnt++;
+		if(tokens[i].type==')')
+			cnt--;
+		if(cnt<=0 && i!=q)
+			return false;
+	}
+	if(cnt==0)
+		return true;
+	else
+	   	return false;
+}
+
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
