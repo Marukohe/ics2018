@@ -7,8 +7,52 @@
 
 // this should be enough
 static char buf[65536];
+
+static uint32_t choose(uint32_t n)
+{
+	return rand()%n;
+}
+
+static inline char *gen_num()
+{
+	static char s[20];
+	int tmp=rand()%1000;
+	sprintf(s,"%d",tmp);
+	return s;
+}
+
+static inline char *gen(char a)
+{
+	static char b[3];
+	b[0]=a;
+	return b;
+}
+
+static inline char *gen_rand_op()
+{
+	int temp=rand()%4;
+	switch(temp){
+		case 0: return "*";
+		case 1: return "/";
+		case 2: return "+";
+		case 3: return "-";
+		default: assert(0);
+	}
+}
+
 static inline void gen_rand_expr() {
-  buf[0] = '\0';
+   /* buf[0] = '\0';*/
+   switch(choose(3)){
+	  case 0: strcat(buf,gen_num());break;
+	  case 1: strcat(buf,gen('('));
+			  gen_rand_expr();
+			  strcat(buf,gen(')'));
+			  break;
+	  default: gen_rand_expr();
+			   strcat(buf,gen_rand_op());
+			   gen_rand_expr();
+			   break;
+  }
 }
 
 static char code_buf[65536];
@@ -29,6 +73,7 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
+	buf[0]='\0';
     gen_rand_expr();
 
     sprintf(code_buf, code_format, buf);
@@ -45,7 +90,7 @@ int main(int argc, char *argv[]) {
     assert(fp != NULL);
 
     int result;
-    fscanf(fp, "%d", &result);
+    fscanf(fp,"%d", &result);
     pclose(fp);
 
     printf("%u %s\n", result, buf);
