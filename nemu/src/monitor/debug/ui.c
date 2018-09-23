@@ -97,9 +97,10 @@ static int cmd_x(char *args){
     int n,m;
 	sscanf(args,"%d%x",&n,&m);
 	for(int i=0;i<n;i++){
-		int cnt=pmem[m];
-		printf("%x\n",cnt);
-		m++;
+		printf("%x: ",m);
+		/*int cnt=pmem[m];*/
+		printf("0x%x%x%x%x\n",pmem[m],pmem[m+1],pmem[m+2],pmem[m+3]);
+		m+=4;
 	}
 	return 0;
 }
