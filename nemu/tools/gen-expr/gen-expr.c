@@ -40,18 +40,38 @@ static inline char *gen_rand_op()
 	}
 }
 
+static inline void insertspace()
+{
+	while(rand()%4==1)
+	{
+		strcat(buf," ");
+	}
+}
+
 static inline void gen_rand_expr() {
    /* buf[0] = '\0';*/
    switch(choose(3)){
-	  case 0: strcat(buf,gen_num());break;
+	  case 0: insertspace(); strcat(buf,gen_num());strcat(buf,"U");break;
 	  case 1: strcat(buf,gen('('));
+			  insertspace();
 			  gen_rand_expr();
+			  insertspace();
 			  strcat(buf,gen(')'));
+			  insertspace();
 			  break;
-	  default: gen_rand_expr();
-			   strcat(buf,gen_rand_op());
+	  default: insertspace();
 			   gen_rand_expr();
+			   insertspace();
+			   strcat(buf,gen_rand_op());
+			   insertspace();
+			   gen_rand_expr();
+			   insertspace();
 			   break;
+  }
+  if(strlen(buf)>=65536)
+  {	 
+	  buf[0]='0';
+	  buf[1]='\0';
   }
 }
 
