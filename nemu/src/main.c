@@ -15,8 +15,10 @@ int main(int argc, char *argv[]) {
   /* printf("yingyinging\n");*/
   bool success =true;
   uint32_t cnt;
+  int i=0;
   while(~fscanf(fp,"%u",&cnt)){
-	  printf("weisheme\n");
+	  printf("%d\n",i);
+	  i++;
 	 char str1[65536];
 	 fscanf(fp,"%[^\n]%*c",str1);
      uint32_t tmp =  expr(str1, &success);
