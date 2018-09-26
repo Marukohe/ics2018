@@ -8,8 +8,10 @@ int main(int argc, char *argv[]) {
   int is_batch_mode = init_monitor(argc, argv);
 
   uint32_t expr(char *e, bool *success);
-  FILE *fp;
+  FILE *fp=NULL;
   fp=fopen("./tools/gen-expr/input","w+");
+  if(fp==NULL)
+	  printf("opening file failed\n");
   bool success =true;
   uint32_t cnt;
   while(~fscanf(fp,"%u",&cnt)){
