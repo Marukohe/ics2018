@@ -29,7 +29,7 @@ static struct rule {
   {"\\-", '-'},         //minus
   {"\\$.{2,3}", REG},        //register
   {"0x[0-9a-fA-F]",HEX}, //hexidecimal
-  {"[0-9]+U+", DEC},       //decimal
+  {"[0-9]+U*", DEC},       //decimal
   {"\\(",'('},           //left bracket
   {"\\)",')'},           //right bracket
   
