@@ -9,10 +9,10 @@ int main(int argc, char *argv[]) {
 
   uint32_t expr(char *e, bool *success);
   FILE *fp=NULL;
-  fp=fopen("./tools/gen-expr/input","w+");
+  fp=fopen("./tools/gen-expr/input","r");
   if(fp==NULL)
 	  printf("opening file failed\n");
-  printf("yingyinging\n");
+  /* printf("yingyinging\n");*/
   bool success =true;
   uint32_t cnt;
   while(~fscanf(fp,"%u",&cnt)){
