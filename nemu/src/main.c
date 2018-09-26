@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
 
   uint32_t expr(char *e, bool *success);
   FILE *fp=NULL;
-  fp=fopen("./tools/gen-expr/input","w+");
+  fp=fopen("../tools/gen-expr/input","w+");
   if(fp==NULL)
 	  printf("opening file failed\n");
   printf("yingyinging\n");
