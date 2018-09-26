@@ -268,7 +268,7 @@ uint32_t eval(int p,int q)
 					  if(val2==0)
 					  {
 						  printf("divide by 0\n");
-						  return 0;
+						  break;
 					  }
 					  else
 						 return val1/val2;
