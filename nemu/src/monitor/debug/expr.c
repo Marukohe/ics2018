@@ -227,7 +227,7 @@ uint32_t eval(int p,int q)
 						cnt++;
 					else if(tokens[i].type==')')
 						cnt--;
-				}while(cnt==0);
+				}while(cnt!=0);
 			}
 			else if(tokens[i].type=='*'&&flag==1)
 			{
