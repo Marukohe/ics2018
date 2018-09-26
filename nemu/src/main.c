@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
   fp=fopen("./tools/gen-expr/input","w+");
   if(fp==NULL)
 	  printf("opening file failed\n");
+  printf("yingyinging\n");
   bool success =true;
   uint32_t cnt;
   while(~fscanf(fp,"%u",&cnt)){
