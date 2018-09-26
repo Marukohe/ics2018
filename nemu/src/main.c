@@ -6,13 +6,12 @@ int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
   	
   int is_batch_mode = init_monitor(argc, argv);
-
+/*
   uint32_t expr(char *e, bool *success);
   FILE *fp=NULL;
   fp=fopen("./tools/gen-expr/input","r");
   if(fp==NULL)
 	  printf("opening file failed\n");
-  /* printf("yingyinging\n");*/
   bool success =true;
   uint32_t cnt;
   int i=0;
@@ -28,7 +27,7 @@ int main(int argc, char *argv[]) {
 		 printf("ying ying ying\n");
   }
   fclose(fp);
-
+*/
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
 
