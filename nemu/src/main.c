@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
   bool success =true;
   uint32_t cnt;
   while(~fscanf(fp,"%u",&cnt)){
+	  printf("weisheme\n");
 	 char str1[65536];
 	 fscanf(fp,"%[^\n]%*c",str1);
      uint32_t tmp =  expr(str1, &success);
