@@ -29,7 +29,7 @@ static struct rule {
   {"\\-", '-'},         //minus
   {"\\$.{2,3}", REG},        //register
   {"0x[0-9a-fA-F]",HEX}, //hexidecimal
-  {"[0-9]+", DEC},       //decimal
+  {"[0-9]+U", DEC},       //decimal
   {"\\(",'('},           //left bracket
   {"\\)",')'},           //right bracket
   
@@ -52,8 +52,8 @@ void init_regex() {
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
-    }
-  }
+     }
+  } 
 }
 
 typedef struct token {
@@ -85,7 +85,7 @@ static bool make_token(char *e) {
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
-         */
+          */
 
         switch (rules[i].token_type) {
 		    case TK_NOTYPE:
@@ -93,27 +93,27 @@ static bool make_token(char *e) {
 			case '*': case '+': case TK_EQ: case '/': case '-': case REG: case HEX: case DEC: case '(': case ')':
 				tokens[nr_token].type=rules[i].token_type;break;
             default: TODO();
-        }
+         }
         
 		if(tokens[nr_token].type==REG||tokens[nr_token].type==HEX||tokens[nr_token].type==DEC)
 		{
 			strncpy(tokens[nr_token].str,substr_start,substr_len);
 			(tokens[nr_token].str)[substr_len]='\0';
-		}
+	 	}
 
 	    if(rules[i].token_type!=TK_NOTYPE){	
 			nr_token++;
-		}
+	 	}
 
         break;
-      }
-    }
+       }
+    } 
 
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
-    }
-  }
+     }
+  } 
 
   return true;
 }
@@ -124,7 +124,7 @@ bool check_parentheses(int p,int q)
 		return false;
 	int cnt=0;
 	for(int i=p;i<=q;i++)
-	{
+	{ 
 		if(tokens[i].type=='(')
 			cnt++;
 		if(tokens[i].type==')')
@@ -144,12 +144,12 @@ uint32_t eval(int p,int q)
 		printf("Unexpected expression\n");
 		assert(0);
 		return 0;
-	}
+	} 
 	else if(p==q)
-	{
+	{ 
 		int cnt;
 	    if(tokens[p].type==HEX)
-		{
+	 	{
 			sscanf(tokens[p].str,"%x",&cnt);
 			return cnt;
 		}	
@@ -157,18 +157,18 @@ uint32_t eval(int p,int q)
 		{
 			sscanf(tokens[p].str,"%d",&cnt);
 			return cnt;
-		}
+	 	}
 		else if(tokens[p].type==REG)
 		{
 			if(tokens[p].str[0]!='$'||tokens[p].str[1]!='e')
 			{
 				assert(0);
 				return 0;
-			} 
+	 		} 
 			else
 			{
 				switch(tokens[p].str[2])
-				{
+	 			{
 					case 'a':
 						return cpu.eax;
 					case 'b':
@@ -179,19 +179,19 @@ uint32_t eval(int p,int q)
 									return cpu.ebx;
 								case 'p':
 									return cpu.ebp;
-							}
-						}
+	 						}
+	 					}
 					case 'c':
 						return cpu.ecx;
 					case 'd':
-						{
+	 					{
 							switch(tokens[p].str[3])
 							{
 								case 'x':
 									return cpu.edx;
 								case 'i':
 									return cpu.edi;
-							}
+	 						}
 						}
 					case 's':
 						{
@@ -201,15 +201,15 @@ uint32_t eval(int p,int q)
 									return cpu.esp;
 								case 'i':
 									return cpu.esi;
-							}
-						}
+	 						}
+	 					}
 					default:{
 								assert(0);
 								return 0;
-							}
+	 						}
 				}
-			}
-		}
+	 		}
+	 	}
 
 	}
 	else if(check_parentheses(p,q)==true)
@@ -231,10 +231,10 @@ uint32_t eval(int p,int q)
 						cnt++;
 					else if(tokens[i].type==')')
 						cnt--;
-				}while(cnt!=0);
-			}
+	 			}while(cnt!=0);
+	 		}
 			else if(tokens[i].type=='*'&&flag==1)
-			{
+	 		{
 				op=i;
 				op_type='*';
 			}
@@ -242,20 +242,20 @@ uint32_t eval(int p,int q)
 			{
 				op=i;
 				op_type='/';
-			}
+	 		}
 			else if(tokens[i].type=='+')
 			{
 				op=i;
 				op_type='+';
 				flag=0;
-			}
+	 		}
 			else if(tokens[i].type=='-')
 			{
 				op=i;
 				op_type='-';
 				flag=0;
-			}
-		}
+	 		}
+	 	}
 		uint32_t val1,val2;
 		val1=eval(p,op-1);
 		val2=eval(op+1,q);
@@ -269,12 +269,12 @@ uint32_t eval(int p,int q)
 					  {
 						  printf("divide by 0\n");
 						  return 0;
-					  }
+	 				  }
 					  else
 						 return val1/val2;
 			default: assert(0);
-		}
-	}
+	 	}
+	} 
 	assert(0);
 	return 0;
 }
@@ -283,7 +283,7 @@ uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
-  }
+  } 
 
   /* TODO: Insert codes to evaluate the expression. */
   /*TODO();*/
