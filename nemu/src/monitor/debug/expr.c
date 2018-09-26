@@ -91,7 +91,7 @@ static bool make_token(char *e) {
 		    case TK_NOTYPE:
 				break;
 			case '*': case '+': case TK_EQ: case '/': case '-': case REG: case HEX: case DEC: case '(': case ')':
-				tokens[nr_token].type=rules[i].token_type;
+				tokens[nr_token].type=rules[i].token_type;break;
             default: TODO();
         }
         
