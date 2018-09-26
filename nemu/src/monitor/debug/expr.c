@@ -257,7 +257,10 @@ uint32_t eval(int p,int q)
 	 		}
 	 	}
 		uint32_t val1,val2;
-		val1=eval(p,op-1);
+		if(op==p)
+			return 0-eval(q,q);
+		else
+			val1=eval(p,op-1);
 		val2=eval(op+1,q);
 		
 		switch(op_type){
