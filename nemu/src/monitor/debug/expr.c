@@ -7,7 +7,8 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,REG,HEX,DEC=260
+  TK_NOTYPE = 256, TK_EQ,REG,HEX,DEC=260,
+  TK_NEQ,TK_AND,TK_OR,TK_POINT
 
   /* TODO: Add more token types */
 
@@ -32,6 +33,10 @@ static struct rule {
   {"[0-9]+U*", DEC},       //decimal
   {"\\(",'('},           //left bracket
   {"\\)",')'},           //right bracket
+  {"!=", TK_NEQ},       //not equal
+  {"&&", TK_AND},       //and
+  {"\\|\\|",TK_OR},     //or
+  {"\\*", TK_POINT},    //point
   
 };
 
