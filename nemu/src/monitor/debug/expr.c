@@ -242,7 +242,7 @@ uint32_t eval(int p,int q)
 	 		}
 			else if(tokens[i].type==DEREF&&flag==6)
 			{
-				op=1;
+				op=i;
 				op_type=DEREF;
 			}
 			else if(tokens[i].type==NEG&&flag==6)
