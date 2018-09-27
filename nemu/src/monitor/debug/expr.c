@@ -36,7 +36,7 @@ static struct rule {
   {"!=", TK_NEQ},       //not equal
   {"&&", TK_AND},       //and
   {"\\|\\|",TK_OR},     //or
-  {"\\*", DEREF},    //point
+  {"abcdg", DEREF},    //point
   {"\\-", NEG},     //negative numbers
 };
 
