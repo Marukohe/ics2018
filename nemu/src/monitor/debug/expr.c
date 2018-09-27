@@ -225,7 +225,7 @@ uint32_t eval(int p,int q)
 	{
 		int op=0;
 		int op_type=0;
-		int flag=1;
+		int flag=5;
 		int cnt=0;
 		for(int i=p;i<=q;i++)
 		{
@@ -240,12 +240,12 @@ uint32_t eval(int p,int q)
 						cnt--;
 	 			}while(cnt!=0);
 	 		}
-			else if(tokens[i].type=='*'&&flag==1)
+			else if(tokens[i].type=='*'&&flag==5)
 	 		{
 				op=i;
 				op_type='*';
 			}
-			else if(tokens[i].type=='/'&&flag==1)
+			else if(tokens[i].type=='/'&&flag==5)
 			{
 				op=i;
 				op_type='/';
@@ -254,13 +254,13 @@ uint32_t eval(int p,int q)
 			{
 				op=i;
 				op_type='+';
-				flag=0;
+				flag=4;
 	 		}
 			else if(tokens[i].type=='-')
 			{
 				op=i;
 				op_type='-';
-				flag=0;
+				flag=4;
 	 		}
 	 	}
 		uint32_t val1,val2;
