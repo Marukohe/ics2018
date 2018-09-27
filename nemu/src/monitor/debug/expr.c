@@ -225,7 +225,7 @@ uint32_t eval(int p,int q)
 	{
 		int op=0;
 		int op_type=0;
-		int flag=5;
+		int flag=6;
 		int cnt=0;
 		for(int i=p;i<=q;i++)
 		{
@@ -240,15 +240,22 @@ uint32_t eval(int p,int q)
 						cnt--;
 	 			}while(cnt!=0);
 	 		}
-			else if(tokens[i].type=='*'&&flag==5)
+			else if(tokens[i].type==DEREF&&flag==6)
+			{
+				op=1;
+				op_type=DEREF;
+			}
+			else if(tokens[i].type=='*'&&flag>=5)
 	 		{
 				op=i;
 				op_type='*';
+				flag=5;
 			}
-			else if(tokens[i].type=='/'&&flag==5)
+			else if(tokens[i].type=='/'&&flag>=5)
 			{
 				op=i;
 				op_type='/';
+				flag=5;
 	 		}
 			else if(tokens[i].type=='+'&&flag>=4)
 			{
@@ -288,7 +295,9 @@ uint32_t eval(int p,int q)
 			}
 	 	}
 		uint32_t val1,val2;
-		if(op==p)
+		if(op_type==DEREF)
+			return vaddr_read(eval(op+1,op+1),4);
+		if(op==p)                 /*to void expression like -3*/
 			return 0-eval(q,q);
 		else
 			val1=eval(p,op-1);
@@ -325,6 +334,12 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   /*TODO();*/
+
+    for(int i=0;i<nr_token;i++)
+	{
+		if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=REG||tokens[i-1].type!=HEX||tokens[i-1].type!=DEC||tokens[i-1].type!=')')))
+			tokens[i].type=DEREF;
+    }
 
     return eval(0,nr_token-1);
 	return 0;
