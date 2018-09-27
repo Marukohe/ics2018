@@ -299,7 +299,7 @@ uint32_t eval(int p,int q)
 				flag=2;
 			}
 	 	}
-		uint32_t val1,val2;
+		uint32_t val1=0,val2=0;
 		/*if(op_type==DEREF)
 			return vaddr_read(eval(op+1,op+1),4);*/
 		/*if(op==p)                 to void expression like -3
@@ -307,7 +307,7 @@ uint32_t eval(int p,int q)
 		else
 			val1=eval(p,op-1);*/
 		printf("%d %d\n",op_type,op);
-		if(op_type!=DEREF||op_type!=NEG)
+		if(op_type!=DEREF&&op_type!=NEG)
 		{
 			printf("yingyingying\n");
 			val1=eval(p,op-1);
