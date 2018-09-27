@@ -8,7 +8,7 @@
 
 enum {
   TK_NOTYPE = 256, TK_EQ,REG,HEX,DEC=260,
-  TK_NEQ,TK_AND,TK_OR,DEREF
+  TK_NEQ,TK_AND,TK_OR,DEREF,NEG
 
   /* TODO: Add more token types */
 
@@ -37,7 +37,7 @@ static struct rule {
   {"&&", TK_AND},       //and
   {"\\|\\|",TK_OR},     //or
   {"\\*", DEREF},    //point
-  
+  {"\\-", NEG},     //negative numbers
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -295,11 +295,13 @@ uint32_t eval(int p,int q)
 			}
 	 	}
 		uint32_t val1,val2;
-		if(op_type==DEREF)
-			return vaddr_read(eval(op+1,op+1),4);
-		if(op==p)                 /*to void expression like -3*/
+		/*if(op_type==DEREF)
+			return vaddr_read(eval(op+1,op+1),4);*/
+		/*if(op==p)                 to void expression like -3
 			return 0-eval(q,q);
 		else
+			val1=eval(p,op-1);*/
+		if(op_type!=DEREF||op_type!=NEG)
 			val1=eval(p,op-1);
 		val2=eval(op+1,q);
 		
@@ -319,6 +321,8 @@ uint32_t eval(int p,int q)
 			case TK_NEQ: return val1!=val2;
 			case TK_OR: return val1||val2;
 			case TK_AND: return val1&&val2;
+			case DEREF: return vaddr_read(val2,4);
+			case NEG: return -val2;
 			default: assert(0);
 	 	}
 	} 
@@ -339,6 +343,8 @@ uint32_t expr(char *e, bool *success) {
 	{
 		if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=REG||tokens[i-1].type!=HEX||tokens[i-1].type!=DEC||tokens[i-1].type!=')')))
 			tokens[i].type=DEREF;
+		else if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=REG||tokens[i-1].type!=HEX||tokens[i-1].type!=DEC||tokens[i-1].type!=')')))
+			tokens[i].type=NEG;
     }
 
     return eval(0,nr_token-1);
