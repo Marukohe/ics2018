@@ -301,6 +301,7 @@ uint32_t eval(int p,int q)
 			return 0-eval(q,q);
 		else
 			val1=eval(p,op-1);*/
+		printf("%d",op_type);
 		if(op_type!=DEREF||op_type!=NEG)
 			val1=eval(p,op-1);
 		val2=eval(op+1,q);
