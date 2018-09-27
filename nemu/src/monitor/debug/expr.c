@@ -245,6 +245,11 @@ uint32_t eval(int p,int q)
 				op=1;
 				op_type=DEREF;
 			}
+			else if(tokens[i].type==NEG&&flag==6)
+			{
+				op=i;
+				op_type=NEG;
+			}
 			else if(tokens[i].type=='*'&&flag>=5)
 	 		{
 				op=i;
