@@ -95,7 +95,7 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
 		    case TK_NOTYPE:
 				break;
-			case '*': case '+': case TK_EQ: case '/': case '-': case REG: case HEX: case DEC: case '(': case ')':
+			case '*': case '+': case TK_EQ: case '/': case '-': case REG: case HEX: case DEC: case '(': case ')': case TK_NEQ: case TK_OR: case TK_AND: 
 				tokens[nr_token].type=rules[i].token_type;break;
             default: TODO();
          }
