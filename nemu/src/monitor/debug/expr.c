@@ -29,7 +29,7 @@ static struct rule {
   {"/", '/'},         //divide
   {"\\-", '-'},         //minus
   {"\\$.{2,3}", REG},        //register
-  {"0x[0-9a-fA-F]",HEX}, //hexidecimal
+  {"0x[0-9a-fA-F]+",HEX}, //hexidecimal
   {"[0-9]+U*", DEC},       //decimal
   {"\\(",'('},           //left bracket
   {"\\)",')'},           //right bracket
@@ -356,7 +356,7 @@ uint32_t expr(char *e, bool *success) {
 		else if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=REG&&tokens[i-1].type!=HEX&&tokens[i-1].type!=DEC&&tokens[i-1].type!=')')))
 			tokens[i].type=NEG;
     }
-    printf("%d\n",nr_token-1);
+   /* printf("%d\n",nr_token-1);*/
     return eval(0,nr_token-1);
 	return 0;
 }
