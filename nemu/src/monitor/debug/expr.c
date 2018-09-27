@@ -250,18 +250,42 @@ uint32_t eval(int p,int q)
 				op=i;
 				op_type='/';
 	 		}
-			else if(tokens[i].type=='+')
+			else if(tokens[i].type=='+'&&flag>=4)
 			{
 				op=i;
 				op_type='+';
 				flag=4;
 	 		}
-			else if(tokens[i].type=='-')
+			else if(tokens[i].type=='-'&&flag>=4)
 			{
 				op=i;
 				op_type='-';
 				flag=4;
 	 		}
+			else if(tokens[i].type==TK_EQ&&flag>=3)
+			{
+				op=i;
+				op_type=TK_EQ;
+				flag=3;
+			}
+			else if(tokens[i].type==TK_NEQ&&flag>=3)
+			{
+				op=i;
+				op_type=TK_NEQ;
+				flag=3;
+			}
+			else if(tokens[i].type==TK_OR&&flag>=2)
+			{
+				op=i;
+				op_type=TK_OR;
+				flag=2;
+			}
+			else if(tokens[i].type==TK_AND&&flag>=2)
+			{
+				op=i;
+				op_type=TK_AND;
+				flag=2;
+			}
 	 	}
 		uint32_t val1,val2;
 		if(op==p)
