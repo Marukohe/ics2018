@@ -36,7 +36,7 @@ static struct rule {
   {"!=", TK_NEQ},       //not equal
   {"&&", TK_AND},       //and
   {"\\|\\|",TK_OR},     //or
-  {"abcdg", DEREF},    //point
+  {"\\*", DEREF},    //point
   {"\\-", NEG},     //negative numbers
 };
 
@@ -351,9 +351,9 @@ uint32_t expr(char *e, bool *success) {
 
     for(int i=0;i<nr_token;i++)
 	{
-		if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=REG||tokens[i-1].type!=HEX||tokens[i-1].type!=DEC||tokens[i-1].type!=')')))
+		if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=REG&&tokens[i-1].type!=HEX&&tokens[i-1].type!=DEC&&tokens[i-1].type!=')')))
 			tokens[i].type=DEREF;
-		else if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=REG||tokens[i-1].type!=HEX||tokens[i-1].type!=DEC||tokens[i-1].type!=')')))
+		else if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=REG&&tokens[i-1].type!=HEX&&tokens[i-1].type!=DEC&&tokens[i-1].type!=')')))
 			tokens[i].type=NEG;
     }
 
