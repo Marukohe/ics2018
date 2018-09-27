@@ -208,6 +208,8 @@ uint32_t eval(int p,int q)
 									return cpu.esi;
 	 						}
 	 					}
+					case 'i':
+						return cpu.eip;
 					default:{
 								assert(0);
 								return 0;
