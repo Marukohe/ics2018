@@ -356,7 +356,7 @@ uint32_t expr(char *e, bool *success) {
 		else if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=REG&&tokens[i-1].type!=HEX&&tokens[i-1].type!=DEC&&tokens[i-1].type!=')')))
 			tokens[i].type=NEG;
     }
-
+    printf("%d\n",nr_token-1);
     return eval(0,nr_token-1);
 	return 0;
 }
