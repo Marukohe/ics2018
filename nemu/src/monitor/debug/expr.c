@@ -8,7 +8,7 @@
 
 enum {
   TK_NOTYPE = 256, TK_EQ,REG,HEX,DEC=260,
-  TK_NEQ,TK_AND,TK_OR,TK_POINT
+  TK_NEQ,TK_AND,TK_OR,DEREF
 
   /* TODO: Add more token types */
 
@@ -36,7 +36,7 @@ static struct rule {
   {"!=", TK_NEQ},       //not equal
   {"&&", TK_AND},       //and
   {"\\|\\|",TK_OR},     //or
-  {"\\*", TK_POINT},    //point
+  {"\\*", DEREF},    //point
   
 };
 
