@@ -306,10 +306,10 @@ uint32_t eval(int p,int q)
 			return 0-eval(q,q);
 		else
 			val1=eval(p,op-1);*/
-		printf("%d %d\n",op_type,op);
+	    /*printf("%d %d\n",op_type,op);*/
 		if(op_type!=DEREF&&op_type!=NEG)
 		{
-			printf("yingyingying\n");
+		   /*printf("yingyingying\n");*/
 			val1=eval(p,op-1);
 
 		}
