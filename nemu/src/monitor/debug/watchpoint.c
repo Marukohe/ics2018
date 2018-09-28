@@ -100,8 +100,8 @@ bool checkchange()
 			printf("Watchpoint %d has changed,the old value is %u and now is %u\n",wp->NO,wp->ans,tmp);
 			flag=false;
 			wp->ans=tmp;
-			wp=wp->next;
 		}
+		wp=wp->next;
 	}
 	return flag;
 }
