@@ -76,8 +76,10 @@ void pwatchpoint()
 	WP *wp;
 	wp = head;
 	bool success = true;
-	if(wp==NULL)
-		printf("There is no watchpoint.\n");
+	if(wp==NULL){
+		printf("There is not such watchpoint.\n");
+		return;
+	}
 	while(wp!=NULL)
 	{
 		uint32_t tmp=expr(wp->bufs, &success);
