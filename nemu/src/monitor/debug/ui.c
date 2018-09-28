@@ -141,7 +141,7 @@ static int cmd_w(char *args)
 static int cmd_d(char *args)
 {
 	int n;
-	sscanf(args,"%n",&n);
+	sscanf(args,"%d",&n);
 	free_wp(n);
 	return 0;
 }
