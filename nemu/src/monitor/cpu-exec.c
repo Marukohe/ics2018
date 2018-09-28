@@ -42,8 +42,10 @@ void cpu_exec(uint64_t n) {
     /* TODO: check watchpoints here. */
    bool checkchange();
    bool flag = checkchange();
-   if(flag==false)
+   if(flag==false){
 	   nemu_state=NEMU_STOP;
+	   return;
+   }
 #endif
 
 #ifdef HAS_IOE
