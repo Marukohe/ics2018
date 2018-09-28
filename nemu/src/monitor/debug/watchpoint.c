@@ -6,12 +6,20 @@
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
 
+WP* new_wp();
+void free_wp(int n);
+
 void init_wp_pool() {
   int i;
   for (i = 0; i < NR_WP; i ++) {
     wp_pool[i].NO = i;
     wp_pool[i].next = &wp_pool[i + 1];
   }
+ /* for(int i=0;i<NR_WP;i++)
+  {
+	  wp_pool[i]->prev=wp_pool[i-1];
+  }
+  wp_pool[0]->prev=NULL;*/
   wp_pool[NR_WP - 1].next = NULL;
 
   head = NULL;
@@ -20,4 +28,60 @@ void init_wp_pool() {
 
 /* TODO: Implement the functionality of watchpoint */
 
+WP* new_wp()
+{
+	if(free_==NULL)
+	{
+		printf("There is no avalialbe watchpoint\n");
+		assert(0);
+	}
+    WP *x;
+	x=free_;
+	free_=free_->next;
+	x->next=head;
+	head=x;
+	return head;
+}
 
+void free_wp(int n)
+{
+	WP *x;
+	x=head;
+	WP *y=x;
+	if(head==NULL)
+	{
+		printf("There is no watchpoint\n");
+		assert(0);
+	}
+	while((x->NO!=n)&&x->next!=NULL)
+	{
+		y=x;
+		x=x->next;
+	}
+	if(x->NO==n)
+	{
+		if(x==head) head=head->next;
+		else
+		{
+			y->next=x->next;
+			x->next=free_;
+			free_=x;
+		}
+	}
+}
+
+uint32_t expr(char *e, bool *success);
+void pwatchpoint()
+{
+	WP *wp;
+	wp = head;
+	bool success = true;
+	if(wp==NULL)
+		printf("There is no watchpoint.\n");
+	while(wp!=NULL)
+	{
+		uint32_t tmp=expr(wp->bufs, &success);
+		printf("WATCHPOINT NO.%d  %s: %u\n",wp->NO,wp->bufs,tmp);
+		wp=wp->next;
+	}
+}

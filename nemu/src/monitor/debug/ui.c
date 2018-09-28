@@ -43,7 +43,7 @@ static int cmd_si(char *args){
 	{
 		cpu_exec(1);
 		return 0;
-	}
+	} 
 	uint64_t cnt=0;
 	int len=strlen(args);
 	if(!len)
@@ -72,6 +72,11 @@ static int cmd_si(char *args){
 	return 0;
 }
 
+void pwatchpoint();
+WP *new_wp();
+void init_wp_pool();
+void free_wp(int n);
+
 static int cmd_info(char *args)
 {
 	 if(strcmp(args,"r")==0){
@@ -85,6 +90,11 @@ static int cmd_info(char *args)
 			printf("edi\t%-16x%-d\n",cpu.edi,cpu.edi);
 			printf("eip\t%-16x%-d\n",cpu.eip,cpu.eip);
 			return 0;
+	 }
+	 else if(strcmp(args,"w")==0)
+	 {
+		 pwatchpoint();/*errors*/
+		 return 0;
 	 }
 	 else{
 		/*case "w": watchpoint*/ 
@@ -120,6 +130,23 @@ static int cmd_p(char *args)
 	return 0;
 }
 
+static int cmd_w(char *args)
+{
+	WP *x;
+	x=new_wp();
+	strcat(x->bufs,args);
+	return 0;
+}
+
+static int cmd_d(char *args)
+{
+	int n;
+	sscanf(args,"%n",&n);
+	free_wp(n);
+	return 0;
+}
+
+
 static struct {
   char *name;
   char *description;
@@ -132,6 +159,8 @@ static struct {
   {"info", "print the state of program",cmd_info},
   {"x","Scan the memory",cmd_x},
   {"p","expression evaluation",cmd_p},
+  {"w","add watpoint",cmd_w},
+  {"d","delete watchpoint",cmd_d},
   /* TODO: Add more commands */
 
 };
