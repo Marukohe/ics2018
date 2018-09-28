@@ -86,3 +86,21 @@ void pwatchpoint()
 		wp=wp->next;
 	}
 }
+
+bool checkchange()
+{
+	bool flag = true;
+	bool success = true;
+	WP *wp=head;
+	while(wp!=NULL)
+	{
+		uint32_t tmp=expr(wp->bufs,&success);
+		if(tmp!=wp->ans)
+		{
+			printf("Watchpoint %d has changed,the old value is %u and now is %u\n",wp->NO,wp->ans,tmp);
+			flag=false;
+			wp->ans=tmp;
+		}
+	}
+	return flag;
+}

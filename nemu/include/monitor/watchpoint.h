@@ -16,5 +16,6 @@ WP* new_wp();
 void free_wp(int n);
 void init_wp_pool();
 void pwatchpoint();
+bool checkchange();
 
 #endif

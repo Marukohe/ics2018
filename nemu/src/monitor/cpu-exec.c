@@ -40,10 +40,10 @@ void cpu_exec(uint64_t n) {
 
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
-   /* for(int i=0;i<NR_WP;i++)
-	{
-		
-	}*/
+   bool checkchange();
+   bool flag = checkchange();
+   if(flag==false)
+	   nemu_state=NEMU_STOP;
 #endif
 
 #ifdef HAS_IOE
