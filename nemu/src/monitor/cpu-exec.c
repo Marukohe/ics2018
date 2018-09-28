@@ -40,7 +40,10 @@ void cpu_exec(uint64_t n) {
 
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
-
+   /* for(int i=0;i<NR_WP;i++)
+	{
+		
+	}*/
 #endif
 
 #ifdef HAS_IOE

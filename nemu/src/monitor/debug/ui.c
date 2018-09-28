@@ -135,6 +135,8 @@ static int cmd_w(char *args)
 	WP *x;
 	x=new_wp();
 	strcat(x->bufs,args);
+	bool success = true;
+	x->ans =expr(x->bufs, &success);
 	return 0;
 }
 

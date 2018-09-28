@@ -2,7 +2,7 @@
 #include "monitor/expr.h"
 
 #define NR_WP 32
-
+uint32_t expr(char *e, bool *success);
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
 
@@ -34,7 +34,7 @@ WP* new_wp()
 	{
 		printf("There is no avalialbe watchpoint\n");
 		assert(0);
-	}
+ 	}
     WP *x;
 	x=free_;
 	free_=free_->next;
@@ -52,38 +52,37 @@ void free_wp(int n)
 	{
 		printf("There is no watchpoint\n");
 		assert(0);
-	}
+	} 
 	while((x->NO!=n)&&x->next!=NULL)
 	{
 		y=x;
 		x=x->next;
-	}
+	} 
 	if(x->NO==n)
-	{
+	{ 
 		if(x==head) head=head->next;
 		else
-		{
+	 	{
 			y->next=x->next;
 			x->next=free_;
 			free_=x;
 		}
 	}
-}
+};
 
-uint32_t expr(char *e, bool *success);
 void pwatchpoint()
 {
 	WP *wp;
 	wp = head;
-	bool success = true;
+/*	bool success = true;*/
 	if(wp==NULL){
 		printf("There is not such watchpoint.\n");
 		return;
 	}
 	while(wp!=NULL)
 	{
-		uint32_t tmp=expr(wp->bufs, &success);
-		printf("WATCHPOINT NO.%d  %s: %u\n",wp->NO,wp->bufs,tmp);
+		/*uint32_t tmp=expr(wp->bufs, &success);*/
+		printf("WATCHPOINT NO.%d  %s: %u\n",wp->NO,wp->bufs,wp->ans);
 		wp=wp->next;
 	}
 }
