@@ -51,7 +51,8 @@ void free_wp(int n)
 	if(head==NULL)
 	{
 		printf("There is no watchpoint\n");
-		assert(0);
+		/*assert(0);*/
+		return;
 	} 
 	while((x->NO!=n)&&x->next!=NULL)
 	{
