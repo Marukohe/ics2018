@@ -45,7 +45,7 @@ void cpu_exec(uint64_t n) {
   /* assert(0);*/
    bool flag = checkchange();
   /* assert(0);*/
-   if(flag==false){
+   if(flag==false&&nemu_state==NEMU_RUNNING){
 	   nemu_state=NEMU_STOP;
 	   break;
    }
