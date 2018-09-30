@@ -80,7 +80,7 @@ void free_wp(int n);
 static int cmd_info(char *args)
 {
 	 if(strcmp(args,"r")==0){
-			printf("eax\t%-16x%-d\n",cpu.eax,cpu.eax);
+			printf("eax\t0x%-16x%-d\n",cpu.eax,cpu.eax);
 			printf("ecx\t%-16x%-d\n",cpu.ecx,cpu.ecx);
 			printf("edx\t%-16x%-d\n",cpu.edx,cpu.edx);
 			printf("ebx\t%-16x%-d\n",cpu.ebx,cpu.ebx);
