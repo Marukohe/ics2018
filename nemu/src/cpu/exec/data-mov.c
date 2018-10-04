@@ -38,19 +38,19 @@ make_EHelper(leave) {
 make_EHelper(cltd) {
   if (decoding.is_operand_size_16) {
     TODO();
-  }
+  } 
   else {
     TODO();
-  }
-
+   }
+ 
   print_asm(decoding.is_operand_size_16 ? "cwtl" : "cltd");
 }
 
 make_EHelper(cwtl) {
-  if (decoding.is_operand_size_16) {
+   if (decoding.is_operand_size_16) {
     TODO();
   }
-  else {
+   else {
     TODO();
   }
 

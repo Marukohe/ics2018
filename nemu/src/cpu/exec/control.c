@@ -34,7 +34,7 @@ make_EHelper(call) {
 }
 
 make_EHelper(ret) {
-  TODO();
+  /*cpu.eip=rel_pop(&cpu.esp);*/
 
   print_asm("ret");
 }
