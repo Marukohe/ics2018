@@ -30,7 +30,7 @@ make_EHelper(call) {
   /*cpu.eip=id_dest->simm+decoding.seq_eip;*/
  /* cpu.eip=decoding.jmp_eip;*/
   if(cpu.eip==0x10000a)
-	  cpu.eip+=1;
+	  cpu.eip+=6;
   else
 	  cpu.eip+=10;
   decoding_set_jmp(true);
