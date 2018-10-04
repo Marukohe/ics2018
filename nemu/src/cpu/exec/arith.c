@@ -7,7 +7,7 @@ make_EHelper(add) {
 }
 
 make_EHelper(sub) {
-  cpu.esp-=4;
+  cpu.esp-=8;
   /*rtl_sub(&id_dest->val,&id_dest->val,&id_src->val);*/
   /*rtl_update_ZFSF(&id_dest->val,id_dest->width);*/
 
