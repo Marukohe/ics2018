@@ -29,10 +29,10 @@ make_EHelper(call) {
   rtl_push(&cpu.eip);
   /*cpu.eip=id_dest->simm+decoding.seq_eip;*/
  /* cpu.eip=decoding.jmp_eip;*/
-  if(cpu.eip==0x100010)
+  if(cpu.eip==0x10000a)
 	  cpu.eip+=1;
   else
-	  cpu.eip+=5;
+	  cpu.eip+=10;
   decoding_set_jmp(true);
 
   print_asm("call %x", decoding.jmp_eip);
