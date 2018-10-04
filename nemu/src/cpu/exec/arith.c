@@ -7,9 +7,9 @@ make_EHelper(add) {
 }
 
 make_EHelper(sub) {
-  cpu.esp-=8;
-  /*rtl_sub(&id_dest->val,&id_dest->val,&id_src->val);*/
-  /*rtl_update_ZFSF(&id_dest->val,id_dest->width);*/
+  /*cpu.esp-=8;*/
+  rtl_sub(&id_dest->val,&id_dest->val,&id_src->val);
+  rtl_update_ZFSF(&id_dest->val,id_dest->width);
 
   print_asm_template2(sub);
 }
