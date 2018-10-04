@@ -244,7 +244,7 @@ void exec_wrapper(bool print_flag) {
     puts(decoding.asm_buf);
   }
 #endif
-
+  printf("%x %x\n",cpu.eip,decoding.opcode); /*debug*/
   update_eip();
 
 #if defined(DIFF_TEST)
