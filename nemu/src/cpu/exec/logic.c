@@ -14,8 +14,8 @@ make_EHelper(and) {
 }
 
 make_EHelper(xor) {
-  rtl_xor(&at,&id_dest->val,&id_src->val);
-  operand_write(id_dest,&at);
+  rtl_xor(&id_dest->val,&id_dest->val,&id_src->val);
+  /*operand_write(id_dest,&at);*/
   cpu.EFLAGS.CF=0;
   cpu.EFLAGS.OF=0;
 
