@@ -1,7 +1,13 @@
 #include "cpu/exec.h"
 
 make_EHelper(add) {
-  TODO();
+  /*TODO();*/
+  rtl_add(&t2, &id_dest->val, &id_src->val);
+  rtl_setrelop(RELOP_LTU, &t3, &t2, &id_dest->val);
+  /*rtl_get_CF(&t1);
+  rtl_add(&t2, &t2, &t1);*/
+  operand_write(id_dest, &t2);
+
 
   print_asm_template2(add);
 }
