@@ -50,11 +50,11 @@ static int cmd_si(char *args){
 		cnt=1;
 	else
 	{
-		if(len>2){
+		/*if(len>2){
 			printf("Unexpected expression.\n");
 			return 0;
-		}
-		else{
+		}*/
+		//else{
 			for(int i=0;i<len;i++)
 			{
 				if('0'<=args[i] && args[i]<='9'){
@@ -66,7 +66,7 @@ static int cmd_si(char *args){
 					return 0;
 				}
 			}
-		}
+		//}
 	}
 	cpu_exec(cnt);
 	return 0;
