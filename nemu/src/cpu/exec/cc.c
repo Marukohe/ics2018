@@ -51,7 +51,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
 			rtl_li(dest,0);
 		break;
     case CC_LE:
-		if(cpu.EFLAGS.ZF==1&&cpu.EFLAGS.SF!=cpu.EFLAGS.OF)
+		if(cpu.EFLAGS.ZF==1||cpu.EFLAGS.SF!=cpu.EFLAGS.OF)
 			rtl_li(dest,1);
 		else
 			rtl_li(dest,0);
