@@ -71,5 +71,21 @@ void difftest_step(uint32_t eip) {
 
   // TODO: Check the registers state with the reference design.
   // Set `nemu_state` to `NEMU_ABORT` if they are not the same.
-  TODO();
+ // TODO();
+  if(cpu.eax!=ref_r.eax)
+	  nemu_state=NEMU_ABORT;
+  if(cpu.ecx!=ref_r.ecx)
+      nemu_state=NEMU_ABORT;
+  if(cpu.edx!=ref_r.edx)
+      nemu_state=NEMU_ABORT;
+  if(cpu.ebx!=ref_r.ebx)
+      nemu_state=NEMU_ABORT;
+  if(cpu.esp!=ref_r.esp)
+      nemu_state=NEMU_ABORT;
+  if(cpu.ebp!=ref_r.ebp)
+      nemu_state=NEMU_ABORT;
+  if(cpu.esi!=ref_r.esi)
+      nemu_state=NEMU_ABORT;
+  if(cpu.edi!=ref_r.edi)
+      nemu_state=NEMU_ABORT;
 }
