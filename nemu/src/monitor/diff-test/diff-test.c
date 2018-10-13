@@ -88,4 +88,6 @@ void difftest_step(uint32_t eip) {
       nemu_state=NEMU_ABORT;
   if(cpu.edi!=ref_r.edi)
       nemu_state=NEMU_ABORT;
+  if(cpu.eip!=ref_r.eip)
+	  nemu_state=NEMU_ABORT;
 }
