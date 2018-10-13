@@ -162,15 +162,15 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   switch(width){
 	case 1:
 	  rtl_li(&t2,0xff);
-	  rtl_and(dest,src1,&t2);
+	  rtl_or(dest,src1,&t2);
 	  return;
 	case 2:
 	  rtl_li(&t2,0xffff);
-	  rtl_and(dest,src1,&t2);
+	  rtl_or(dest,src1,&t2);
 	  return;
 	case 4:  
 	  rtl_li(&t2,0xffffffff);
-	  rtl_and(dest,src1,&t2);
+	  rtl_or(dest,src1,&t2);
 	  return;
 	default:
 	  assert(0);
