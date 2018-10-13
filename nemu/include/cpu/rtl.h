@@ -136,7 +136,7 @@ static inline void rtl_lr(rtlreg_t* dest, int r, int width) {
     case 1: rtl_host_lm(dest, &reg_b(r), 1); return;
     case 2: rtl_host_lm(dest, &reg_w(r), 2); return;
     default: assert(0);
-  }
+  } 
 }
 
 static inline void rtl_sr(int r, const rtlreg_t* src1, int width) {
@@ -145,7 +145,7 @@ static inline void rtl_sr(int r, const rtlreg_t* src1, int width) {
     case 1: rtl_host_sm(&reg_b(r), src1, 1); return;
     case 2: rtl_host_sm(&reg_w(r), src1, 2); return;
     default: assert(0);
-  }
+  } 
 }
 
 static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
@@ -158,7 +158,23 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  TODO();
+  //TODO();
+  switch(width){
+	case 1:
+	  rtl_li(&t2,0xff);
+	  rtl_and(dest,src1,&t2);
+	  return;
+	case 2:
+	  rtl_li(&t2,0xffff);
+	  rtl_and(dest,src1,&t2);
+	  return;
+	case 4:  
+	  rtl_li(&t2,0xffffffff);
+	  rtl_and(dest,src1,&t2);
+	  return;
+	default:
+	  assert(0);
+  }
 }
 
 static inline void rtl_push(const rtlreg_t* src1) {
