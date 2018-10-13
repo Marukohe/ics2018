@@ -89,7 +89,7 @@ static int cmd_info(char *args)
 			printf("esi\t0x%-16x%-d\n",cpu.esi,cpu.esi);
 			printf("edi\t0x%-16x%-d\n",cpu.edi,cpu.edi);
 			printf("eip\t0x%-16x%-d\n",cpu.eip,cpu.eip);
-			printf("CF: %d  ZF: %d  SF: %d  IF: %d  OF: %d\n",cpu.EFLAGS.CF,cpu.EFLAGS.ZF,cpu.EFLAGS.SF,cpu.EFLAGS.IF,cpu.EFLAGS.OF);
+			printf("CF: %d  ZF: %d  SF: %d  IF: %d  OF: %d\n",cpu.CF,cpu.ZF,cpu.SF,cpu.IF,cpu.OF);
 			return 0;
 	 }
 	 else if(strcmp(args,"w")==0)
