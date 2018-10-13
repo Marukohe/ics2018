@@ -6,14 +6,14 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-  rtl_push(&cpu.eip);
+  rtl_push(&id_dest->val);
 
   print_asm_template1(push);
 }
 
 make_EHelper(pop) {
-  rtl_pop(&cpu.eip);
-
+  rtl_pop(&at);
+  operand_write(id_dest,&at);
   print_asm_template1(pop);
 }
 
