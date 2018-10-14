@@ -230,7 +230,7 @@ make_rtl_setget_eflags(SF)
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
-  bool flag=true;
+  /*bool flag=true;
   for(int i=0;i<width*8-1;i++)
   {
 	  if(result[i]!=0)
@@ -242,12 +242,19 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   if(flag == false)
 	  cpu.ZF=1;
   else
-	  cpu.ZF=0;
+	  cpu.ZF=0;*/
+	if(result==0)
+		cpu.ZF=1;
+	else
+		cpu.ZF=0;
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
-  cpu.SF=result[width*8-1];
+  //cpu.SF=result[width*8-1];
+  rtl_li(&at,width*8-1);
+  rtl_shr(&t1,result,&at);
+  cpu.SF=t1;
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
