@@ -3,7 +3,7 @@
 
 make_EHelper(test) {
  // TODO();
-  rtl_xor(&at,&id_dest->val,&id_src->val);
+  rtl_and(&at,&id_dest->val,&id_src->val);
   operand_write(id_dest,&at);
   cpu.CF=0;
   cpu.OF=0;
