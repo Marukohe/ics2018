@@ -159,19 +159,31 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
   //TODO();
+  rtl_li(&at,width*8-1);
+  rtl_shr(&t1,src1,&at);
   switch(width){
 	case 1:
-	  rtl_li(&t2,0xff);
-	  rtl_or(dest,src1,&t2);
-	  return;
+		if(t1==0){
+			rtl_li(&t2,0x000000ff);
+			rtl_and(dest,src1,&t2);
+		}
+		else if(t1==1){
+			rtl_li(&t2,0xffffffff);
+			rtl_and(dest,src1,&t2);
+		}
+		return;
 	case 2:
-	  rtl_li(&t2,0xffff);
-	  rtl_or(dest,src1,&t2);
-	  return;
-	case 4:  
-	  rtl_li(&t2,0xffffffff);
-	  rtl_or(dest,src1,&t2);
-	  return;
+		if(t1==0){
+			rtl_li(&t2,0x0000ffff);
+			rtl_and(dest,src1,&t2);
+		}
+		else if(t2==1){
+			rtl_li(&t2,0xffffffff);
+			rtl_and(dest,src1,&t2);
+		}
+	    return;
+	case 4:
+	    return;
 	default:
 	  assert(0);
   }
