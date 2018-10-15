@@ -164,8 +164,9 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   switch(width){
 	case 1:
 		if(t1==0){
-			rtl_li(&t2,0x00000000);
-			rtl_or(dest,src1,&t2);
+			*dest=*src1;
+			//rtl_li(&t2,0x00000000);
+			//rtl_or(dest,src1,&t2);
 		}
 		else if(t1==1){
 			rtl_li(&t2,0xffffff00);
@@ -173,14 +174,15 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 		}
 		return;
 	case 2:
-		if(t1==0){
-			rtl_li(&t2,0x00000000);
-			rtl_or(dest,src1,&t2);
+		if(t1==0){ 
+			*dest=*src1;
+			//rtl_li(&t2,0x00000000);
+			//rtl_or(dest,src1,&t2);
 		}
 		else if(t2==1){
 			rtl_li(&t2,0xffff0000);
 			rtl_or(dest,src1,&t2);
-		}
+		} 
 	    return;
 	case 4:
 	    return;
