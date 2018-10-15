@@ -17,12 +17,12 @@ make_EHelper(and) {
   //printf("%x\n",id_src->val);
   //rtl_sext(&at,&id_src->val,id_src->width);
   //printf("at: %x\n",at);
-  rtl_and(&t0,&id_dest->val,&id_src->val);
+  rtl_and(&at,&id_dest->val,&id_src->val);
   //printf("t0: %x\n",t0);
-  operand_write(id_dest,&t0);
+  operand_write(id_dest,&at);
   cpu.CF=0;
   cpu.OF=0;
-  rtl_update_ZFSF(&id_dest->val,id_dest->width);
+  rtl_update_ZFSF(&at,id_dest->width);
 
   print_asm_template2(and);
 }
