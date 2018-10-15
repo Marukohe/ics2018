@@ -51,17 +51,17 @@ make_group(gp2,
 
   /* 0xf6, 0xf7 */
 make_group(gp3,
-    EMPTY, EMPTY, EMPTY, EMPTY,
+    EMPTY, EMPTY, EX(not), EMPTY,
     EMPTY, EX(imul1), EMPTY, EMPTY)
 
   /* 0xfe */
 make_group(gp4,
-    EX(inc), EX(dec), EX(not), EMPTY,
+    EX(inc), EX(dec), EMPTY, EMPTY,
     EMPTY, EMPTY, EMPTY, EMPTY)
 
   /* 0xff */
 make_group(gp5,
-    EX(inc), EX(dec), EX(not), EMPTY,
+    EX(inc), EX(dec), EMPTY, EMPTY,
     EMPTY, EMPTY, EX(push), EMPTY)
 
   /* 0x0f 0x01*/
