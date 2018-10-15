@@ -14,11 +14,11 @@ make_EHelper(test) {
 
 make_EHelper(and) {
   /*TODO();*/
-  printf("%x\n",id_src->val);
-  rtl_sext(&at,&id_src->val,id_src->width);
-  printf("at: %x\n",at);
-  rtl_and(&t0,&id_dest->val,&at);
-  printf("t0: %x\n",t0);
+  //printf("%x\n",id_src->val);
+  //rtl_sext(&at,&id_src->val,id_src->width);
+  //printf("at: %x\n",at);
+  rtl_and(&t0,&id_dest->val,&id_src->val);
+  //printf("t0: %x\n",t0);
   operand_write(id_dest,&t0);
   cpu.CF=0;
   cpu.OF=0;
