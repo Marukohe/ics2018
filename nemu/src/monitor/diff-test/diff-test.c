@@ -109,4 +109,24 @@ void difftest_step(uint32_t eip) {
 	  nemu_state=NEMU_ABORT;
 	  printf("difference in ref_r.eip\t0x%-16x%-d\n",ref_r.eip,ref_r.eip);
   }
+  if(cpu.CF!=ref_r.CF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.CF: %u\n",ref_r.CF);
+  }
+  if(cpu.ZF!=ref_r.ZF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.ZF: %u\n",ref_r.ZF);
+  }
+  if(cpu.SF!=ref_r.SF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.SF: %u\n",ref_r.SF);
+  }
+  if(cpu.OF!=ref_r.OF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.OF: %u\n",ref_r.OF);
+  }
+  if(cpu.IF!=ref_r.IF){
+	  nemu_state=NEMU_ABORT;
+	  printf("difference in ref_r.IF: %u\n",ref_r.IF);
+  }
 }
