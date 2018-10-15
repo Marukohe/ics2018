@@ -37,4 +37,4 @@ make_EHelper(shr);
 make_EHelper(dec);
 make_EHelper(not);
 make_EHelper(cltd);
-
+make_EHelper(idiv);
