@@ -9,6 +9,17 @@ make_EHelper(add) {
   operand_write(id_dest, &t2);
   rtl_update_ZFSF(&id_dest->val,id_dest->width);
 
+  rtl_setrelop(RELOP_LTU, &t0, &t2, &id_dest->val);
+  rtl_or(&t0, &t3, &t0);
+  rtl_set_CF(&t0);
+
+  rtl_xor(&t0, &id_dest->val, &id_src->val);
+  rtl_not(&t0, &t0);
+  rtl_xor(&t1, &id_dest->val, &t2);
+  rtl_and(&t0, &t0, &t1);
+  rtl_msb(&t0, &t0, id_dest->width);
+  rtl_set_OF(&t0);
+
   print_asm_template2(add);
 }
 
@@ -21,7 +32,7 @@ make_EHelper(sub) {
   rtl_setrelop(RELOP_LTU, &t3, &id_dest->val, &t2);
   operand_write(id_dest, &t2);
   //TODO update eflags
- /* rtl_update_ZFSF(&t2, id_dest->width);
+  rtl_update_ZFSF(&t2, id_dest->width);
 
   rtl_setrelop(RELOP_LTU, &t0, &id_dest->val, &t2);
   rtl_or(&t0, &t3, &t0);
@@ -33,7 +44,6 @@ make_EHelper(sub) {
   rtl_msb(&t0, &t0, id_dest->width);
   rtl_set_OF(&t0);
 
-*/
   print_asm_template2(sub);
 }
 
