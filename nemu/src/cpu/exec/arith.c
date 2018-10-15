@@ -7,7 +7,7 @@ make_EHelper(add) {
   /*rtl_get_CF(&t1);
   rtl_add(&t2, &t2, &t1);*/
   operand_write(id_dest, &t2);
-
+  rtl_update_ZFSF(&id_dest->val,id_dest->width);
 
   print_asm_template2(add);
 }
@@ -16,11 +16,11 @@ make_EHelper(sub) {
   /*cpu.esp-=8;*/
  /* rtl_sub(&id_dest->val,&id_dest->val,&id_src->val);
   rtl_update_ZFSF(&id_dest->val,id_dest->width);
-*/ 
+*/
   rtl_sub(&t2, &id_dest->val, &id_src->val);
   rtl_setrelop(RELOP_LTU, &t3, &id_dest->val, &t2);
   operand_write(id_dest, &t2);
-
+  //TODO update eflags
  /* rtl_update_ZFSF(&t2, id_dest->width);
 
   rtl_setrelop(RELOP_LTU, &t0, &id_dest->val, &t2);
