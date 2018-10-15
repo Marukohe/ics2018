@@ -52,7 +52,7 @@ make_group(gp2,
   /* 0xf6, 0xf7 */
 make_group(gp3,
     EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, EMPTY, EMPTY)
+    EMPTY, EX(imul1), EMPTY, EMPTY)
 
   /* 0xfe */
 make_group(gp4,
@@ -62,7 +62,7 @@ make_group(gp4,
   /* 0xff */
 make_group(gp5,
     EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, EX(push), EMPTY)
+    EMPTY, EX(imul1), EX(push), EMPTY)
 
   /* 0x0f 0x01*/
 make_group(gp7,

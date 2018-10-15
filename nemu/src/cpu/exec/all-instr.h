@@ -25,3 +25,6 @@ make_EHelper(jcc);
 make_EHelper(leave);
 make_EHelper(adc);
 make_EHelper(or);
+make_EHelper(imul1);
+make_EHelper(imul2);
+make_EHelper(imul3);
