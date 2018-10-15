@@ -31,3 +31,6 @@ make_EHelper(imul3);
 make_EHelper(jmp);
 make_EHelper(inc);
 make_EHelper(sbb);
+make_EHelper(sar);
+make_EHelper(shl);
+make_EHelper(shr);
