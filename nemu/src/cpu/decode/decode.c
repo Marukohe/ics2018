@@ -44,10 +44,10 @@ static inline make_DopHelper(SI) {
   op->simm = instr_fetch(eip,op->width);
   /*rtl_li(&at,op->simm);
   rtl_sext(&op->val,&at,4);*/
-  rtl_li(&at,op->simm);
+  /*rtl_li(&at,op->simm);
   rtl_sext(&at,&at,op->width);
-  rtl_li(&op->val,at);
-  //rtl_li(&op->val, op->simm);
+  rtl_li(&op->val,at);*/
+  rtl_li(&op->val, op->simm);
 
 #ifdef DEBUG
   snprintf(op->str, OP_STR_SIZE, "$0x%x", op->simm);
