@@ -185,7 +185,8 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 		} 
 	    return;
 	case 4:
-	    *dest=*src1; 
+	    *dest=*src1;
+	    return;	
 	default:
 	  assert(0);
   }
