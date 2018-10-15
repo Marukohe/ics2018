@@ -159,10 +159,10 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
   //TODO();
-  printf("%d\n",width);//TODO
+  //printf("%d\n",width);//TODO
   rtl_li(&t3,width*8-1);
   rtl_shr(&t1,src1,&t3);
-  printf("%d\n",t1);//TODO
+  //printf("%d\n",t1);//TODO
   switch(width){
 	case 1:
 		if(t1==0){
