@@ -49,13 +49,14 @@ make_EHelper(sub) {
 
 make_EHelper(cmp) {
   /*TODO();*/
-  rtl_sub(&t2,&id_dest->val,&id_src->val);
   Log("%x %x",id_dest->val,id_src->val);
-  rtl_setrelop(RELOP_LTU,&t3,&t2,&id_dest->val);
-  rtl_update_ZFSF(&t2,id_dest->width);
+  rtl_sub(&t2, &id_dest->val, &id_src->val);
+  rtl_setrelop(RELOP_LTU, &t3, &id_dest->val, &t2);
   
   at=id_dest->val;
-  operand_write(id_dest,&t2);
+  operand_write(id_dest, &t2);
+
+  rtl_update_ZFSF(&t2, id_dest->width);
 
   rtl_setrelop(RELOP_LTU, &t0, &id_dest->val, &t2);
   rtl_or(&t0, &t3, &t0);
