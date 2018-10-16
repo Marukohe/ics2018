@@ -163,10 +163,10 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   //rtl_li(&t3,width*8-1);
   //rtl_shr(&t1,src1,&t3);
   //printf("%d\n",t1);//TODO
-  at=((*src1>>(width*8-1))==1);
+  t0=((*src1>>(width*8-1))==1);
   switch(width){
 	case 1:
-		if(at==0){
+		if(t0==0){
 			*dest=*src1;
 		}
 		else{
@@ -175,7 +175,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 		}
 		return;
 	case 2:
-		if(at==0){ 
+		if(t0==0){ 
 			*dest=*src1;
 		}
 		else{
