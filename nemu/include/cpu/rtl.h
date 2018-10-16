@@ -160,28 +160,25 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
   //TODO();
   //printf("%d\n",width);//TODO
-  rtl_li(&t3,width*8-1);
-  rtl_shr(&t1,src1,&t3);
+  //rtl_li(&t3,width*8-1);
+  //rtl_shr(&t1,src1,&t3);
   //printf("%d\n",t1);//TODO
+  at=((*src1>>(width*8-1))==1);
   switch(width){
 	case 1:
-		if(t1==0){
+		if(at==0){
 			*dest=*src1;
-			//rtl_li(&t2,0x00000000);
-			//rtl_or(dest,src1,&t2);
 		}
-		else if(t1==1){
+		else{
 			rtl_li(&t2,0xffffff00);
 			rtl_or(dest,src1,&t2);
 		}
 		return;
 	case 2:
-		if(t1==0){ 
+		if(at==0){ 
 			*dest=*src1;
-			//rtl_li(&t2,0x00000000);
-			//rtl_or(dest,src1,&t2);
 		}
-		else if(t2==1){
+		else{
 			rtl_li(&t2,0xffff0000);
 			rtl_or(dest,src1,&t2);
 		} 
