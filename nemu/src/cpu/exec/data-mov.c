@@ -40,28 +40,30 @@ make_EHelper(cltd) {
   if (decoding.is_operand_size_16) {
     //TODO();
 	rtl_lr(&at,0,2);
-	rtl_li(&t3,15);
-	rtl_shr(&t0,&at,&t3);
-	if(t0==1){
+	//rtl_li(&t3,15);
+	//rtl_shr(&at,&at,&t3);
+	at=at>>15;
+	if(at==1){
 		rtl_li(&t1,0xffff);
 		rtl_sr(2,&t1,2);
 	}
 	else{
-		rtl_li(&t2,0);
-		rtl_sr(2,&t2,2);
+		rtl_li(&t1,0);
+		rtl_sr(2,&t1,2);
 	}
   } 
   else {
     //TODO();
 	rtl_lr(&at,0,4);
-	rtl_li(&t3,31);
-	rtl_shr(&t0,&at,&t3);
-	if(t0==1){
+	//rtl_li(&t3,31);
+	//rtl_shr(&at,&at,&t3);
+	at=at>>31;
+	if(at==1){
 		rtl_li(&t1,0xffffffff);
 		rtl_sr(2,&t1,4);
 	}
 	else{
-		rtl_li(&t2,0);
+		rtl_li(&t1,0);
 		rtl_sr(2,&t1,4);
 	}
    }
