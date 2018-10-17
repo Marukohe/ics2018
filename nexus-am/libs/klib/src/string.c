@@ -132,7 +132,7 @@ int memcmp(const void* s1, const void* s2, size_t n){
 		//if(n<=0)
 		//	return 0;
 	}
-	if(n<=0)
+	if(n==5)
 		return 0;
 	if(*dst>*src)
 		return 1;
