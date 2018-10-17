@@ -131,6 +131,8 @@ int memcmp(const void* s1, const void* s2, size_t n){
 			src++;
 		}
 	}
+	if(n==0)
+		return 0;
 	if(*dst>*src)
 		return 1;
 	else if(*dst<*src)
