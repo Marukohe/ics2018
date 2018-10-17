@@ -254,10 +254,10 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
 	  cpu.ZF=1;
   else
 	  cpu.ZF=0;*/
-	if(*result==0)
-		cpu.ZF=1;
-	else
+	if(*result)
 		cpu.ZF=0;
+	else
+		cpu.ZF=1;
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
