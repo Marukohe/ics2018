@@ -217,13 +217,13 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   //TODO();
   //rtl_li(&at,width*8-1);
   //rtl_shr(dest,src1,&at);
-  *dest=((*src1>>(width*8-1))==1);
-  /*unsigned int tmp=1;
-  tmp<<=width*-1;tmp &= *src1;
+  //*dest=((*src1>>(width*8-1))==1);
+  unsigned int tmp=1;
+  tmp<<=width*8-1;tmp &= *src1;
   if(tmp==0)
 	  *dest=0;
   else
-	  *dest=1;*/
+	  *dest=1;
 }
 
 #define make_rtl_setget_eflags(f) \
