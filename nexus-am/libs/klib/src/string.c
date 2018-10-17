@@ -94,7 +94,8 @@ void* memset(void* v,int c,size_t n) {
 	}*/
 	while(n--)
 	{
-		*ret++=ch;
+		ret++;
+		*ret=ch;
 	}
 	return v;
 }
