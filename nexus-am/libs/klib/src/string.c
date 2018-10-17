@@ -118,7 +118,7 @@ void* memcpy(void* out, const void* in, size_t n) {
 
 int memcmp(const void* s1, const void* s2, size_t n){
 	if(s1==NULL||s2==NULL||n<0)
-	   return 13;
+	   return 0;
 	const unsigned char* dst = (const unsigned char*)s1;
 	const unsigned char* src = (const unsigned char*)s2;
 	while(n--){
