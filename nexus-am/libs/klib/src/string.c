@@ -92,6 +92,7 @@ void* memset(void* v,int c,size_t n) {
 		ret=v;
 		*ret++=ch;
 	}
+	ret = v;
 	ret++;
 	ret='\0';
 	return v;
