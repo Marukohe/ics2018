@@ -56,7 +56,7 @@ make_EHelper(cmp) {
   at=id_dest->val;
   operand_write(id_dest, &t2);
   Log("%x",id_dest->val);
-  at=t2;
+  //at=t2;
   rtl_update_ZFSF(&t2, id_dest->width);
 
   rtl_setrelop(RELOP_LTU, &t0, /*&at*/&id_dest->val, &t2);
