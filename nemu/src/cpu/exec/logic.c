@@ -3,10 +3,10 @@
 
 make_EHelper(test) {
  // TODO();
-  Log("%x %x", id_dest->val,id_src->val);
+  //Log("%x %x", id_dest->val,id_src->val,id->width);
   rtl_and(&at,&id_dest->val,&id_src->val);
   //operand_write(id_dest,&at);
-  Log("%x",at);
+  //Log("%x",at);
   cpu.CF=0;
   cpu.OF=0;
   rtl_update_ZFSF(&at,id_dest->width);
