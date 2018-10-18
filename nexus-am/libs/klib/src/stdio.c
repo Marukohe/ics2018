@@ -1,7 +1,8 @@
 #include "klib.h"
 #include <stdarg.h>
 
-#ifndef __ISA_NATIVE__
+//#ifndef __ISA_NATIVE__
+#if !defined(__ISA_NATIVE)||defined(__NATIVE_USE_KLIB)
 
 #define is_digit(c) ((c) >= '0' && (c) <='9')
 
