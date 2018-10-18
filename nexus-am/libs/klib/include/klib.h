@@ -8,9 +8,9 @@
 #include <am.h>
 #include <stdarg.h>
 
-#define __NATIVE_USE_KLIB__
+//#define __NATIVE_USE_KLIB__
 
-#ifdef __NATIVE_USE_KLIB
+#ifdef __NATIVE_USE_KLIB__
 #define strlen my_strlen
 #define strcpy my_strcpy
 #define strncpy my_strncpy
