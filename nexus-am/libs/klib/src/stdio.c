@@ -9,7 +9,7 @@ static int skip_atoi(const char **s)
 {
 	int i=0;
 	while(is_digit(**s)){
-		i = i*10 + *((*s)++)-'0';
+		i = i + *((*s)++)-'0';
 	}
 	return i;
 }
