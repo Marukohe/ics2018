@@ -7,6 +7,13 @@ int main() {
 	nemu_assert(strcmp(buf, "Hello world!\n") == 0);
 
 	sprintf(buf, "%d + %d = %d\n", 1, 1, 2);
+	_putc(buf[0]);
+	_putc(buf[1]);
+	_putc(buf[2]);
+	_putc(buf[3]);
+	_putc(buf[4]);
+	_putc(buf[5]);
+	_putc(buf[6]);
 	nemu_assert(strcmp(buf, "1 + 1 = 2\n") == 0);
 
 	//sprintf(buf, "%d + %d = %d\n", 2, 10, 12);
