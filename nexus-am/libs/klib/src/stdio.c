@@ -31,7 +31,7 @@ void num_to_string(long num,int base,int flags,int width,int precision, char **s
 		num=num/base;
 	}
 	width-=i;
-	while(i--)
+	while(i-->0)
 		*((*s)++) = tmp[i];
 	while(width-->0)
 		*((*s)++) = ' ';
