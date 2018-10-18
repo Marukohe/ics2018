@@ -37,7 +37,7 @@ char* strcat(char* dst, const char* src) {
 	return dst;
 }
 
-int strcmp(const char* s1, const char* s2) {
+/*int strcmp(const char* s1, const char* s2) {
 	size_t s1_len = strlen(s1); 
 	size_t s2_len = strlen(s2);
 	size_t cmp_len;
@@ -63,7 +63,21 @@ int strcmp(const char* s1, const char* s2) {
 	}
 	return value;
 }
-
+*/
+int strcmp(const char* s1,const char* s2)
+{
+	int value=0;
+	if(!s2||!s2) return -2;
+	while(!(value = *(unsigned char*)s1-*(unsigned char*)s2)&&*s2){
+		s1++;
+		s2++;
+	}
+	if(value < 0)
+		return -1;
+	else if(value > 0)
+		return 0;
+	return value;
+}
 int strncmp(const char* s1, const char* s2, size_t n) {
 	size_t i;
 	int value=0;
