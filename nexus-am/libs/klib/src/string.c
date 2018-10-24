@@ -1,7 +1,7 @@
 #include "klib.h"
 
 //#ifndef __ISA_NATIVE__
-#if !defined(__ISA_NATIVE__) || defined(__NATIVE__USE__KLIB__)
+#if !defined(__ISA_NATIVE__)||defined(__NATIVE__USE__KLIB__)
 
 size_t strlen(const char *s) {
 	size_t i = 0;
