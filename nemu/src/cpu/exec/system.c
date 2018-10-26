@@ -42,8 +42,8 @@ make_EHelper(iret) {
 }
 
 make_EHelper(in) {
-  TODO();
-
+  //TODO();
+  operand_write(id_dest,&id_src->val);
   print_asm_template2(in);
 
 #if defined(DIFF_TEST)
