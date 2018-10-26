@@ -1,4 +1,5 @@
 #include "cpu/exec.h"
+//#include "device/port-io.h"
 
 void difftest_skip_ref();
 void difftest_skip_dut();
@@ -41,9 +42,25 @@ make_EHelper(iret) {
   print_asm("iret");
 }
 
+uint32_t pio_read_l(ioaddr_t addr);
+uint32_t pio_read_w(ioaddr_t addr);
+uint32_t pio_read_b(ioaddr_t addr);
+
 make_EHelper(in) {
   //TODO();
-  operand_write(id_dest,&id_src->val);
+  //operand_write(id_dest,&id_src->val);
+  if(id_src->width==1){
+	  rtl_li(&at,pio_read_b(id_src->val));
+	  operand_write(id_dest,&at);
+  }
+  else if(id_src->width==2){
+	  rtl_li(&at,pio_read_w(id_src->val));
+	  operand_write(id_dest,&at);
+  }
+  else{
+	  rtl_li(&at,pio_read_l(id_src->val));
+	  operand_write(id_dest,&at);
+  }
   print_asm_template2(in);
 
 #if defined(DIFF_TEST)
