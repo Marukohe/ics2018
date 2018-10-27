@@ -81,7 +81,7 @@ make_EHelper(out) {
   }
   else if(id_dest->width==2){
 	  pio_write_w(id_dest->val,id_src->val);
-	  operand_write(id_dest,&at);
+	  //operand_write(id_dest,&at);
   }
   else{
 	  pio_write_l(id_dest->val,id_src->val);
