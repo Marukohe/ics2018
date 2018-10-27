@@ -14,9 +14,10 @@ static int skip_atoi(const char **s)
 	}
 	return i;
 }
-int printf(const char *fmt, ...) {
+
+/*int printf(const char *fmt, ...) {
   return 0;
-}
+}*/
 
 void num_to_string(long num,int base,int flags,int width,int precision, char **s){
 	char tmp[32];
@@ -83,6 +84,18 @@ int sprintf(char *out, const char *fmt, ...) {
 	va_start(args,fmt);
 	res = vsprintf(out,fmt,args);
 	va_end(args);
+	return res;
+}
+
+int printf(const char *fmt, ...) {
+	va_list args;
+	int res;
+	va_start(args,fmt);
+	char *s;
+	res=vsprintf(s,fmt,args);
+	for(; *s ;s++){
+		_puts(*s);
+	}
 	return res;
 }
 
