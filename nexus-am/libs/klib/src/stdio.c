@@ -91,10 +91,10 @@ int printf(const char *fmt, ...) {
 	va_list args;
 	int res;
 	va_start(args,fmt);
-	char *s;
+	char *s="";
 	res=vsprintf(s,fmt,args);
 	for(; *s ;s++){
-		_puts(*s);
+		_putc(*s);
 	}
 	return res;
 }
