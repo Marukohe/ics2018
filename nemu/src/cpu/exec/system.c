@@ -76,16 +76,16 @@ make_EHelper(out) {
   //TODO();
   //operand_write(id_dest,&id_src->val);
   if(id_dest->width==1){
-	  pio_write_b(at,id_src->val);
-	  operand_write(id_dest,&at);
+	  pio_write_b(id_dest->val,id_src->val);
+	  //operand_write(id_dest,&at);
   }
   else if(id_dest->width==2){
-	  pio_write_w(at,id_src->val);
+	  pio_write_w(id_dest->val,id_src->val);
 	  operand_write(id_dest,&at);
   }
   else{
-	  pio_write_l(at,id_src->val);
-	  operand_write(id_dest,&at);
+	  pio_write_l(id_dest->val,id_src->val);
+	  //operand_write(id_dest,&at);
   }
 
   print_asm_template2(out);
