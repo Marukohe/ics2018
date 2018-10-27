@@ -49,11 +49,11 @@ uint32_t pio_read_b(ioaddr_t addr);
 make_EHelper(in) {
   //TODO();
   //operand_write(id_dest,&id_src->val);
-  if(id_src->width==1){
+  if(id_dest->width==1){
 	  rtl_li(&at,pio_read_b(id_src->val));
 	  operand_write(id_dest,&at);
   }
-  else if(id_src->width==2){
+  else if(id_dest->width==2){
 	  rtl_li(&at,pio_read_w(id_src->val));
 	  operand_write(id_dest,&at);
   } 
@@ -75,11 +75,11 @@ void pio_write_l(ioaddr_t, uint32_t data);
 make_EHelper(out) {
   //TODO();
   //operand_write(id_dest,&id_src->val);
-  if(id_src->width==1){
+  if(id_dest->width==1){
 	  pio_write_b(at,id_src->val);
 	  operand_write(id_dest,&at);
   }
-  else if(id_src->val==2){
+  else if(id_dest->width==2){
 	  pio_write_w(at,id_src->val);
 	  operand_write(id_dest,&at);
   }
