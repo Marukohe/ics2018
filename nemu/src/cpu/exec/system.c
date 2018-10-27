@@ -56,8 +56,8 @@ make_EHelper(in) {
   else if(id_src->width==2){
 	  rtl_li(&at,pio_read_w(id_src->val));
 	  operand_write(id_dest,&at);
-  }
-  else{
+  } 
+   else{
 	  rtl_li(&at,pio_read_l(id_src->val));
 	  operand_write(id_dest,&at);
   }
@@ -68,9 +68,25 @@ make_EHelper(in) {
 #endif
 }
 
+void pio_write_b(ioaddr_t, uint32_t data);
+void pio_write_w(ioaddr_t, uint32_t data);
+void pio_write_l(ioaddr_t, uint32_t data);
+
 make_EHelper(out) {
   //TODO();
-  operand_write(id_dest,&id_src->val);
+  //operand_write(id_dest,&id_src->val);
+  if(id_src->width==1){
+	  pio_write_b(at,id_src->val);
+	  operand_write(id_dest,&at);
+  }
+  else if(id_src->val==2){
+	  pio_write_w(at,id_src->val);
+	  operand_write(id_dest,&at);
+  }
+  else{
+	  pio_write_l(at,id_src->val);
+	  operand_write(id_dest,&at);
+  }
 
   print_asm_template2(out);
 
