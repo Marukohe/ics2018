@@ -91,12 +91,13 @@ int printf(const char *fmt, ...) {
 	va_list args;
 	int res;
 	va_start(args,fmt);
-	char *s="";
+	char s[128];
 	res=vsprintf(s,fmt,args);
 	va_end(args);
-	//for(; *s ;s++){
-	//	_putc(*s);
-	//}
+	size_t cnt=strlen(s);
+	for(int i=0;i<cnt;i++){
+		_putc(s[i]);
+	}
 	return res;
 }
 
