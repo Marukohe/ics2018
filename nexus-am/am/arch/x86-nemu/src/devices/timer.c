@@ -29,6 +29,4 @@ size_t timer_read(uintptr_t reg, void *buf, size_t size) {
 }
 
 void timer_init() {
-	char s='A';
-	_putc(s);
 }
