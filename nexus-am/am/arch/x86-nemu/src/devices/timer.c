@@ -2,13 +2,16 @@
 #include <x86.h>
 #include <amdev.h>
 
-//static struct timeval boot_time;
+static _RTCReg bool_time;
 size_t timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_TIMER_UPTIME: {
+	  _RTCReg nowtime;
+	  uint32_t seconds=nowtime.second-bool_time.second;
+
       _UptimeReg *uptime = (_UptimeReg *)buf;
       uptime->hi = 0;
-      uptime->lo = 0;
+      uptime->lo = seconds;
       return sizeof(_UptimeReg);
     }
     case _DEVREG_TIMER_DATE: {
@@ -26,6 +29,6 @@ size_t timer_read(uintptr_t reg, void *buf, size_t size) {
 }
 
 void timer_init() {
-	char s='h';
+	char s='A';
 	_putc(s);
 }
