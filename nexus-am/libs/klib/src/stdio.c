@@ -5,7 +5,13 @@
 #if !defined(__ISA_NATIVE__)||defined(__NATIVE_USE_KLIB__)
 
 #define is_digit(c) ((c) >= '0' && (c) <='9')
-
+#define ZEROPAD 1
+#define SIGN 2
+#define PLUS 4
+#define SPACE 8
+#define LEFT 16
+#define SPACIAL 32
+#define LARGE 64
 static int skip_atoi(const char **s)
 {
 	int i=0;
@@ -38,7 +44,7 @@ void num_to_string(long num,int base,int flags,int width,int precision, char **s
 	while(width-->0)
 		*((*s)++) = ' ';
 }
-
+/*
 int vsprintf(char *out, const char *fmt, va_list ap) {
 	int len;
 	int i;
@@ -76,6 +82,61 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 	}
 
 	return (int)(out-start);
+}
+*/
+int vsprintf(char *out, const char *fmt, va_list ap) {
+	char *str;
+	int field_width;
+
+	for(str=out;*fmt;fmt++){
+		unsigned long num;
+		int base = 10;
+		int flags = 0;
+		int qualifier = -1;
+		int precision = -1;
+		bool bFmt = true;
+		if(*fmt != '%'){
+			*str++=*fmt;
+			continue;
+		}
+		bFmt = true;
+		while(bFmt){
+			fmt++;
+			switch(*fmt){
+				case '-': flags |= LEFT; break;
+				case '+': flags |= PLUS; break;
+				case ' ': flags |= SPACE; break;
+				case '#': flags |= SPECIAL; break;
+				case '0': flags |= ZEROPAD; break;
+				default: bFmt = false;
+			}
+		} 
+		field_width = -1;
+		if(is_digit(*fmt))
+			field_width = skip_atoi(&fmt);
+		else if('*'==*fmt){
+			fmt++;
+			field_width = va_arg(args,int);
+			if(field_width<0){
+				field_width = -field_width;
+				flags |= LEFT;
+			}
+		} 
+
+		precision=-1;
+		if('.'==*fmt){
+			fmt++;
+			if(is_digit(*fmt){
+				precision = skip_atoi(&fmt);
+			}
+			else if('*'==*fmt){
+				fmt++;
+				precision = va_arg(args,int);
+			}
+			if(precision<0) precision=0;
+		}
+
+	}
 }
 
 int sprintf(char *out, const char *fmt, ...) {
