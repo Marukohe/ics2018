@@ -24,25 +24,80 @@ static int skip_atoi(const char **s)
 /*int printf(const char *fmt, ...) {
   return 0;
 }*/
+static char *digits = "0123456789abcdefghijklmnopqrstuvwxyz";
+static char *upper_digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-void num_to_string(long num,int base,int flags,int width,int precision, char **s){
-	char tmp[32];
-	int i=0;
-	const char *digits="0123456789ABCDEF";
+static char *num_to_string(char *str, long num,int base,int size,int precision,int type){
+	char c,sign,tmp[66];
+	char *dig = digits;
+	int i;
+	if(type&LARGE) dig = upper_digits;
+	if(type&LEFT) type &= ~ZEROPAD;
+	if(base<2||base>36) return 0;
 
-	if(base<2 || base>16) return;
-
-	if(num==0) tmp[i++]='0';
-	while(num!=0)
-	{
-		tmp[i++] = digits[num%base];
-		num=num/base;
+	c = (type & ZEROPAD) ? '0' : ' ';
+	sign = 0;
+	if(type&SIGN){
+		if(num<0){
+			sign = '-';
+			num = -num;
+			size--;
+		}
+		else if(type & PLUS){
+			sign = '+';
+			size--;
+		}
+		else if(type&SPACE){
+			sign = ' ';
+			size--;
+		}
 	}
-	width-=i;
-	while(i-->0)
-		*((*s)++) = tmp[i];
-	while(width-->0)
-		*((*s)++) = ' ';
+
+	if(type&SPECIAL){
+		if(base==16)
+			size -=2;
+		else if(base==8)
+			size--;
+	}
+	i=0;
+	if(num==0)
+		tmp[++]='0';
+	else{
+		while(num!=0){
+			tmp[i++] = dig[((unsigned long) num) % (unsigned) base];
+			num = ((unsigned long) num) / (unsigned) base;
+		}
+	}
+
+	if(i>precision) precision=i;
+	size -= precision;
+	if(!(type&(ZEROPAD|LEFT)))
+	{
+		while(size-->0) *str++=' ';
+	}
+	if(sign) *str++ = sign;
+
+	if(type &SPECIALE){
+		if(base==8)
+			*str++='0';
+		else if(base==16)
+		{
+			*str++='0';
+			*str++=digits[33];
+		}
+	}
+
+	if(!(type&LEFT)){
+		while(size-->0) *str++=c;
+	}
+
+	while(i<precision--) *str++='0';
+	while(i-->0) *str++=tmp[i];
+	while(size-->0) *str++=' ';
+
+	return str;
+
+		
 }
 /*
 int vsprintf(char *out, const char *fmt, va_list ap) {
@@ -120,23 +175,100 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			if(field_width<0){
 				field_width = -field_width;
 				flags |= LEFT;
-			}
-		} 
+		 	}
+		}  
 
 		precision=-1;
 		if('.'==*fmt){
 			fmt++;
-			if(is_digit(*fmt){
-				precision = skip_atoi(&fmt);
+			if(is_digit(*fmt)){
+				precision = skip_stoi(&fmt);
 			}
 			else if('*'==*fmt){
 				fmt++;
-				precision = va_arg(args,int);
+				precision = va_arg(args,fmt);
 			}
 			if(precision<0) precision=0;
 		}
 
+		qualifier = -1;
+		if('h' == *fmt || 'l'==*fmt || 'L' ==*fmt){
+			qualifier = *fmt;
+			fmt++;
+		}
+
+		base = 10;
+		switch(*fmt){
+			case 'c':
+			{
+				if(!(flags & LEFT)) while (--field_width>0) *str++=' ';
+				*str++ = (unsigned char) va_arg(args,int);
+				while(--field_width>0) *str++=' ';
+				continue;
+			}
+			case 's':
+			{
+				int len;
+				char *s = va_arg(args,char *);
+				if(!s) s = "<NULL>";
+				//len = strnlen(s,precision);
+				len = strlen(s);
+				if(!(flags & LEFT)) while(len<field_width--) *str++ = ' ';
+				for(int i=0;i<len;i++) *str++ = *s++;
+				while(len<field_width--) *str++=' ';
+				continue;
+			}
+			case 'o':
+			{
+				base = 8;
+				break;
+			}
+			case 'X':
+			{
+				flags |= LARGE;
+			}
+			case 'x':
+			{
+				base = 16;
+				break;
+			}
+			case 'd':
+			case 'i':
+			{
+				flags |= SIGN;
+			}
+			case 'u':
+			{
+				break;
+			}
+			default:
+			{
+				if(*fmt != '%') *str++ = '%';
+				if(*fmt)
+					*str++=*fmt;
+				else
+					--fmt;
+				continue;
+			}
+		}
+
+		if(qualifier == 'l')
+			num = va_arg(args,unsigned long);
+		else if(qualifier == 'h){
+			if(flags &SIGN)
+				num = va_arg(args,short);
+			else
+				num = va_arg(args,unsigned short);
+		}
+		else if(flags &SIGN)
+			num=va_arg(args,int);
+		else
+			num = va_arg(args,unsigned long);
+
+		str = num_to_string(str,num,base,field_width,precision,flags);
 	}
+	*str = '/0';
+	return str - out;
 }
 
 int sprintf(char *out, const char *fmt, ...) {
