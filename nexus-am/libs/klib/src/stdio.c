@@ -10,7 +10,7 @@
 #define PLUS 4
 #define SPACE 8
 #define LEFT 16
-#define SPACIAL 32
+#define SPECIAL 32
 #define LARGE 64
 static int skip_atoi(const char **s)
 {
@@ -61,7 +61,7 @@ static char *num_to_string(char *str, long num,int base,int size,int precision,i
 	}
 	i=0;
 	if(num==0)
-		tmp[++]='0';
+		tmp[i++]='0';
 	else{
 		while(num!=0){
 			tmp[i++] = dig[((unsigned long) num) % (unsigned) base];
@@ -77,7 +77,7 @@ static char *num_to_string(char *str, long num,int base,int size,int precision,i
 	}
 	if(sign) *str++ = sign;
 
-	if(type &SPECIALE){
+	if(type &SPECIAL){
 		if(base==8)
 			*str++='0';
 		else if(base==16)
@@ -149,12 +149,12 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 		int flags = 0;
 		int qualifier = -1;
 		int precision = -1;
-		bool bFmt = true;
+	    int bFmt = 1;
 		if(*fmt != '%'){
 			*str++=*fmt;
 			continue;
 		}
-		bFmt = true;
+		bFmt = 1;
 		while(bFmt){
 			fmt++;
 			switch(*fmt){
@@ -163,7 +163,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				case ' ': flags |= SPACE; break;
 				case '#': flags |= SPECIAL; break;
 				case '0': flags |= ZEROPAD; break;
-				default: bFmt = false;
+				default: bFmt = 0;
 			}
 		} 
 		field_width = -1;
@@ -171,7 +171,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			field_width = skip_atoi(&fmt);
 		else if('*'==*fmt){
 			fmt++;
-			field_width = va_arg(args,int);
+			field_width = va_arg(ap,int);
 			if(field_width<0){
 				field_width = -field_width;
 				flags |= LEFT;
@@ -182,11 +182,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 		if('.'==*fmt){
 			fmt++;
 			if(is_digit(*fmt)){
-				precision = skip_stoi(&fmt);
+				precision = skip_atoi(&fmt);
 			}
 			else if('*'==*fmt){
 				fmt++;
-				precision = va_arg(args,fmt);
+				precision = va_arg(ap,int);
 			}
 			if(precision<0) precision=0;
 		}
@@ -202,14 +202,14 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 			case 'c':
 			{
 				if(!(flags & LEFT)) while (--field_width>0) *str++=' ';
-				*str++ = (unsigned char) va_arg(args,int);
+				*str++ = (unsigned char) va_arg(ap,int);
 				while(--field_width>0) *str++=' ';
 				continue;
 			}
 			case 's':
 			{
 				int len;
-				char *s = va_arg(args,char *);
+				char *s = va_arg(ap,char *);
 				if(!s) s = "<NULL>";
 				//len = strnlen(s,precision);
 				len = strlen(s);
@@ -253,21 +253,21 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 		}
 
 		if(qualifier == 'l')
-			num = va_arg(args,unsigned long);
-		else if(qualifier == 'h){
+			num = va_arg(ap,unsigned long);
+		else if(qualifier == 'h'){
 			if(flags &SIGN)
-				num = va_arg(args,short);
+				num = va_arg(ap,int);//short int
 			else
-				num = va_arg(args,unsigned short);
+				num = va_arg(ap,unsigned int);//unsignedshort int
 		}
 		else if(flags &SIGN)
-			num=va_arg(args,int);
+			num=va_arg(ap,int);
 		else
-			num = va_arg(args,unsigned long);
+			num = va_arg(ap,unsigned long);
 
 		str = num_to_string(str,num,base,field_width,precision,flags);
 	}
-	*str = '/0';
+	*str = '\0';
 	return str - out;
 }
 
