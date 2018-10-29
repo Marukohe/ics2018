@@ -7,6 +7,7 @@ size_t timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_TIMER_UPTIME: {
 	  //_RTCReg nowtime;
+	  //get_timeofday(&nowtime);
 	  //uint32_t seconds=nowtime.second-bool_time.second;
 
       _UptimeReg *uptime = (_UptimeReg *)buf;
