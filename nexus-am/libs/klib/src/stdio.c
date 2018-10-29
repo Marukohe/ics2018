@@ -95,7 +95,7 @@ int printf(const char *fmt, ...) {
 	res=vsprintf(s,fmt,args);
 	va_end(args);
 	size_t cnt=strlen(s);
-	for(int i=0;i<cnt;i++){
+	for(int i=0;i<cnt-1;i++){
 		_putc(s[i]);
 	}
 	return res;
