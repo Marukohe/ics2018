@@ -93,6 +93,7 @@ int printf(const char *fmt, ...) {
 	va_start(args,fmt);
 	char *s="";
 	res=vsprintf(s,fmt,args);
+	va_end(args);
 	for(; *s ;s++){
 		_putc(*s);
 	}
