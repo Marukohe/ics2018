@@ -47,13 +47,13 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 	char *start=out;
 	char* s;
 	while((c=*fmt++)!=0)
-	{
+	{ 
 		if(c!='%'){ *out++=c; continue;}
 		if(*fmt == '%'){ *out++ = '%'; fmt++; continue;}
         width=-1;
 		if(is_digit(*fmt))
 		   	width = skip_atoi((const char**)(&fmt));
-		else if(*fmt == '*'){
+	 	else if(*fmt == '*'){
 			width = va_arg(ap,int);
 			fmt++;
 		}
@@ -72,7 +72,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				break;
 			default:
 				return -1;
-		}
+	 	}
 	}
 
 	return (int)(out-start);
@@ -91,11 +91,11 @@ int printf(const char *fmt, ...) {
 	va_list args;
 	int res;
 	va_start(args,fmt);
-	char s[128];
+	char s[256];
 	res=vsprintf(s,fmt,args);
 	va_end(args);
-	size_t cnt=strlen(s);
-	for(int i=0;i<cnt-1;i++){
+	//size_t cnt=strlen(s);
+	for(int i=0;i<res;i++){
 		_putc(s[i]);
 	}
 	return res;
