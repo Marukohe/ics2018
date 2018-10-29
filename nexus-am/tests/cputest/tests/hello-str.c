@@ -11,12 +11,13 @@ int main() {
 	nemu_assert(strcmp(buf, "1 + 1 = 2\n") == 0);
 
 	sprintf(buf, "%d + %d = %d\n", 2, 10, 12);
-	printf("%s",buf);
+	//printf("%s",buf);
 	nemu_assert(strcmp(buf, "2 + 10 = 12\n") == 0);
 
 	//nemu_assert(strcmp("2d + 10d = 12d","2 + 10 = 12")==0);
 	int a=10;
 	char *s="hello,world";
+	printf("%d\n",a);
 	printf("%d  %s\n",a,s);
 	return 0;
 }
