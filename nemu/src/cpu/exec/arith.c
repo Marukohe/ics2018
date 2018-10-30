@@ -120,7 +120,14 @@ make_EHelper(dec) {
 }
 
 make_EHelper(neg) {
-  TODO();
+  //TODO();
+  if(id_dest->val==0)
+	  cpu.CF=0;
+  else
+	  cpu.CF=1;
+  rtl_li(&t0,0);
+  rtl_sub(&t1,&t0,&id_dest->val);
+  operand_write(id_dest,&t1);
 
   print_asm_template1(neg);
 }
