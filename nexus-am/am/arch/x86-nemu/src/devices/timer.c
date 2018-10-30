@@ -7,7 +7,6 @@ static uint32_t boottime;
 size_t timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_TIMER_UPTIME: {
-	  boottime=inl(p);
 	  uint32_t nowtime=inl(p);
       _UptimeReg *uptime = (_UptimeReg *)buf;
       uptime->hi = 0;
@@ -29,4 +28,5 @@ size_t timer_read(uintptr_t reg, void *buf, size_t size) {
 }
 
 void timer_init() {
+	boottime=inl(p);
 }
