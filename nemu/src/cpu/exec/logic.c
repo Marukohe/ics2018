@@ -17,9 +17,9 @@ make_EHelper(test) {
 make_EHelper(and) {
   /*TODO();*/
   //printf("%x\n",id_src->val);
-  rtl_sext(&t1,&id_src->val,id_src->width);
+  //rtl_sext(&t1,&id_src->val,id_src->width);
   //printf("at: %x\n",at);
-  rtl_and(&at,&id_dest->val,&t1);
+  rtl_and(&at,&id_dest->val,&id_src->val);
   //printf("t0: %x\n",t0);
   operand_write(id_dest,&at);
   cpu.CF=0;
