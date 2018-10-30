@@ -2,17 +2,16 @@
 #include <x86.h>
 #include <amdev.h>
 
-//static _RTCReg bool_time;
+int p = 0x48;
+static uint32_t boottime;
 size_t timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_TIMER_UPTIME: {
-	  //_RTCReg nowtime;
-	  //get_timeofday(&nowtime);
-	  //uint32_t seconds=nowtime.second-bool_time.second;
-
+	  boottime=inl(p);
+	  uint32_t nowtime=inl(p);
       _UptimeReg *uptime = (_UptimeReg *)buf;
       uptime->hi = 0;
-      uptime->lo = 0;
+      uptime->lo = nowtime-boottime;
       return sizeof(_UptimeReg);
     }
     case _DEVREG_TIMER_DATE: {
