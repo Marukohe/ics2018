@@ -75,6 +75,8 @@ void difftest_step(uint32_t eip) {
   if(cpu.eax!=ref_r.eax){
 	  nemu_state=NEMU_ABORT;
 	  printf("difference in ref_r.eax\t0x%-16x%-d\n",ref_r.eax,ref_r.eax);
+	  printf("difference in cpu.eax\t0x%-16x%-d\n",cpu.eax,cpu.eax);
+
   }
   if(cpu.ecx!=ref_r.ecx){
       nemu_state=NEMU_ABORT;
