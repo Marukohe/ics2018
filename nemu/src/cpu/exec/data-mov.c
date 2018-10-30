@@ -74,33 +74,19 @@ make_EHelper(cltd) {
 make_EHelper(cwtl) {
   if (decoding.is_operand_size_16) {
     //TODO();
-	rtl_lr(&at,0,2);
+	rtl_lr(&at,0,1);
+	rtl_sext(&t1,&at,1);
+	rtl_sr(0,&t1,2);
 	//rtl_li(&t3,15);
 	//rtl_shr(&at,&at,&t3);
-	at=at>>15;
-	if(at==1){
-		rtl_li(&t1,0xffff);
-		rtl_sr(0,&t1,2);
-	}
-	else{
-		rtl_li(&t1,0);
-		rtl_sr(0,&t1,2);
-	}
   } 
   else {
     //TODO();
-	rtl_lr(&at,0,4);
+	rtl_lr(&at,0,2);
+	rtl_sext(&t1,&at,2);
+	rtl_sr(0,&t1,4);
 	//rtl_li(&t3,31);
 	//rtl_shr(&at,&at,&t3);
-	at=at>>31;
-	if(at==1){
-		rtl_li(&t1,0xffffffff);
-		rtl_sr(0,&t1,4);
-	}
-	else{
-		rtl_li(&t1,0);
-		rtl_sr(0,&t1,4);
-	}
    }
  
   print_asm(decoding.is_operand_size_16 ? "cwtl" : "cltd");
