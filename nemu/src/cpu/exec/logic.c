@@ -93,3 +93,21 @@ make_EHelper(not) {
   operand_write(id_dest,&at);
   print_asm_template1(not);
 }
+
+make_EHelper(rol){
+	//DOmyself
+	int tmp=id_src->val;
+	t0=id_dest->val;
+	while(tmp!=0){
+		int tmpcf=((t0>>(id_dest->width*8-1))==1);
+		t0=t0*2+tmpcf;
+		tmp--;
+	}
+	int cf=((t0>>(id_dest->width*8-1))==1);
+	if(id_src->val==1){
+		if(cf!=cpu.CF)
+			cpu.OF=1;
+		else
+			cpu.OF=0;
+	}
+}
