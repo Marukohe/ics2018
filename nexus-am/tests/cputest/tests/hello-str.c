@@ -15,9 +15,9 @@ int main() {
 	nemu_assert(strcmp(buf, "2 + 10 = 12\n") == 0);
 
 	//nemu_assert(strcmp("2d + 10d = 12d","2 + 10 = 12")==0);
-	int a=10;
-	char *s="hello,world";
-	printf("%03d\n",a);
-	printf("%d  %s\n",a,s);
+	//int a=10;
+	//char *s="hello,world";
+	//printf("%03d\n",a);
+	//printf("%d  %s\n",a,s);
 	return 0;
 }
