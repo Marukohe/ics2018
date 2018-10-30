@@ -103,6 +103,7 @@ make_EHelper(rol){
 		t0=t0*2+tmpcf;
 		tmp--;
 	}
+	operand_write(id_dest,&t0);
 	int cf=((t0>>(id_dest->width*8-1))==1);
 	if(id_src->val==1){
 		if(cf!=cpu.CF)
