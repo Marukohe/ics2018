@@ -2,7 +2,7 @@
 #define __COMMON_H__
 
 volatile static int dummy;
-//#define DEBUG
+#define DEBUG
 //#define DIFF_TEST
 
 #if _SHARE
