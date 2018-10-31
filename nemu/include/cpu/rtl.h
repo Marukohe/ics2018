@@ -108,7 +108,7 @@ static inline void interpret_rtl_setrelop(uint32_t relop, rtlreg_t *dest,
   *dest = interpret_relop(relop, *src1, *src2);
 }
 
-static inline void interpret_rtl_j(vaddr_t target) {
+inline void interpret_rtl_j(vaddr_t target) {
   cpu.eip = target;
   decoding_set_jmp(true);
 }
