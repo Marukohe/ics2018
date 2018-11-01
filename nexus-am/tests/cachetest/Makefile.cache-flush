@@ -1,4 +1,4 @@
-NAME = pingpong
-SRCS = tests/pingpong.c
+NAME = cache-flush
+SRCS = tests/cache-flush.c
 LIBS += klib
 include /home/hw/ics2018/nexus-am/Makefile.app
