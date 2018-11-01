@@ -109,14 +109,8 @@ int strncmp(const char* s1, const char* s2, size_t n) {
 void* memset(void* v,int c,size_t n) {
 	const unsigned char ch = c;
 	unsigned char *ret;
-	while(n--)
-	{
-		ret=v;
-		*ret++=ch;
-	}
-	ret = v;
-	ret++;
-	ret='\0';
+	for(ret=v;0<n;++ret,--n)
+		*ret=ch;
 	return v;
 }
 /*
