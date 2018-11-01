@@ -1,0 +1,4 @@
+NAME = access-cache
+SRCS = tests/access-cache.c
+LIBS += klib
+include /home/hw/ics2018/nexus-am/Makefile.app
