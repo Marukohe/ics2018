@@ -119,7 +119,7 @@ void* memset(void* v,int c,size_t n) {
 	ret='\0';
 	return v;
 }
-
+/*
 void* memcpy(void* out, const void* in, size_t n) {
 	if(out==NULL||in==NULL||n<=0)
 	   return NULL;
@@ -137,6 +137,15 @@ void* memcpy(void* out, const void* in, size_t n) {
 	}
 	return out;
 }
+*/
+void* memcpy(void* out, const void* in, size_t n){
+	char *s1;
+	const char *s2;
+	for(s1=out,s2=in;0<n;++s1,++s2,--n)
+		*s1=*s2;
+	return out;	
+} 
+
 
 int memcmp(const void* s1, const void* s2, size_t n){
 	if(s1==NULL||s2==NULL||n<0)
