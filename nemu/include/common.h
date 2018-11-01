@@ -2,7 +2,7 @@
 #define __COMMON_H__
 
 //volatile static int dummy;
-#define DEBUG
+//#define DEBUG
 //#define DIFF_TEST
 
 #if _SHARE
@@ -12,7 +12,7 @@
 #endif
 
 /* You will define this macro in PA2 */
-//#define HAS_IOE
+#define HAS_IOE
 
 #include <stdint.h>
 #include <assert.h>
