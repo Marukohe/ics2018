@@ -52,6 +52,7 @@ typedef union {
 	   };
 	  uint32_t eflags;
 	};
+	uint32_t CS;
   };
 
 } CPU_state;
