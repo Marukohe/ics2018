@@ -58,7 +58,7 @@ typedef union {
 } CPU_state;
 
 extern CPU_state cpu;
-
+/*IDTR register*/
 typedef struct{
 	uint16_t limite;
 	uint32_t base;
