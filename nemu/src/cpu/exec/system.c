@@ -6,7 +6,15 @@ void difftest_skip_dut();
 
 make_EHelper(lidt) {
   //TODO();
-  cpu.IDTR.base=1;
+  if(id_dest->width==2){
+	  cpu.IDTR.limit=id_dest->val;
+	  cpu.IDTR.base=vaddr_read(id_dest->addr+2,2);
+  }
+  else{
+	  cpu.IDTR.limit=id_dest->val;
+	  cpu.IDTR.base=vaddr_read(id_dest->addr+2,4);
+  }
+
   print_asm_template1(lidt);
 }
 
