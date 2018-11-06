@@ -24,7 +24,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 	GD.val[0]=vaddr_read(cpu.IDTR.base+NO*8,4);
 	GD.val[1]=vaddr_read(cpu.IDTR.base+NO*8+4,4);
 	//TODO();
-	decoding.seq_eip=GD.Gatedesc.offset_15_0+(GD.Gatedesc.offset_31_16<<16);
+	cpu.eip=GD.Gatedesc.offset_15_0+(GD.Gatedesc.offset_31_16<<16);
 
 
 }
