@@ -13,13 +13,14 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 	}GD;*/
 
     /*push eflags*/
-	rtl_push(&cpu.eflags);
+	//rtl_push(&cpu.eflags);
 
 	/*push CS*/
-	rtl_push(&cpu.CS);
+	//rtl_push(&cpu.CS);
 
 	/*push eip*/
-	rtl_push(&ret_addr);
+	//rtl_push(&ret_addr);
+	cpu.esp-=12;
 
 	//GD.val[0]=vaddr_read(cpu.IDTR.base+NO*8,4);
 	//GD.val[1]=vaddr_read(cpu.IDTR.base+NO*8+4,4);
