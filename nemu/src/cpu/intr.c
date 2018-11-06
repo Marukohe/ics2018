@@ -20,7 +20,6 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 
 	/*push eip*/
 	rtl_push(&ret_addr);
-	cpu.esp-=12;
 
 	GD.val[0]=vaddr_read(cpu.IDTR.base+NO*8,4);
 	GD.val[1]=vaddr_read(cpu.IDTR.base+NO*8+4,4);
