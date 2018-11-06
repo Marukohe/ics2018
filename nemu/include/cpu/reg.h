@@ -53,18 +53,22 @@ typedef union {
 	  uint32_t eflags;
 	};
   uint32_t CS;
+  struct{
+	  uint16_t limit;
+	  uint32_t base;
+	}IDTR;
   };
 
 } CPU_state;
 
 extern CPU_state cpu;
 /*IDTR register*/
-typedef struct{
-	uint16_t limite;
-	uint32_t base;
-}IDTR_state;
+//typedef struct{
+//	uint16_t limite;
+//	uint32_t base;
+//}IDTR_state;
 
-extern IDTR_state IDTR;
+//extern IDTR_state IDTR;
 
 static inline int check_reg_index(int index) {
   assert(index >= 0 && index < 8);

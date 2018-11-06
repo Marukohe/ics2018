@@ -6,7 +6,7 @@ void difftest_skip_dut();
 
 make_EHelper(lidt) {
   //TODO();
-  IDTR.base=1;
+  cpu.IDTR.base=1;
   print_asm_template1(lidt);
 }
 
