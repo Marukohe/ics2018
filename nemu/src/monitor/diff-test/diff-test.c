@@ -72,7 +72,7 @@ void difftest_step(uint32_t eip) {
   // TODO: Check the registers state with the reference design.
   // Set `nemu_state` to `NEMU_ABORT` if they are not the same.
  // TODO();
-  if(cpu.eax==ref_r.eax){
+  if(cpu.eax!=ref_r.eax){
 	  nemu_state=NEMU_ABORT;
 	  printf("difference in ref_r.eax\t0x%-16x%-d\n",ref_r.eax,ref_r.eax);
 	  printf("difference in cpu.eax\t0x%-16x%-d\n",cpu.eax,cpu.eax);
