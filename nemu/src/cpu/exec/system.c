@@ -5,7 +5,7 @@ void difftest_skip_ref();
 void difftest_skip_dut();
 
 make_EHelper(lidt) {
-  TODO();
+  //TODO();
   if(id_dest->width==2){
 	  cpu.IDTR.limit=id_dest->val;
 	  cpu.IDTR.base=vaddr_read(id_dest->addr+2,2);
@@ -36,7 +36,7 @@ make_EHelper(mov_cr2r) {
 
 void raise_intr(uint8_t NO,vaddr_t ret_addr);
 make_EHelper(int) {
-  //TODO();
+  TODO();
   raise_intr(cpu.IDTR.limit,decoding.seq_eip);
 
   print_asm("int %s", id_dest->str);
