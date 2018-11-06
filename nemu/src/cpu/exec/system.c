@@ -5,7 +5,7 @@ void difftest_skip_ref();
 void difftest_skip_dut();
 
 make_EHelper(lidt) {
-  //TODO();
+  TODO();
   if(id_dest->width==2){
 	  cpu.IDTR.limit=id_dest->val;
 	  cpu.IDTR.base=vaddr_read(id_dest->addr+2,2);
