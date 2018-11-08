@@ -12,7 +12,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   size_t len = get_ramdisk_size();
   ramdisk_read(buf,0,len);
   //ramdisk_write(buf,0x4000000,len);
-  memcpy(&ramdisk_start+0x4000000,buf,len);
+  memcpy(&ramdisk_start+(0x4000000-(uint32_t)&ramdisk_start),buf,len);
   return DEFAULT_ENTRY;
 }
 
