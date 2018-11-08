@@ -218,6 +218,30 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				while(len<field_width--) *str++=' ';
 				continue;
 			}
+			case 'p':
+			{
+				if(field_width==-1)
+				{
+					field_width=2*sizeof(void*);
+					flags|=ZEROPAD;
+				}
+				str=number(str,(unsigned long)va_arg(ap,void *),16,field_width,precision,flags);
+				continue;
+			}
+			case 'n':
+			{
+				if(qualifier=='1')
+				{
+					long *ip=va_args(ap,long *);
+					*ip=(str-out);
+				}
+				else
+				{
+					int *ip=va_args(ap,int *);
+					*ip=(str,out);
+				}
+				continue;
+			}
 			case 'o':
 			{
 				base = 8;
