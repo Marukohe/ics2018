@@ -13,6 +13,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(bufff,0,len);
   //ramdisk_write(buf,0x4000000,len);
   memcpy(&ramdisk_start+0x3EFEDA8,bufff,len);
+  //memcpt(&ramdisk_start+(uintptr_t)(0x4000000-&ramdisk_start),bufff,len);
   return DEFAULT_ENTRY;
 }
 
