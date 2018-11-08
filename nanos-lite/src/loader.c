@@ -3,7 +3,11 @@
 #define DEFAULT_ENTRY 0x4000000
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
+  //TODO();
+  void *buf;
+  size_t len = get_ramdsik_size();
+  ramdisk_read(buf,0,len);
+  ramdisk_write(*buf,0x4000000,len);
   return DEFAULT_ENTRY;
 }
 
