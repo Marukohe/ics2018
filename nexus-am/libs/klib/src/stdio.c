@@ -225,20 +225,20 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 					field_width=2*sizeof(void*);
 					flags|=ZEROPAD;
 				}
-				str=number(str,(unsigned long)va_arg(ap,void *),16,field_width,precision,flags);
+				str=num_to_string(str,(unsigned long)va_arg(ap,void *),16,field_width,precision,flags);
 				continue;
 			}
 			case 'n':
 			{
 				if(qualifier=='1')
 				{
-					long *ip=va_args(ap,long *);
+					long *ip=va_arg(ap,long *);
 					*ip=(str-out);
 				}
 				else
 				{
-					int *ip=va_args(ap,int *);
-					*ip=(str,out);
+					int *ip=va_arg(ap,int *);
+					*ip=(str-out);
 				}
 				continue;
 			}
