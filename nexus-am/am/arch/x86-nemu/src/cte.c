@@ -11,6 +11,7 @@ _Context* irq_handle(_Context *tf) {
   if (user_handler) {
     _Event ev;
 	//
+	/*
 	printf("eax: %x\n",tf->eax);
 	printf("ecx: %x\n",tf->ecx);
 	printf("edx: %x\n",tf->edx);
@@ -22,6 +23,7 @@ _Context* irq_handle(_Context *tf) {
 	printf("eflags: %x\n",tf->eflags);
 	printf("cs: %x\n",tf->cs);
 	printf("eip %x\n",tf->eip);
+	*/
 	//
     switch (tf->irq) {
 	  case 0x81: ev.event=_EVENT_YIELD; break;
