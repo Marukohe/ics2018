@@ -11,14 +11,14 @@ _Context* irq_handle(_Context *tf) {
   if (user_handler) {
     _Event ev;
 	//
-	printf("edi: %x\n",tf->edi);
-	printf("esi: %x\n",tf->esi);
-	printf("ebp: %x\n",tf->ebp);
-	printf("esp: %x\n",tf->esp);
-	printf("ebx: %x\n",tf->ebx);
-	printf("edx: %x\n",tf->edx);
+	printf("eax: %x\n",tf->eax);
 	printf("ecx: %x\n",tf->ecx);
-	printf("eax: %x\n",tf->ecx);
+	printf("edx: %x\n",tf->edx);
+	printf("ebx: %x\n",tf->ebx);
+	printf("esp: %x\n",tf->esp);
+	printf("ebp: %x\n",tf->ebp);
+	printf("esi: %x\n",tf->esi);
+	printf("edi: %x\n",tf->edi);
 	printf("eflags: %x\n",tf->eflags);
 	printf("cs: %x\n",tf->cs);
 	printf("eip %x\n",tf->eip);
