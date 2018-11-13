@@ -90,6 +90,7 @@ static int cmd_info(char *args)
 			printf("edi\t0x%-16x%-d\n",cpu.edi,cpu.edi);
 			printf("eip\t0x%-16x%-d\n",cpu.eip,cpu.eip);
 			printf("CS\t0x%-16x%-d\n",cpu.CS,cpu.CS);
+			printf("eflags\t0x%-16x%-d\n",cpu.eflags,cpu.eflags);
 			printf("CF: %d  ZF: %d  SF: %d  IF: %d  OF: %d\n",cpu.CF,cpu.ZF,cpu.SF,cpu.IF,cpu.OF);
 			return 0;
 	 } 
