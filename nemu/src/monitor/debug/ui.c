@@ -89,19 +89,20 @@ static int cmd_info(char *args)
 			printf("esi\t0x%-16x%-d\n",cpu.esi,cpu.esi);
 			printf("edi\t0x%-16x%-d\n",cpu.edi,cpu.edi);
 			printf("eip\t0x%-16x%-d\n",cpu.eip,cpu.eip);
+			printf("CS\t0x%-16x%-d\n",cpu.CS,cpu.CS);
 			printf("CF: %d  ZF: %d  SF: %d  IF: %d  OF: %d\n",cpu.CF,cpu.ZF,cpu.SF,cpu.IF,cpu.OF);
 			return 0;
-	 }
+	 } 
 	 else if(strcmp(args,"w")==0)
-	 {
+	  {
 		 pwatchpoint();/*errors*/
 		 return 0;
 	 }
 	 else{
 		/*case "w": watchpoint*/ 
-		printf("Unexpected expression\n");
+	 	printf("Unexpected expression\n");
 		return 0;
-	 }
+	  }
 }
 
 static int cmd_x(char *args){
@@ -194,10 +195,10 @@ static int cmd_help(char *args) {
 }
 
 void ui_mainloop(int is_batch_mode) {
-  if (is_batch_mode) {
-    cmd_c(NULL);
-    return;
-  }
+  //if (is_batch_mode) {
+  //  cmd_c(NULL);
+  //  return;
+  //}
 
   while (1) {
     char *str = rl_gets();
