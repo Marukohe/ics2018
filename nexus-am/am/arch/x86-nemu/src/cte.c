@@ -1,6 +1,6 @@
 #include <am.h>
 #include <x86.h>
-
+#include <klib.h>
 static _Context* (*user_handler)(_Event, _Context*) = NULL;
 
 void vectrap();
@@ -10,6 +10,19 @@ _Context* irq_handle(_Context *tf) {
   _Context *next = tf;
   if (user_handler) {
     _Event ev;
+	//
+	printf("edi: %x\n",tf->edi);
+	printf("esi: %x\n",tf->esi);
+	printf("ebp: %x\n",tf->ebp);
+	printf("esp: %x\n",tf->esp);
+	printf("ebx: %x\n",tf->ebx);
+	printf("edx: %x\n",tf->edx);
+	printf("ecx: %x\n",tf->ecx);
+	printf("eax: %x\n",tf->ecx);
+	printf("eflags: %x\n",tf->eflags);
+	printf("cs: %x\n",tf->cs);
+	printf("eip %x\n",tf->eip);
+	//
     switch (tf->irq) {
 	  case 0x81: ev.event=_EVENT_YIELD; break;
       default: ev.event = _EVENT_ERROR; break;
