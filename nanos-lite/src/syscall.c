@@ -29,7 +29,7 @@ int sys_yield(){
 
 int sys_exit(int code){
 	_halt(code);
-	return 0;
+	return code;
 }
 
 int sys_write(_Context *c){
