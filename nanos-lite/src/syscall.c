@@ -9,7 +9,7 @@ int sys_write(_Context *c);
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-  //printf("yingyingying %d\n",a[0]);
+  printf("yingyingying %d\n",c->GPR2);
   switch (a[0]) {
 	case 0: sys_exit(c->GPR2); break;
 	case 1: sys_yield(); break;
