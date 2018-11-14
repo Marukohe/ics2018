@@ -24,11 +24,11 @@ _Context* do_syscall(_Context *c) {
 
 int sys_yield(){
 	_yield();
-	return 1;
+	return 0;
 }
 
 int sys_exit(int code){
-	_halt(0);
+	_halt(code);
 	return 0;
 }
 
