@@ -17,12 +17,18 @@ struct _Context {
   int       irq;
   uintptr_t err,eip,cs,eflags;
 };
-
+/*
 #define GPR1 eax
 #define GPR2 eip
 #define GPR3 eip
 #define GPR4 eip
 #define GPRx eip
+*/
+#define GPR1 eax
+#define GPR2 ebx
+#define GPR3 ecx
+#define GPR4 edx
+#define GPRx eax
 
 #ifdef __cplusplus
 extern "C" {
