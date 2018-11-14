@@ -15,7 +15,9 @@ _Context* do_syscall(_Context *c) {
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
-  return NULL;
+  c->GPRx=c->GPR1;
+  //return NULL;
+  return c;
 }
 
 void sys_yield(){
