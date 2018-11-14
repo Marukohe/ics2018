@@ -38,7 +38,7 @@ int _write(int fd, void *buf, size_t count){
   _exit(SYS_write);
   //printf("exit after here\n");
   //_exit(13);
-  return 0;
+  return count;
 }
 
 void *_sbrk(intptr_t increment){
