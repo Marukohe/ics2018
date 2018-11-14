@@ -28,7 +28,7 @@ int sys_yield(){
 }
 
 int sys_exit(int code){
-	_halt(code);
+	_halt(0);
 	return 0;
 }
 
