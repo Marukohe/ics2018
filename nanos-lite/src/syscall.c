@@ -19,7 +19,7 @@ _Context* do_syscall(_Context *c) {
   } 
 
   //c->GPRx=c->GPR1;
-  return NULL;
+  return c;
   //return c->GPRx;
 }
 
