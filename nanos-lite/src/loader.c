@@ -8,11 +8,14 @@ size_t ramdisk_read(void *buf,size_t offset,size_t len);
 extern uint8_t ramdisk_start;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  void *bufff=NULL;
-  size_t len = get_ramdisk_size();
-  ramdisk_read(bufff,0,len);
+  //void *bufff=NULL;
+  //size_t len = get_ramdisk_size();
+  //ramdisk_read(bufff,0,len);
   //ramdisk_write(buf,0x4000000,len);
-  memcpy(&ramdisk_start+0x3EFEDA8,bufff,len);
+  //memcpy(&ramdisk_start+0x3EFEDA8,bufff,len);
+  size_t len=get_ramdisk_size();
+  void *bufff=(void *)0x4000000;
+  ramdisk_read(bufff,0,len);
   return DEFAULT_ENTRY;
 }
 
