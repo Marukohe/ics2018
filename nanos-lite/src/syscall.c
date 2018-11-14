@@ -37,5 +37,5 @@ int sys_write(_Context *c){
 	char *buf=(char *)c->GPR3;
 	for(int i=0;i<c->GPR4;i++)
 		_putc(buf[i]);
-	return c->GPR4;
+	return SYS_write;
 }
