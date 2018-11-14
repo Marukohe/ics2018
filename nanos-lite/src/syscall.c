@@ -11,7 +11,7 @@ _Context* do_syscall(_Context *c) {
   a[0] = c->GPR1;
   printf("yingyingying %d\n",c->GPR2);
   switch (a[0]) {
-	case 0: sys_exit(c->GPR2); break;
+	case 0: sys_exit(c->GPR1); break;
 	case 1: sys_yield(); break;
 	case 4: sys_write(c); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
@@ -19,7 +19,7 @@ _Context* do_syscall(_Context *c) {
 
   //c->GPRx=c->GPR1;
   return NULL;
-  //return c;
+  //return c->GPRx;
 }
 
 int sys_yield(){
@@ -29,7 +29,7 @@ int sys_yield(){
 
 int sys_exit(int code){
 	_halt(code);
-	return 0;
+	return code;
 }
 
 int sys_write(_Context *c){
