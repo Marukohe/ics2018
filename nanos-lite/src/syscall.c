@@ -33,9 +33,9 @@ int sys_exit(int code){
 }
 
 int sys_write(_Context *c){
-	assert(c->GPR1<=2);
-	char *buf=(char *)c->GPR2;
-	for(int i=0;i<c->GPR3;i++)
+	assert(c->GPR2<=2);
+	char *buf=(char *)c->GPR3;
+	for(int i=0;i<c->GPR4;i++)
 		_putc(buf[i]);
 	return 0;
 }
