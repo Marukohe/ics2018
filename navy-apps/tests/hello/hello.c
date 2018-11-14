@@ -4,7 +4,7 @@
 int main() {
   write(1, "Hello World!\n", 13);
   //assert(0);
-  printf("at hello\n");
+  //printf("at hello\n");
   int i = 2;
   volatile int j = 0;
   while (1) {
