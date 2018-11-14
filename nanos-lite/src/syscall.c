@@ -9,11 +9,11 @@ int sys_write(_Context *c);
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-  printf("yingyingying %d\n",c->GPR2);
+  printf("yingyingying %d\n",c->GPR1);
   switch (a[0]) {
-	case 0: sys_exit(c->GPR1); break;
-	case 1: sys_yield(); break;
-	case 4: sys_write(c); break;
+	case 0: c->GPRx=sys_exit(c->GPRx); break;
+	case 1: c->GPRx=sys_yield(); break;
+	case 4: c->GPRx=sys_write(c); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   } 
 
