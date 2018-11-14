@@ -24,7 +24,7 @@ _Context* do_syscall(_Context *c) {
 
 int sys_yield(){
 	_yield();
-	return 0;
+	return 1;
 }
 
 int sys_exit(int code){
