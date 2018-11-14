@@ -11,7 +11,7 @@ _Context* do_syscall(_Context *c) {
   a[0] = c->GPR1;
   //printf("yingyingying %d\n",a[0]);
   switch (a[0]) {
-	case 0: sys_exit(0); break;
+	case 0: sys_exit(c->GPR2); break;
 	case 1: sys_yield(); break;
 	case 4: sys_write(c); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
@@ -37,5 +37,5 @@ int sys_write(_Context *c){
 	char *buf=(char *)c->GPR3;
 	for(int i=0;i<c->GPR4;i++)
 		_putc(buf[i]);
-	return c->GPR4;
+	return c->GPRx;
 }
