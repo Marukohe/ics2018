@@ -12,7 +12,7 @@ _Context* do_syscall(_Context *c) {
   printf("at syscall.c %d\n",c->GPR1);
   //printf("at_syscall.c ebx %d\n",c->GPR2);
   switch (a[0]) {
-	case 0: c->GPRx=sys_exit(c->GPR1); break;
+	case 0: c->GPRx=sys_exit(c->GPR2); break;
 	case 1: c->GPRx=sys_yield(); break;
 	case 4: c->GPRx=sys_write(c); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
