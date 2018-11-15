@@ -12,7 +12,7 @@ _Context* do_syscall(_Context *c) {
   a[1] = c->GPR2;
   a[2] = c->GPR3;
   a[3] = c->GPR4;
-  printf("at_syscall.c ebx %d\n",c->GPR2);
+  //printf("at_syscall.c ebx %d\n",c->GPR2);
   switch (a[0]) {
 	case 0: _halt(a[1]); break;
 	case 1: c->GPRx=sys_yield(); break;
