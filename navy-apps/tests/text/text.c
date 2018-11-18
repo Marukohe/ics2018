@@ -4,8 +4,13 @@
 int main() {
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
-
+  //
+  assert(0);
+  //
   fseek(fp, 0, SEEK_END);
+  //
+  assert(0);
+  //
   long size = ftell(fp);
   assert(size == 5000);
 
