@@ -46,7 +46,7 @@ int fs_open(const char *pathname,int flags,int mode){
  	for(int i=0;i<NR_FILES;i++){
 		if(strcmp(file_table[i].name,pathname)==0)
 		{
-			//Log("fd:%d",i);
+			Log("%s fd:%d",pathname,i);
 			return i;
  	 	}
  	} 
