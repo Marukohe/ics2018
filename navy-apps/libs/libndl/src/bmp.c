@@ -31,12 +31,13 @@ int NDL_LoadBitmap(NDL_Bitmap *bmp, const char *filename) {
   assert(sizeof(hdr) == 54);
   assert(1 == fread(&hdr, sizeof(struct BitmapHeader), 1, fp));
 
-  assert(0);
+  //assert(0);
   if (hdr.bitcount != 24) return -1;
   if (hdr.compression != 0) return -1;
   pixels = (uint32_t*)malloc(hdr.width * hdr.height * sizeof(uint32_t));
   if (!pixels) return -1;
 
+  assert(0);
   w = hdr.width; h = hdr.height;
   int line_off = (w * 3 + 3) & ~0x3;
 
