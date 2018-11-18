@@ -57,7 +57,7 @@ int NDL_LoadBitmap(NDL_Bitmap *bmp, const char *filename) {
       pixels[w * i + j] = (r << 16) | (g << 8) | b;
     }
   }
-  //assert(0);
+  assert(0);
   fclose(fp);
   bmp->w = w;
   bmp->h = h;
