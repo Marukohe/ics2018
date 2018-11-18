@@ -98,6 +98,8 @@ off_t fs_lseek(int fd,off_t offset,int whence){
 			if(file_table[fd].size+offset<0)
 				return -1;
 			file_table[fd].open_offset = file_table[fd].size+offset;
+			Log("%s",file_table[fd].name);
+			Log("%d",file_table[fd].size);
 			Log("%d",file_table[fd].open_offset);
 			assert(0);
 			return file_table[fd].open_offset;
