@@ -105,7 +105,7 @@ off_t fs_lseek(int fd,off_t offset,int whence){
 			Log("%s",file_table[fd].name);
 			Log("%d",file_table[fd].size);
 			Log("%d",file_table[fd].open_offset);
-			assert(0);
+			//assert(0);
 			return file_table[fd].open_offset;
 		default:
 			assert(0);
