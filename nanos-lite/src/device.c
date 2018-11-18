@@ -36,12 +36,13 @@ static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 	strncpy(buf,dispinfo+offset,len);
-    Log("buf:%soffset:%d",(char *)buf,offset);
+    //Log("buf:%soffset:%d",(char *)buf,offset);
   return 0;
 }
 
 int W = 400;
 int H = 300;
+
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   //extern int screen_w,screen_h;
   //Log("screen:%d %d",screen_width(),screen_height());
