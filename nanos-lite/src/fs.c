@@ -41,7 +41,10 @@ void init_fs() {
 int fs_open(const char *pathname,int flags,int mode){
  	for(int i=0;i<NR_FILES;i++){
 		if(strcmp(file_table[i].name,pathname)==0)
+		{
 			return i;
+			Log("fd:%d",i);
+		}
 	}
 	assert(0);
 	return 0;
@@ -57,6 +60,7 @@ ssize_t fs_read(int fd,void *buf,size_t len){
 	//Log("%d",len);
 	ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len);
 	file_table[fd].open_offset+=len;
+	Log("%s",file_table[fd].name);
 	return len;
 }
 
