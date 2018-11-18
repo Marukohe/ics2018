@@ -42,7 +42,10 @@ int NDL_LoadBitmap(NDL_Bitmap *bmp, const char *filename) {
   //assert(0);
   int line_off = (w * 3 + 3) & ~0x3;
   //assset(0);
+  printf("H:%d\n",h);
   for (int i = 0; i < h; i ++) {
+	if(i>=290)
+		printf("%d\n\n",i);
     fseek(fp, hdr.offset + (h - 1 - i) * line_off, SEEK_SET);
     int nread = fread(&pixels[w * i], 3, w, fp);
     for (int j = w - 1; j >= 0; j --) {
