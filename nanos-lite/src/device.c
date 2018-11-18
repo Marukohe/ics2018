@@ -20,16 +20,16 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   int key = read_key();
   if(key!=_KEY_NONE){
 	if((key&0x8000)==0)  //down
-		len = sprintf(buf,"ku %s\n",keyname[key]);
+		sprintf(buf,"ku %s\n",keyname[key]);
 	else    //code
-		len = sprintf(buf,"kd %s\n",keyname[key&0x7fff]);
+		sprintf(buf,"kd %s\n",keyname[key&0x7fff]);
   }
   else{
 	  uint32_t tim = uptime();
-	  len = sprintf(buf,"t %d\n",tim);
+	  sprintf(buf,"t %d\n",tim);
   }
 
-  return len-1;
+  return strlen(buf);
 }
 
 static char dispinfo[128] __attribute__((used));
