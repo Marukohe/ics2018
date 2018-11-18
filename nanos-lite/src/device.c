@@ -40,21 +40,23 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   return 0;
 }
 
+int W = 400;
+int H = 300;
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   //extern int screen_w,screen_h;
   //Log("screen:%d %d",screen_width(),screen_height());
   offset/=4;
-  int y = offset/640;
-  int x = offset-640*y;
+  int y = offset/W;
+  int x = offset-W*y;
   len/=4;
-  int lenA = len>640-x?640-x:len;
-  int lenB = len-lenA>0?((len-lenA)/640>0?(len-lenA)/640*640:0):0;
+  int lenA = len>W-x?W-x:len;
+  int lenB = len-lenA>0?((len-lenA)/W>0?(len-lenA)/W*W:0):0;
   int lenC = len-lenA-lenB;
   draw_rect((uint32_t *)buf,x,y,lenA,1);
   if(lenB)
-	  draw_rect((uint32_t *)buf+lenA,0,y+1,640,lenB/640);
+	  draw_rect((uint32_t *)buf+lenA,0,y+1,W,lenB/W);
   if(lenC)
-	  draw_rect((uint32_t *)buf+lenA+lenB,0,y+1+lenB/640,lenC,1);
+	  draw_rect((uint32_t *)buf+lenA+lenB,0,y+1+lenB/W,lenC,1);
   return 0;
 }
 
@@ -64,6 +66,6 @@ void init_device() {
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
-  strcpy(dispinfo,"WIDTH:640\nHEIGHT:480");
+  strcpy(dispinfo,"WIDTH:400\nHEIGHT:300");
   Log("dispinfo:%s",dispinfo);
 }
