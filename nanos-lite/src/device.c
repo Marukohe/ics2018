@@ -64,6 +64,6 @@ void init_device() {
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
-  strcpy(dispinfo,"WIDTH:500\nHEIGHT:300");
+  strcpy(dispinfo,"WIDTH:600\nHEIGHT:300");
   Log("dispinfo:%s",dispinfo);
 }
