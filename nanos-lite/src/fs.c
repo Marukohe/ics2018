@@ -30,6 +30,8 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0,0, 0, invalid_read, invalid_write},
   {"stdout", 0,0, 0, invalid_read, serial_write},
   {"stderr", 0,0, 0, invalid_read, serial_write},
+  {"/dev/fb",0,0},
+  {"/proc/dispinfo",0,0},
 #include "files.h"
 };
 
@@ -45,8 +47,8 @@ int fs_open(const char *pathname,int flags,int mode){
 		{
 			//Log("fd:%d",i);
 			return i;
-		}
-	}
+ 		}
+ 	}
 	assert(0);
 	return 0;
 }
