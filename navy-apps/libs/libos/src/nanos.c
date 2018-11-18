@@ -37,13 +37,15 @@ int _write(int fd, void *buf, size_t count){
   //_exit(SYS_write);
 }
 
-extern char * _end;
-intptr_t programing_break = (intptr_t)&_end;
+extern char  _end;
+//intptr_t programing_break = (intptr_t)&_end;
 void *_sbrk(intptr_t increment){
-  intptr_t old_break = programing_break;
-  programing_break+=increment;
+  static void *prog_brk = (void *)&_end;
+  void *old_brk;
+  old_brk = prog_brk;
+  prog_brk+=increment;
   _syscall_(SYS_brk,0,0,0);
-  return (void *)old_break;
+  return (void *)old_brk;
 }
 
 int _read(int fd, void *buf, size_t count) {
