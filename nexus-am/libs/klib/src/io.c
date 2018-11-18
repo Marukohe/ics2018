@@ -69,6 +69,7 @@ int screen_width() {
 }
 
 int screen_height() {
+  assert(0);
   _Device *dev = getdev(&video_dev, _DEV_VIDEO);
   _VideoInfoReg info;
   dev->read(_DEVREG_VIDEO_INFO, &info, sizeof(info));
