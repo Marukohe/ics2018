@@ -51,7 +51,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   int x = offset-W*y;
   len/=4;
   int lenA = len>W-x?W-x:len;
-  int lenB = len-lenA>0?((len-lenA)/W>0?(len-lenA)/W*W:0):0;
+  int lenB = len-lenA>0?((len-lenA)/W>1?(len-lenA)/W*W:0):0;
   int lenC = len-lenA-lenB;
   draw_rect((uint32_t *)buf,x,y,lenA,1);
   if(lenB)
