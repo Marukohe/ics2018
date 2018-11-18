@@ -23,10 +23,23 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
+	strncpy(buf,dispinfo+offset,len);
   return 0;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
+  offset/=4;
+  int y = offset/screen_width();
+  int x = offset-screen_width()*y;
+  len/=4;
+  int lenA = len>screen_width()-x?screen_width()-x:len;
+  int lenB = len-lenA>0?((len-lenA)/screen_width()>0?(len-lenA)/screen_width()*screen_width():0):0;
+  int lenC = len-lenA-lenB;
+  draw_rect((uint32_t *)buf,x,y,lenA,1);
+  if(lenB)
+	  draw_rect((uint32_t *)buf+lenA,0,y+1,screen_width(),lenB/screen_width());
+  if(lenC)
+	  draw_rect((uint32_t *)buf+lenA+lenB,0,y+1+lenB/screen_width(),lenC,1);
   return 0;
 }
 
@@ -36,4 +49,5 @@ void init_device() {
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
+  strcpy(dispinfo,"WIDTH640\nFEIGHT:480");
 }

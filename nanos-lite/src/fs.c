@@ -13,7 +13,7 @@ typedef struct {
   WriteFn write;
 } Finfo;
 
-enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB};
+enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB,FD_DISPINFO};
 
 size_t invalid_read(void *buf, size_t offset, size_t len) {
   panic("should not reach here");
@@ -48,24 +48,36 @@ int fs_open(const char *pathname,int flags,int mode){
 		{
 			//Log("fd:%d",i);
 			return i;
- 		}
- 	}
+ 	 	}
+ 	} 
 	assert(0);
 	return 0;
 }
 extern size_t ramdisk_read(void *buf,size_t offset,size_t len);
 extern size_t ramdisk_write(const void *buf,size_t offset,size_t len);
-
+extern size_t dispinfo_read(void *buf,size_t offset,size_t len);
+extern size_t fb_write(const void *buf,size_t offset,size_t len);
 ssize_t fs_read(int fd,void *buf,size_t len){
-	if(file_table[fd].open_offset==file_table[fd].size)
-		return 0;
-	else if(file_table[fd].open_offset+len>file_table[fd].size)
-		len = file_table[fd].size - file_table[fd].open_offset;
-	//Log("%d",len);
-	ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len);
-	file_table[fd].open_offset+=len;
-	//Log("%s",file_table[fd].name);
-	return len;
+	switch(fd){
+		case FD_DISPINFO:
+			if(file_table[FD_DISPINFO].open_offset+len==file_table[FD_DISPINFO].size)
+				return 0;
+			else if(file_table[FD_DISPINFO].open_offset+len>file_table[FD_DISPINFO].size)
+				len = file_table[FD_DISPINFO].size - file_table[FD_DISPINFO].open_offset;
+			dispinfo_read(buf,file_table[FD_DISPINFO].open_offset,len);
+			file_table[FD_DISPINFO].open_offset+=len;
+			return len;
+		default:	
+			if(file_table[fd].open_offset==file_table[fd].size)
+				return 0;
+			else if(file_table[fd].open_offset+len>file_table[fd].size)
+				len = file_table[fd].size - file_table[fd].open_offset;
+			//Log("%d",len);
+			ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len);
+			file_table[fd].open_offset+=len;
+			//Log("%s",file_table[fd].name);
+			return len;
+	}
 }
 
 ssize_t fs_write(int fd,const void *buf,size_t len){
@@ -78,6 +90,10 @@ ssize_t fs_write(int fd,const void *buf,size_t len){
 				_putc(buff[i]);
 			return len;
 		}
+		case FD_FB:
+			fb_write(buf,file_table[FD_FB].open_offset,len);
+			file_table[FD_FB].open_offset+=len;
+			return len;
 		default:
 			//assert(0);
 			if(file_table[fd].open_offset==file_table[fd].size)
