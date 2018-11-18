@@ -60,6 +60,7 @@ extern size_t fb_write(const void *buf,size_t offset,size_t len);
 ssize_t fs_read(int fd,void *buf,size_t len){
 	switch(fd){
 		case FD_DISPINFO:
+			Log("filesize:%d",file_table[FD_DISPINFO].size);
 			if(file_table[FD_DISPINFO].open_offset+len==file_table[FD_DISPINFO].size)
 				return 0;
 			else if(file_table[FD_DISPINFO].open_offset+len>file_table[FD_DISPINFO].size)
