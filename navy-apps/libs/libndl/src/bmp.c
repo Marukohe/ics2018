@@ -37,8 +37,9 @@ int NDL_LoadBitmap(NDL_Bitmap *bmp, const char *filename) {
   pixels = (uint32_t*)malloc(hdr.width * hdr.height * sizeof(uint32_t));
   if (!pixels) return -1;
 
-  assert(0);
+  //assert(0);
   w = hdr.width; h = hdr.height;
+  assert(0);
   int line_off = (w * 3 + 3) & ~0x3;
 
   for (int i = 0; i < h; i ++) {
