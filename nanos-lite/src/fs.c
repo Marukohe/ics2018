@@ -67,6 +67,7 @@ ssize_t fs_read(int fd,void *buf,size_t len){
 				len = file_table[FD_DISPINFO].size - file_table[FD_DISPINFO].open_offset;
 			dispinfo_read(buf,file_table[FD_DISPINFO].open_offset,len);
 			file_table[FD_DISPINFO].open_offset+=len;
+			Log("filesize after read:%d",file_table[FD_DISPINFO].size);
 			return len;
 		default:	
 			if(file_table[fd].open_offset==file_table[fd].size)
