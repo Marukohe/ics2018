@@ -13,7 +13,7 @@ typedef struct {
   WriteFn write;
 } Finfo;
 
-enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB,FD_DISPINFO};
+enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB,FD_DISPINFO,FD_EVENTS};
 
 size_t invalid_read(void *buf, size_t offset, size_t len) {
   panic("should not reach here");
@@ -32,6 +32,7 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stderr", 0,0, 0, invalid_read, serial_write},
   {"/dev/fb",0,0},
   {"/proc/dispinfo",128,0},
+  {"/dev/events",0,0},
 #include "files.h"
 };
 
@@ -58,6 +59,7 @@ extern size_t ramdisk_read(void *buf,size_t offset,size_t len);
 extern size_t ramdisk_write(const void *buf,size_t offset,size_t len);
 extern size_t dispinfo_read(void *buf,size_t offset,size_t len);
 extern size_t fb_write(const void *buf,size_t offset,size_t len);
+extern size_t events_read(void *buf,size_t offset,size_t len);
 ssize_t fs_read(int fd,void *buf,size_t len){
 	switch(fd){
 		case FD_DISPINFO:
@@ -70,6 +72,8 @@ ssize_t fs_read(int fd,void *buf,size_t len){
 			file_table[FD_DISPINFO].open_offset+=len;
 			Log("filesize after read:%d",file_table[FD_DISPINFO].size);
 			return len;
+		case FD_EVENTS:
+			return events_read(buf,0,len);
 		default:	
 			if(file_table[fd].open_offset==file_table[fd].size)
 				return 0;
