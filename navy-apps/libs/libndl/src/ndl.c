@@ -16,25 +16,25 @@ int NDL_OpenDisplay(int w, int h) {
     NDL_CloseDisplay();
   }
 
-  assert(0);
+  //assert(0);
   canvas_w = w;
   canvas_h = h;
   canvas = malloc(sizeof(uint32_t) * w * h);
   assert(canvas);
 
-  assert(0);
+  //assert(0);
   if (getenv("NWM_APP")) {
     has_nwm = 1;
   } else {
     has_nwm = 0;
   }
 
-  assert(0);
+  //assert(0);
   if (has_nwm) {
     printf("\033[X%d;%ds", w, h); fflush(stdout);
     evtdev = stdin;
   } else {
-	assert(0);
+	//assert(0);
     get_display_info();
     assert(screen_w >= canvas_w);
     assert(screen_h >= canvas_h);
