@@ -47,8 +47,9 @@ int NDL_LoadBitmap(NDL_Bitmap *bmp, const char *filename) {
 	//if(i>=290)
 	//	printf("%d\n\n",i);
     fseek(fp, hdr.offset + (h - 1 - i) * line_off, SEEK_SET);
-	assert(0);
+	//assert(0);
     int nread = fread(&pixels[w * i], 3, w, fp);
+	assert(0);
     for (int j = w - 1; j >= 0; j --) {
       uint8_t b = *(((uint8_t*)&pixels[w * i]) + 3 * j);
       uint8_t g = *(((uint8_t*)&pixels[w * i]) + 3 * j + 1);
