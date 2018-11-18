@@ -42,19 +42,19 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   //extern int screen_w,screen_h;
-  Log("screen:%d %d",screen_width(),screen_height());
+  //Log("screen:%d %d",screen_width(),screen_height());
   offset/=4;
-  int y = offset/screen_width();
-  int x = offset-screen_width()*y;
+  int y = offset/640;
+  int x = offset-640*y;
   len/=4;
-  int lenA = len>screen_width()-x?screen_width()-x:len;
-  int lenB = len-lenA>0?((len-lenA)/screen_width()>0?(len-lenA)/screen_width()*screen_width():0):0;
+  int lenA = len>640-x?640-x:len;
+  int lenB = len-lenA>0?((len-lenA)/640>0?(len-lenA)/640*640:0):0;
   int lenC = len-lenA-lenB;
   draw_rect((uint32_t *)buf,x,y,lenA,1);
   if(lenB)
-	  draw_rect((uint32_t *)buf+lenA,0,y+1,screen_width(),lenB/screen_width());
+	  draw_rect((uint32_t *)buf+lenA,0,y+1,640,lenB/640);
   if(lenC)
-	  draw_rect((uint32_t *)buf+lenA+lenB,0,y+1+lenB/screen_width(),lenC,1);
+	  draw_rect((uint32_t *)buf+lenA+lenB,0,y+1+lenB/640,lenC,1);
   return 0;
 }
 
