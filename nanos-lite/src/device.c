@@ -20,13 +20,13 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   int key = read_key();
   if(key!=_KEY_NONE){
 	if((key&0x8000)==0)  //down
-		sprintf(buf,"ku %s\n",keyname[key]);
+		len = sprintf(buf,"ku %s\n",keyname[key]);
 	else    //code
-		sprintf(buf,"kd %s\n",keyname[key&0x7fff]);
+		len = sprintf(buf,"kd %s\n",keyname[key&0x7fff]);
   }
   else{
 	  uint32_t tim = uptime();
-	  sprintf(buf,"t %d\n",tim);
+	  len = sprintf(buf,"t %d\n",tim);
   }
 
   return len-1;

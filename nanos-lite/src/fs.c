@@ -75,10 +75,7 @@ ssize_t fs_read(int fd,void *buf,size_t len){
 			Log("filesize after read:%d",file_table[FD_DISPINFO].size);
 			return len;
 		case FD_EVENTS:
-		{
-			int offset = events_read(buf,0,len);
-			return offset;
-		}
+			return events_read(buf,0,len);
 		default:	
 			if(file_table[fd].open_offset==file_table[fd].size)
 				return 0;
