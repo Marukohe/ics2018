@@ -94,7 +94,7 @@ off_t fs_lseek(int fd,off_t offset,int whence){
 			file_table[fd].open_offset += offset;
 			return file_table[fd].open_offset;
 		case SEEK_END:
-			if(offset>0||file_table[fd].size+offset<0)
+			if(file_table[fd].size+offset<0)
 				return -1;
 			file_table[fd].open_offset = file_table[fd].size+offset;
 			return file_table[fd].open_offset;
