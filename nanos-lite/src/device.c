@@ -40,8 +40,8 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   return 0;
 }
 
-int W = 400;
-int H = 300;
+int W = 800;
+int H = 600;
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   //extern int screen_w,screen_h;
   Log("screen:%d %d",screen_width(),screen_height());
@@ -66,7 +66,7 @@ void init_device() {
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
-  strcpy(dispinfo,"WIDTH:400\nHEIGHT:300");
+  strcpy(dispinfo,"WIDTH:800\nHEIGHT:600");
   //assert(0);
   Log("dispinfo:%s",dispinfo);
 }
