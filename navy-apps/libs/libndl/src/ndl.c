@@ -26,6 +26,7 @@ int NDL_OpenDisplay(int w, int h) {
   if (getenv("NWM_APP")) {
     has_nwm = 1;
   } else {
+	  assert(0);
     has_nwm = 0;
   }
 
