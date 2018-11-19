@@ -14,10 +14,10 @@ int main() {
 	//printf("%s",buf);
 	nemu_assert(strcmp(buf, "2 + 10 = 12\n") == 0);
 
-	//char buff[256];
-	snprintf(buf,5,"%d + %d = %d\n",2,10,12);
-	printf("%s\n",buf);
-	nemu_assert(strcmp(buf,"2 + 1 \n")==0);
+	char buff[256];
+	snprintf(buff,5,"%d + %d = %d\n",2,10,12);
+	printf("%s\n",buff);
+	nemu_assert(strcmp(buff,"2 + \n")==0);
 	//nemu_assert(strcmp("2d + 10d = 12d","2 + 10 = 12")==0);
 	//int a=10;
 	//char *s="hello,world";
