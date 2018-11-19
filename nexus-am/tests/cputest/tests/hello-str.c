@@ -14,7 +14,7 @@ int main() {
 	//printf("%s",buf);
 	nemu_assert(strcmp(buf, "2 + 10 = 12\n") == 0);
 
-	snprintf(buf,10,"%d + %d = %d\n",2,10,12);
+	snprintf(buf,5,"%d + %d = %d\n",2,10,12);
 	printf("%s",buf);
 	nemu_assert(strcmp(buf,"2 + 10 = 12\n")==0);
 	//nemu_assert(strcmp("2d + 10d = 12d","2 + 10 = 12")==0);
