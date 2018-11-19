@@ -7,6 +7,7 @@ void difftest_skip_dut();
 make_EHelper(lidt) {
   //TODO();
   if(id_dest->width==2){
+	  Assert(0,"lidt operand size is 16");
 	  cpu.IDTR.limit=vaddr_read(id_dest->addr,2);
 	  cpu.IDTR.base=vaddr_read(id_dest->addr+2,3);
   }
@@ -51,6 +52,8 @@ make_EHelper(int) {
 
 make_EHelper(iret) {
   //TODO();
+  if(decoding.is_operand_size_16)
+	  Assert(0,"iret operand size is 16");
   rtl_pop(&decoding.jmp_eip);
   rtl_pop(&cpu.CS);
   rtl_pop(&cpu.eflags);
