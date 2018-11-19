@@ -321,11 +321,11 @@ int printf(const char *fmt, ...) {
 int snprintf(char *out, size_t n, const char *fmt, ...) {
   va_list args;
   //int res;
-  char *buf=NULL;
+  char buf[65536];
   va_start(args,fmt);
   vsprintf(buf,fmt,args);
-  char *dst=NULL;
-  strncpy(dst,(const char*)buf,n);
+  char dst[65536];
+  strncpy(dst,(const char *)buf,n);
   strcat(out,(const char *)dst);
   va_end(args);
   return n;
