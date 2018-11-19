@@ -324,9 +324,10 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   char buf[65536];
   va_start(args,fmt);
   vsprintf(buf,fmt,args);
-  char dst[65536];
-  strncpy(dst,(const char *)buf,n);
-  strcat(out,(const char *)dst);
+  memcpy(out,(const void*)buf,n);
+  //char dst[65536];
+  //strncpy(out,(const char *)buf,n);
+  //strcat(out,(const char *)dst);
   va_end(args);
   return n;
 }
