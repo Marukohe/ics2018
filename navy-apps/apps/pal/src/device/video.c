@@ -428,6 +428,7 @@ VIDEO_UpdateScreen(
       screenRealY = offset / 2;
    }
 
+   assert(gpScreen->w==320);
    if (lpRect != NULL)
    {
       dstrect.x = (SHORT)((INT)(lpRect->x) * gpScreenReal->w / gpScreen->w);
