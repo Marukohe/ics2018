@@ -25,9 +25,11 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 		//sprintf(buf,"ku %s\n",keyname[key]);
 		snprintf(buf,len,"ku %s\n",keyname[key]);
 	}
-	else    //code
+	else{    //code
 		//sprintf(buf,"kd %s\n",keyname[key&0x7fff]);
+		assert(0);
 		snprintf(buf,len,"kd %s\n",keyname[key&0x7fff]);
+	}
   }
   else{
 	  uint32_t tim = uptime();
