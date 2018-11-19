@@ -321,7 +321,7 @@ int printf(const char *fmt, ...) {
 int snprintf(char *out, size_t n, const char *fmt, ...) {
   va_list args;
   //int res;
-  char buf[65536];
+  char buf[256];
   va_start(args,fmt);
   vsprintf(buf,fmt,args);
   printf("%s\n\n\n\n\n\n\n\n",buf);
