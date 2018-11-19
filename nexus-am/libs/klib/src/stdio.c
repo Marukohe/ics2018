@@ -321,19 +321,22 @@ int printf(const char *fmt, ...) {
 int snprintf(char *out, size_t n, const char *fmt, ...) {
   va_list args;
   //int res;
-  char buf[256];
+  //char buf[256];
   va_start(args,fmt);
-  vsprintf(buf,fmt,args);
+  vsprintf(out,fmt,args);
   va_end(args);
+  char *s=out;
+  s+=n;
+  s='\0';
   //printf("%s\n\n\n\n\n\n\n\n",buf);
-  memcpy(out,buf,n);
+  //memcpy(out,buf,n);
   //char dst[65536];
   //strncpy(out,(const char *)buf,n);
   //strcat(out,(const char *)dst);
-  char *s1;
-  s1 = out;
-  s1 +=n;
-  s1 = '\0';
+  //char *s1;
+  //s1 = out;
+  //s1 +=n;
+  //s1 = '\0';
   return n;
 }
 
