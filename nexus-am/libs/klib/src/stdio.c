@@ -325,6 +325,7 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   va_start(args,fmt);
   vsprintf(out,fmt,args);
   va_end(args);
+  printf("%s\n",out);
   char *s=out;
   s+=n;
   s='\0';
