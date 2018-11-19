@@ -32,7 +32,8 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 	  snprintf(buf,len,"t %d\n",tim);
   }
 
-  return strlen(buf);
+  return len-1;
+  //return strlen(buf);
 }
 
 static char dispinfo[128] __attribute__((used));
