@@ -327,8 +327,8 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   va_end(args);
   printf("%s\n",out);
   char *s=out;
-  s+=n;
-  s='\0';
+  *s+=n;
+  *s='\0';
   //printf("%s\n\n\n\n\n\n\n\n",buf);
   //memcpy(out,buf,n);
   //char dst[65536];
