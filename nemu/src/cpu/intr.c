@@ -13,8 +13,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 	}GD;
 
     /*push eflags*/
-	if(cpu.eflags==2)
-		cpu.eflags=0x12;
+	//if(cpu.eflags==2)
+		//cpu.eflags=0x12;
 	rtl_push(&cpu.eflags);
 
 	/*push CS*/
