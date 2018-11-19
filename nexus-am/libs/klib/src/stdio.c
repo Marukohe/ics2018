@@ -329,6 +329,10 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   //char dst[65536];
   //strncpy(out,(const char *)buf,n);
   //strcat(out,(const char *)dst);
+  char *s1;
+  s1 = out;
+  s1 +=n;
+  s1 = '\0';
   va_end(args);
   return n;
 }
