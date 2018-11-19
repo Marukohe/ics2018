@@ -77,31 +77,33 @@ void difftest_step(uint32_t eip) {
 	  printf("difference in ref_r.eax\t0x%-16x%-d\n",ref_r.eax,ref_r.eax);
 	  printf("difference in cpu.eax\t0x%-16x%-d\n",cpu.eax,cpu.eax);
 
-  }
+  } 
   if(cpu.ecx!=ref_r.ecx){
       nemu_state=NEMU_ABORT;
 	  printf("difference in ref_r.ecx\t0x%-16x%-d\n",ref_r.ecx,ref_r.ecx);
 
-  }
+  } 
   if(cpu.edx!=ref_r.edx){
       nemu_state=NEMU_ABORT;
 	  printf("difference in ref_r.edx\t0x%-16x%-d\n",ref_r.edx,ref_r.edx);
-  }
+  } 
   if(cpu.ebx!=ref_r.ebx){
       nemu_state=NEMU_ABORT;
 	  printf("difference in ref_r.ebx\t0x%-16x%-d\n",ref_r.ebx,ref_r.ebx);
-  }
+  } 
   if(cpu.esp!=ref_r.esp){
       nemu_state=NEMU_ABORT;
 	  printf("difference in ref_r.esp\t0x%-16x%-d\n",ref_r.esp,ref_r.esp);
-  }
+  } 
   if(cpu.ebp!=ref_r.ebp){
       nemu_state=NEMU_ABORT;
  	  printf("difference in ref_r.ebp\t0x%-16x%-d\n",ref_r.ebp,ref_r.ebp);
-  }
+	  printf("difference in cpu.ebp\t0x%-16x%-d\n",cpu.ebp,cpu.ebp);
+  } 
   if(cpu.esi!=ref_r.esi){
       nemu_state=NEMU_ABORT;
 	  printf("difference in ref_r.esi\t0x%-16x%-d\n",ref_r.esi,ref_r.esi);
+	  printf("difference in cpu.esi\t0x%-16x%-d\n",cpu.esi,cpu.esi);
   }
   if(cpu.edi!=ref_r.edi){
       nemu_state=NEMU_ABORT;
