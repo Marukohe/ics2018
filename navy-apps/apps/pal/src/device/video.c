@@ -436,7 +436,7 @@ VIDEO_UpdateScreen(
       dstrect.h = (WORD)((DWORD)(lpRect->h) * screenRealHeight / gpScreen->h);
 
       SDL_SoftStretch(gpScreen, (SDL_Rect *)lpRect, gpScreenReal, &dstrect);
-
+	  assert(0);
       if (SDL_MUSTLOCK(gpScreenReal))
       {
          SDL_UnlockSurface(gpScreenReal);
@@ -490,7 +490,9 @@ VIDEO_UpdateScreen(
 			   dstrect.y = (screenRealY + g_wShakeLevel) * screenRealHeight / gpScreen->h;
 		   }
 
+		   //Log("%d%d%d%d");
 		   SDL_SoftStretch(gpScreen, &srcrect, gpScreenReal, &dstrect);
+		   //assert(0);
 
 		   if (g_wShakeTime & 1)
 		   {
