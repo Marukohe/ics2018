@@ -21,13 +21,13 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   if(key!=_KEY_NONE){
 	if((key&0x8000)==0)  //down
 	{
-		assert(0);
+		//assert(0);
 		//sprintf(buf,"ku %s\n",keyname[key]);
 		snprintf(buf,len,"ku %s\n",keyname[key]);
 	}
 	else{    //code
 		//sprintf(buf,"kd %s\n",keyname[key&0x7fff]);
-		assert(0);
+		//assert(0);
 		snprintf(buf,len,"kd %s\n",keyname[key&0x7fff]);
 	}
   }
