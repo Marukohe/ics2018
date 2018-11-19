@@ -26,7 +26,7 @@ int NDL_OpenDisplay(int w, int h) {
   if (getenv("NWM_APP")) {
     has_nwm = 1;
   } else {
-	  assert(0);
+	//assert(0);
     has_nwm = 0;
   }
 
@@ -147,7 +147,7 @@ static void get_display_info() {
   }
   fclose(dispinfo);
   //printf("key: %s value: %s\n",key,value);
-  //printf("w:%d  h:%d\n\n\n",screen_w,screen_h);
+  printf("w:%d  h:%d\n\n\n",screen_w,screen_h);
   assert(screen_w > 0 && screen_h > 0);
 }
 

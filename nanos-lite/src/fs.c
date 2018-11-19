@@ -101,7 +101,7 @@ ssize_t fs_write(int fd,const void *buf,size_t len){
 			return len;
 		}
 		case FD_FB:
-			fb_write(buf,file_table[FD_FB].open_offset,len);
+			fb_write(buf,file_table[FD_FB].disk_offset+file_table[FD_FB].open_offset,len);
 			file_table[FD_FB].open_offset+=len;
 			return len;
 		default:
