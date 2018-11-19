@@ -44,12 +44,14 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   return 0;
 }
 
-int W = 400;
-int H = 300;
+//int W = screen_width();
+//int H = screen_height();
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   //extern int screen_w,screen_h;
   //Log("screen:%d %d",screen_width(),screen_height());
+  int W = screen_width();
+  //int H = screen_height();
   offset/=4;
   int y = offset/W;
   int x = offset-W*y;
