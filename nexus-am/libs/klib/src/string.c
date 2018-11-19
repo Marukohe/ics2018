@@ -137,7 +137,7 @@ void* memcpy(void* out, const void* in, size_t n){
 	const char *s2;
 	for(s1=out,s2=in;0<n;++s1,++s2,--n)
 		*s1=*s2;
-	//*s1 = '\0';
+	*s1 = '\0';
 	return out;	
 } 
 
