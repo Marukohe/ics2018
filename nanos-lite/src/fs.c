@@ -6,8 +6,8 @@ typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
 typedef struct {
   char *name;
   size_t size;
-  size_t disk_offset;
-  size_t open_offset;
+  off_t disk_offset;
+  off_t open_offset;
   ReadFn read;
   WriteFn write;
 } Finfo;
@@ -73,7 +73,7 @@ int fs_open(const char *pathname, int flags, int mode){
 }
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
-size_t fs_read(int fd, void *buf,  size_t len){
+ssize_t fs_read(int fd, void *buf,  size_t len){
   //printf("fs_read: I enter the function.\n");
   if(file_table[fd].read != NULL){
     //printf("fs_read: name:%s\n", file_table[fd].name);
@@ -94,7 +94,7 @@ size_t fs_read(int fd, void *buf,  size_t len){
 }
 
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
-size_t fs_write(int fd, const void *buf, size_t len){
+ssize_t fs_write(int fd, const void *buf, size_t len){
   //printf("fs_write: I'm here.\n");
   //printf("fs_write: buf:%p\n", buf);
   if(file_table[fd].write != NULL){
@@ -116,7 +116,7 @@ size_t fs_write(int fd, const void *buf, size_t len){
   return len;
 }
 
-size_t fs_lseek(int fd, size_t offset, int whence){
+ssize_t fs_lseek(int fd, off_t offset, int whence){
   //char* WHENCE[] = {"SEEK_SET", "SEEK_CUR", "SEEK_END"};
   //printf("fs_lseek: whence:%s\toffset:%#x\tsize:%#x\n", WHENCE[whence], offset, fs_filesz(fd));
   switch(whence){
