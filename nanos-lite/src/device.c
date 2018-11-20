@@ -42,18 +42,15 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 }
 
 static char dispinfo[128] __attribute__((used));
-/*
+
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 	strncpy(buf,dispinfo+offset,len);
     //Log("buf:%soffset:%d",(char *)buf,offset);
   return 0;
 }
-*/
+
+/*
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  /*
-  if(len >= 128)
-    len = 127;
-  */
   for(int i = 0;i < len;i++){
     ((char*)buf)[i] = dispinfo[offset+i];
   }
@@ -62,9 +59,12 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   //printf("dispinfo_read: len:%d\tstrlen:%d\n", len, strlen(buf));
   return strlen(buf);
 }
+*/
 //int W = screen_width();
 //int H = screen_height();
 
+/*
+my fbwrite
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   //extern int screen_w,screen_h;
   //Log("screen:%d %d",screen_width(),screen_height());
@@ -83,6 +83,18 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   if(lenC)
 	  draw_rect((uint32_t *)buf+lenA+lenB,0,y+1+lenB/W,lenC,1);
   return 0;
+}
+*/
+
+size_t fb_write(const void *buf, size_t offset, size_t len) {
+  
+  
+  offset /= 4;
+  
+  draw_rect((uint32_t*)buf, offset%screen_width(), offset/screen_width(), len/4, 1);
+  
+  return len;
+  //return 0;
 }
 
 void init_device() {
