@@ -2,10 +2,10 @@
 #include <amdev.h>
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
-  char *buff = (char *)buf;
+  //char *buff = (char *)buf;
   for(int i=0;i<len;i++)
-	_putc(buff[i]);
-  return 0;
+	_putc(((char *)buf)[i]);
+  return len;
 }
 
 #define NAME(key) \
@@ -66,9 +66,11 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 
 
 static char dispinfo[128] __attribute__((used));
+
 /*
+myread
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-    memcpy(buf,dispinfo+offset,len);
+	strncpy(buf,dispinfo+offset,len);
     //Log("buf:%soffset:%d",(char *)buf,offset);
   return 0;
 }
@@ -128,7 +130,7 @@ void init_device() {
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
   //strcpy(dispinfo,"WIDTH:400\nHEIGHT:300");
-  sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d",screen_width(),screen_height());
+  sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d\n",screen_width(),screen_height());
   //assert(0);
-  Log("dispinfo:%s",dispinfo);
+  //Log("dispinfo:%s",dispinfo);
 }
