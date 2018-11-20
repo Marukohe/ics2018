@@ -77,15 +77,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   printf("\n");
   */
   offset /= 4;
-  //char term = ((char*)buf)[len];
-  //((char*)buf)[len] = '\0';
-  /*
-  for(int i = 0;i < len;i++){
-    buff[i] = ((uint32_t*)buf)[i];
-  }
-  buff[len] = '\0';
-  */
-  //draw_rect((uint32_t*)buf, offset%screen_width(), offset/screen_width(), screen_width(), screen_height());
+
   draw_rect((uint32_t*)buf, offset%screen_width(), offset/screen_width(), len/4, 1);
   //((char*)buf)[len] = term;
   //printf("fb_write: offset:%#x\n", offset);
