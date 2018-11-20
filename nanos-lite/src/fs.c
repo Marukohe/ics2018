@@ -34,7 +34,7 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stdout", 0, 0, 0, invalid_read, serial_write},
   {"stderr", 0, 0, 0, invalid_read, serial_write},
   {"/dev/fb", 0, 0, 0, invalid_read, fb_write},
-  {"/proc/dispinfo", 0, 0, 0, dispinfo_read, invalid_write},
+  {"/proc/dispinfo", 128, 0, 0, dispinfo_read, invalid_write},
   {"/dev/events", 0, 0, 0, events_read, invalid_write},
 #include "files.h"
 };
@@ -47,15 +47,7 @@ void init_fs() {
     file_table[i].open_offset = 0;
   }
   // TODO: initialize the size of /dev/fb
-  int fb = fs_open("/dev/fb", 0, 0);
-  file_table[fb].size = screen_width()*screen_height()*4;
-  /*
-  uint32_t buf[2];
-  video_read(1, buf, 8);
-  file_table[fb].size = buf[0]*buf[1]*4;
-  */
-  //printf("init_fs: %d %d\n", buf[0], buf[1]);
-  //printf("init_fs: %d\n", file_table[fb].size);
+  file_table[3].size = screen_width()*screen_height()*4;
 }
 
 size_t fs_filesz(int fd){
@@ -95,13 +87,7 @@ size_t fs_read(int fd, void *buf,  size_t len){
 
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len){
-  //printf("fs_write: I'm here.\n");
-  //printf("fs_write: buf:%p\n", buf);
   if(file_table[fd].write != NULL){
-    //printf("fs_write: name:%s\n", file_table[fd].name);
-    //printf("fs_write: 1:%#x\t2:%#x\t3:%#x\n", file_table[fd].disk_offset, file_table[fd].open_offset, len);
-    //printf("fs_write: open_offset:%#x\n", file_table[fd].open_offset);
-    //printf("fs_write: total offset:%#x\n", file_table[fd].disk_offset+file_table[fd].open_offset);
     size_t term = (*file_table[fd].write)(buf,file_table[fd].disk_offset+file_table[fd].open_offset, len);
     file_table[fd].open_offset += len;
     return term;
@@ -117,8 +103,6 @@ size_t fs_write(int fd, const void *buf, size_t len){
 }
 
 size_t fs_lseek(int fd, size_t offset, int whence){
-  //char* WHENCE[] = {"SEEK_SET", "SEEK_CUR", "SEEK_END"};
-  //printf("fs_lseek: whence:%s\toffset:%#x\tsize:%#x\n", WHENCE[whence], offset, fs_filesz(fd));
   switch(whence){
     case SEEK_SET:
       file_table[fd].open_offset = offset;
