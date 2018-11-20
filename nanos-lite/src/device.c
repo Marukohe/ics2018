@@ -2,12 +2,10 @@
 #include <amdev.h>
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
-  for(int i = 0;i < len;i++){
-    _putc(((char*)buf)[i]);
-  } 
-  return len;
-  //strncpy((char*)0x3f8, buf, len);
-  //return strlen((char*)0x38);
+  char *buff = (char *)buf;
+  for(int i=0;i<len;i++)
+	_putc(buff[i]);
+  return 0;
 }
 
 #define NAME(key) \
@@ -18,7 +16,32 @@ static const char *keyname[256] __attribute__((used)) = {
   _KEYS(NAME)
 };
 
-//size_t input_read(uintptr_t reg, void *buf, size_t size);
+/* my events_read
+size_t events_read(void *buf, size_t offset, size_t len) {
+  int key = read_key();
+  if(key!=_KEY_NONE){
+	if((key&0x8000)==0)  //down
+	{
+		//assert(0);
+		//sprintf(buf,"ku %s\n",keyname[key]);
+		snprintf(buf,len,"ku %s\n",keyname[key]);
+	}
+	else{    //code
+		//sprintf(buf,"kd %s\n",keyname[key&0x7fff]);
+		//assert(0);
+		snprintf(buf,len,"kd %s\n",keyname[key&0x7fff]);
+	}
+  }
+  else{
+	  uint32_t tim = uptime();
+	  //sprintf(buf,"t %d\n",tim);
+	  snprintf(buf,len,"t %d\n",tim);
+  }
+
+  //return len-1;
+  return strlen(buf);
+}
+*/
 size_t events_read(void *buf, size_t offset, size_t len) {
   int key = read_key();
   bool down = false;
@@ -41,13 +64,17 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   //return 0;
 }
 
+
 static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  /*
-  if(len >= 128)
-    len = 127;
-  */
+	strncpy(buf,dispinfo+offset,len);
+    //Log("buf:%soffset:%d",(char *)buf,offset);
+  return 0;
+}
+
+/*
+size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   for(int i = 0;i < len;i++){
     ((char*)buf)[i] = dispinfo[offset+i];
   }
@@ -56,42 +83,40 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   //printf("dispinfo_read: len:%d\tstrlen:%d\n", len, strlen(buf));
   return strlen(buf);
 }
+*/
+//int W = screen_width();
+//int H = screen_height();
 
-//size_t video_read(uintptr_t reg, void *buf, size_t size);
-//void draw_rect(uint32_t *pixels, int x, int y, int w, int h);
-uint32_t buff[1<<16];
+/*
+my fbwrite
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-  /*
-  uint32_t size[2];
-  //printf("fb_write: I'm here.\n");
-  video_read(1, size, 8);
-  */
-  //printf("fb_write: %p\n", buf);
-  //draw_rect((uint32_t*)buf, offset%(screen_width()), offset/(screen_width()), len, 1);
-  //draw_rect((uint32_t*)buf, offset%screen_width(), offset/(screen_width()), len, 1);
-  //draw_rect((uint32_t*)buf, 0, offset/(screen_width()), len, 1);
-  /*
-  for(int i = 0;i < len;i++){
-    printf("%d ", ((uint32_t*)buf)[i]);
-  }
-  printf("\n");
-  */
+  //extern int screen_w,screen_h;
+  //Log("screen:%d %d",screen_width(),screen_height());
+  int W = screen_width();
+  //int H = screen_height();
+  offset/=4;
+  int y = offset/W;
+  int x = offset-W*y;
+  len/=4;
+  int lenA = len>W-x?W-x:len;
+  int lenB = len-lenA>0?((len-lenA)/W>0?(len-lenA)/W*W:0):0;
+  int lenC = len-lenA-lenB;
+  draw_rect((uint32_t *)buf,x,y,lenA,1);
+  if(lenB)
+	  draw_rect((uint32_t *)buf+lenA,0,y+1,W,lenB/W);
+  if(lenC)
+	  draw_rect((uint32_t *)buf+lenA+lenB,0,y+1+lenB/W,lenC,1);
+  return 0;
+}
+*/
+
+size_t fb_write(const void *buf, size_t offset, size_t len) {
+  
+  
   offset /= 4;
-  //char term = ((char*)buf)[len];
-  //((char*)buf)[len] = '\0';
-  /*
-  for(int i = 0;i < len;i++){
-    buff[i] = ((uint32_t*)buf)[i];
-  }
-  buff[len] = '\0';
-  */
-  //draw_rect((uint32_t*)buf, offset%screen_width(), offset/screen_width(), screen_width(), screen_height());
+  
   draw_rect((uint32_t*)buf, offset%screen_width(), offset/screen_width(), len/4, 1);
-  //((char*)buf)[len] = term;
-  //printf("fb_write: offset:%#x\n", offset);
-  //draw_sync();
-  //printf("fb_write: len:%d\n", len);
-  //printf("fb_write: size0f(buf):%d\n", sizeof(buf));
+  
   return len;
   //return 0;
 }
@@ -102,10 +127,8 @@ void init_device() {
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
-  /*
-  uint32_t size[2];
-  video_read(1, size, 8);
-  memset(dispinfo, 0, sizeof(dispinfo));
-  */
-  sprintf(dispinfo, "WIDTH:%d\nHEIGHT:%d\n", screen_width(), screen_height());
+  //strcpy(dispinfo,"WIDTH:400\nHEIGHT:300");
+  sprintf(dispinfo,"WIDTH:%d\nHEIGHT:%d",screen_width(),screen_height());
+  //assert(0);
+  Log("dispinfo:%s",dispinfo);
 }
