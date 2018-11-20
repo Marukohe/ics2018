@@ -1,11 +1,10 @@
 #include "cpu/exec.h"
-
+/*
 make_EHelper(add) {
-  /*TODO();*/
+  
   rtl_add(&t2, &id_dest->val, &id_src->val);
   rtl_setrelop(RELOP_LTU, &t3, &t2, &id_dest->val);
-  /*rtl_get_CF(&t1);
-  rtl_add(&t2, &t2, &t1);*/
+  
   operand_write(id_dest, &t2);
   rtl_update_ZFSF(&id_dest->val,id_dest->width);
 
@@ -21,6 +20,31 @@ make_EHelper(add) {
   rtl_set_OF(&t0);
 
   print_asm_template2(add);
+}
+*/
+
+make_EHelper(add) {
+  
+  t1 = id_dest->val;
+
+  rtl_add(&id_dest->val, &id_dest->val, &id_src->val);
+  
+  operand_write(id_dest, &id_dest->val);
+
+  rtl_setrelop(RELOP_LTU, &t0, &id_dest->val, &t1);
+  rtl_set_CF(&t0);
+
+  rtl_xor(&t0, &t1, &id_src->val);
+  rtl_not(&t0, &t0);
+  rtl_xor(&t2, &id_dest->val, &id_src->val);
+  rtl_and(&t0, &t0, &t2);
+  rtl_msb(&t0, &t0, id_dest->width);
+  rtl_set_OF(&t0);
+
+  rtl_update_ZFSF(&id_dest->val, id_dest->width);
+  
+  print_asm_template2(add);
+
 }
 
 make_EHelper(sub) {
