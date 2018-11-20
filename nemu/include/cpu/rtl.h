@@ -242,31 +242,18 @@ make_rtl_setget_eflags(SF)
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
-  /*bool flag=true;
-  for(int i=0;i<width*8-1;i++)
-  {
-	  if(result[i]!=0)
-	  {
-		  flag = false;
-		  break;
-	  }
-  }
-  if(flag == false)
-	  cpu.ZF=1;
-  else
-	  cpu.ZF=0;*/
+	/*
 	if(*result)
 		cpu.ZF=0;
 	else
 		cpu.ZF=1;
+	*/	
+	assert(width==1||width==2||width==4);
+	cpu.ZF = (*result & ~(0xffffffff<<(8*width-1)<<1))==0;
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
-  // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
-  //cpu.SF=result[width*8-1];
-  //rtl_li(&t0,width*8-1);
-  //rtl_shr(&t1,result,&t0);
-  //cpu.SF=((*result>>(width*8-1))==1);
+/*	
   unsigned int tmp = 1;
   tmp <<=(width*8-1);
   unsigned int flag=(*result)&tmp;
@@ -274,6 +261,9 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
 	  cpu.SF = 1;
   else
 	  cpu.SF = 0;
+ */
+	assert(width==1||width==2||width==4);
+	cpu.SF = (*result>>(8*width-1))&0x1;
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
