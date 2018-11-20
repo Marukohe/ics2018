@@ -1,5 +1,5 @@
 #include "cpu/exec.h"
-/*
+
 make_EHelper(add) {
   
   rtl_add(&t2, &id_dest->val, &id_src->val);
@@ -21,8 +21,8 @@ make_EHelper(add) {
 
   print_asm_template2(add);
 }
-*/
 
+/*
 make_EHelper(add) {
   
   t1 = id_dest->val;
@@ -46,7 +46,7 @@ make_EHelper(add) {
   print_asm_template2(add);
 
 }
-
+*/
 /*
 make_EHelper(sub) {
   
