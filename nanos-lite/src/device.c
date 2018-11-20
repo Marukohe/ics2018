@@ -16,7 +16,7 @@ static const char *keyname[256] __attribute__((used)) = {
   _KEYS(NAME)
 };
 
-/* my events_read
+/* my events_read*/
 size_t events_read(void *buf, size_t offset, size_t len) {
   int key = read_key();
   if(key!=_KEY_NONE){
@@ -41,7 +41,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   //return len-1;
   return strlen(buf);
 }
-*/
+/*
 size_t events_read(void *buf, size_t offset, size_t len) {
   int key = read_key();
   bool down = false;
@@ -63,7 +63,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   return strlen(buf);
   //return 0;
 }
-
+*/
 
 static char dispinfo[128] __attribute__((used));
 
