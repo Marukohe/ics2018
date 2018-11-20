@@ -16,6 +16,7 @@ static const char *keyname[256] __attribute__((used)) = {
   _KEYS(NAME)
 };
 
+/* my events_read
 size_t events_read(void *buf, size_t offset, size_t len) {
   int key = read_key();
   if(key!=_KEY_NONE){
@@ -40,6 +41,29 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   //return len-1;
   return strlen(buf);
 }
+*/
+size_t events_read(void *buf, size_t offset, size_t len) {
+  int key = read_key();
+  bool down = false;
+  if(key & 0x8000){
+    key ^= 0x8000;
+    down = true;
+  }
+  if(key != _KEY_NONE){
+    sprintf(buf, "%s %s\n", down?"kd":"ku", keyname[key]);
+  }
+  else{
+    sprintf(buf, "t %d\n", uptime());
+  }
+  if(strlen(buf) > len){
+    printf("\33[1;31mERROR: In events_read: buf is too long.\33[0m\n");
+    assert(0);
+  }
+  ((char*)buf)[len] = '\0';
+  return strlen(buf);
+  //return 0;
+}
+
 
 static char dispinfo[128] __attribute__((used));
 
