@@ -69,13 +69,14 @@ static char dispinfo[128] __attribute__((used));
 
 /*
 myread
+*/
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 	strncpy(buf,dispinfo+offset,len);
     //Log("buf:%soffset:%d",(char *)buf,offset);
   return 0;
 }
-*/
 
+/*
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   for(int i = 0;i < len;i++){ 
     ((char*)buf)[i] = dispinfo[offset+i];
@@ -85,7 +86,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   //printf("dispinfo_read: len:%d\tstrlen:%d\n", len, strlen(buf));
   return strlen(buf);
 }
-
+*/
 //int W = screen_width();
 //int H = screen_height();
 
