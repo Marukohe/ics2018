@@ -212,29 +212,29 @@ void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect,
   int w = (srcrect == NULL ? src->w : srcrect->w);
   int h = (srcrect == NULL ? src->h : srcrect->h);
   //
-  printf("src->w:%d\nsrc->h:%d\n",src->w,src->h);
+  //printf("src->w:%d\nsrc->h:%d\n",src->w,src->h);
   //
   if(srcrect!=NULL)
-	printf("srcrect->w:%d\nsrcrect->h:%d\n",srcrect->w,srcrect->h);
+	//printf("srcrect->w:%d\nsrcrect->h:%d\n",srcrect->w,srcrect->h);
   assert(dstrect);
   //
-  printf("w:%d\ndsrect->w:%d\nh:%d\ndstrect->h:%d\n\n\n",w,dstrect->w,h,dstrect->h);
+  //printf("w:%d\ndsrect->w:%d\nh:%d\ndstrect->h:%d\n\n\n",w,dstrect->w,h,dstrect->h);
   //
   if(w == dstrect->w && h == dstrect->h) {
     /* The source rectangle and the destination rectangle
      * are of the same size. If that is the case, there
-     * is no need to stretch, just copy. */
+      * is no need to stretch, just copy. */
     SDL_Rect rect;
     rect.x = x;
     rect.y = y;
     rect.w = w;
     rect.h = h;
     SDL_BlitSurface(src, &rect, dst, dstrect);
-  }
+  } 
   else {
     /* No other case occurs in NEMU-PAL. */
     assert(0);
-  }
+  } 
 }
 
 SDL_Surface* SDL_CreateRGBSurface(uint32_t flags, int width, int height, int depth,
