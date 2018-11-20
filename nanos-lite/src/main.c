@@ -12,7 +12,7 @@ int main() {
   init_mm();
 #endif
 
-  Log("'Hello World!' from Nanos-lite");
+  Log("'My name is Van. I'm an artist. I'm a professional artist.' from Nanos-lite");
   Log("Build time: %s, %s", __TIME__, __DATE__);
 
   init_ramdisk();
