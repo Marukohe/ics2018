@@ -8,7 +8,6 @@
 enum {SEEK_SET, SEEK_CUR, SEEK_END};
 #endif
 
-//not mine
 
 size_t fs_filesz(int fd);
 int fs_open(const char *pathname, int flags, int mode);
