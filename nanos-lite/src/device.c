@@ -73,7 +73,7 @@ myread
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 	memcpy(buf,dispinfo+offset,len);
     //Log("buf:%soffset:%d",(char *)buf,offset);
-  return 0;
+  return strlen(buf);
 }
 
 /*
