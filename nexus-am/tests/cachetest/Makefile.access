@@ -1,4 +1,4 @@
-NAME = cache-flush
-SRCS = tests/cache-flush.c
+NAME = access
+SRCS = tests/access.c
 LIBS += klib
 include /home/hw/ics2018/nexus-am/Makefile.app
