@@ -122,8 +122,8 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   offset /= 4;
   col = offset % screen_width();
   row = offset / screen_width();
-  draw_rect((uint32_t*)buf, col, row, len/4, 1);
-  //draw_rect((uint32_t *)buf,col,row,screen_width(),(len/4)/screen_width());
+  //draw_rect((uint32_t*)buf, col, row, len/4, 1);
+  draw_rect((uint32_t *)buf,col,row,screen_width(),1);
   return len;
   //return 0;
 }
