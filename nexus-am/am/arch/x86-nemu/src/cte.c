@@ -10,7 +10,7 @@ void vecsys();
 _Context* irq_handle(_Context *tf) {
   _Context *next = tf;
   if (user_handler) {
-    _Event ev;
+    _Event ev={0};
 	//
 	/*
 	printf("eax: %x\n",tf->eax);
