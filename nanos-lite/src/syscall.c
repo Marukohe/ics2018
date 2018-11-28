@@ -1,6 +1,7 @@
 #include "common.h"
 #include "syscall.h"
 #include <unistd.h>
+#include "proc.h"
 
 void _halt(int code);
 int sys_yield();
@@ -36,6 +37,12 @@ _Context* do_syscall(_Context *c) {
 int sys_yield(){
 	_yield();
 	return 0;
+}
+
+void naive_uload(PCB *pcb,const char *filename);
+int	sys_execve(const char *filename,char *const argv[],char *const envp[]){
+	naive_uload(NULL,filename);
+	return -1;
 }
 /*
 int sys_exit(int code){
