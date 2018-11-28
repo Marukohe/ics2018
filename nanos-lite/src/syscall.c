@@ -5,7 +5,8 @@
 
 void _halt(int code);
 int sys_yield();
-int sys_write(_Context *c);
+int	sys_execve(const char *filename,char *const argv[],char *const envp[]);
+//int sys_write(_Context *c);
 int sys_brk(_Context *c);
 extern int fs_open(const char *pathname, int flags,int mode);
 extern ssize_t fs_read(int fd,void *buf,size_t len);
@@ -20,7 +21,8 @@ _Context* do_syscall(_Context *c) {
   a[3] = c->GPR4;
   //printf("at_syscall.c ebx %d\n",c->GPR2);
   switch (a[0] ) {
-	case SYS_exit: _halt(a[1]); break;
+	//case SYS_exit: _halt(a[1]); break;
+	case SYS_exit: c->GPRx=sys_execve("/bin/init",NULL,NULL); break;
 	case SYS_yield: c->GPRx=sys_yield(); break;
 	case SYS_open: c->GPRx=fs_open((const char *)a[1],a[2],a[3]); break;
 	case SYS_read: c->GPRx=fs_read(a[1],(void *)a[2],a[3]);break;
@@ -28,6 +30,7 @@ _Context* do_syscall(_Context *c) {
 	case SYS_close: c->GPRx=fs_close(a[1]);break;
 	case SYS_lseek: c->GPRx=fs_lseek(a[1],a[2],a[3]);break;
     case SYS_brk: c->GPRx=sys_brk(c); break;
+	case SYS_execve: c->GPRx=sys_execve((const char *)a[1],(char *const*)a[2],(char *const*)a[3]); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   } 
 
