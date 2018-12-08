@@ -33,30 +33,43 @@ typedef union {
   union{
 	  struct{
 		 uint32_t CF :1;
-		 uint32_t nothing :1;
+		 uint32_t :1;
 		 uint32_t PF :1;
-		 uint32_t    :0;
+		 uint32_t :1;
 		 uint32_t AF :1;
-		 uint32_t    :0;
+		 uint32_t :1;
 		 uint32_t ZF :1;
 		 uint32_t SF :1;
 		 uint32_t TF :1;
 		 uint32_t IF :1;
 		 uint32_t DF :1;
 		 uint32_t OF :1;
-		 uint32_t PL :1;
+		 uint32_t IDPL :2;
 		 uint32_t NT :1;
-		 uint32_t    :0;
+		 uint32_t :1;
 		 uint32_t RF :1;
 		 uint32_t VM :1;
+		 uint32_t :14;
 	   };
 	  uint32_t eflags;
 	};
+  uint32_t CS;
+  struct{
+	  uint16_t limit;
+	  uint32_t base;
+	}IDTR;
   };
 
 } CPU_state;
 
 extern CPU_state cpu;
+/*IDTR register*/
+//typedef struct{
+//	uint16_t limite;
+//	uint32_t base;
+//}IDTR_state;
+
+//extern IDTR_state IDTR;
 
 static inline int check_reg_index(int index) {
   assert(index >= 0 && index < 8);

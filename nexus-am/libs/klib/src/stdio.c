@@ -218,6 +218,30 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 				while(len<field_width--) *str++=' ';
 				continue;
 			}
+			case 'p':
+			{
+				if(field_width==-1)
+				{
+					field_width=2*sizeof(void*);
+					flags|=ZEROPAD;
+				}
+				str=num_to_string(str,(unsigned long)va_arg(ap,void *),16,field_width,precision,flags);
+				continue;
+			}
+			case 'n':
+			{
+				if(qualifier=='1')
+				{
+					long *ip=va_arg(ap,long *);
+					*ip=(str-out);
+				}
+				else
+				{
+					int *ip=va_arg(ap,int *);
+					*ip=(str-out);
+				}
+				continue;
+			}
 			case 'o':
 			{
 				base = 8;
@@ -295,7 +319,23 @@ int printf(const char *fmt, ...) {
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
-  return 0;
+  va_list args;
+  //int res;
+  char buf[256];
+  va_start(args,fmt);
+  vsprintf(buf,fmt,args);
+  va_end(args);
+  //printf("%s\n",buf);
+  //printf("%s\n\n\n\n\n\n\n\n",buf);
+  //memcpy(out,buf,n);
+  //char dst[65536];
+  out=strncpy(out,(const char *)buf,n);
+  //strcat(out,(const char *)dst);
+  //char *s1;
+  //s1 = out;
+  //s1 +=n;
+  //s1 = '\0';
+  return n;
 }
 
 #endif

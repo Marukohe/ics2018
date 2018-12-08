@@ -18,14 +18,42 @@ make_EHelper(pop) {
 }
 
 make_EHelper(pusha) {
-  TODO();
-
+  //TODO();
+  //if(id_dest->width==2){
+  if(decoding.is_operand_size_16){
+	  Assert(0,"pusha operand_size is 16");
+  }
+  else{
+	  uint32_t tmp=cpu.esp;
+	  rtl_push(&cpu.eax);
+	  rtl_push(&cpu.ecx);
+	  rtl_push(&cpu.edx);
+	  rtl_push(&cpu.ebx);
+	  rtl_push(&tmp);
+	  rtl_push(&cpu.ebp);
+	  rtl_push(&cpu.esi);
+	  rtl_push(&cpu.edi);
+  }
+	
   print_asm("pusha");
 }
 
 make_EHelper(popa) {
-  TODO();
-
+  //TODO();
+  if(decoding.is_operand_size_16){
+	  Assert(0,"popa operand size is 16");
+  }
+  else{
+	uint32_t throwaway;
+	rtl_pop(&cpu.edi);
+	rtl_pop(&cpu.esi);
+	rtl_pop(&cpu.ebp);
+	rtl_pop(&throwaway);
+	rtl_pop(&cpu.ebx);
+	rtl_pop(&cpu.edx);
+	rtl_pop(&cpu.ecx);
+	rtl_pop(&cpu.eax);
+  }
   print_asm("popa");
 }
 

@@ -5,7 +5,16 @@ void difftest_skip_ref();
 void difftest_skip_dut();
 
 make_EHelper(lidt) {
-  TODO();
+  //TODO();
+  if(id_dest->width==2){
+	  Assert(0,"lidt operand size is 16");
+	  cpu.IDTR.limit=vaddr_read(id_dest->addr,2);
+	  cpu.IDTR.base=vaddr_read(id_dest->addr+2,3);
+  }
+  else{
+	  cpu.IDTR.limit=vaddr_read(id_dest->addr,2);
+	  cpu.IDTR.base=vaddr_read(id_dest->addr+2,4);
+  }
 
   print_asm_template1(lidt);
 }
@@ -26,8 +35,13 @@ make_EHelper(mov_cr2r) {
 #endif
 }
 
+void raise_intr(uint8_t NO,vaddr_t ret_addr);
 make_EHelper(int) {
-  TODO();
+  //TODO();
+  //at=0x100b16;
+  //cpu.esp-=12;
+  //rtl_j(at);
+  raise_intr(id_dest->val,decoding.seq_eip);
 
   print_asm("int %s", id_dest->str);
 
@@ -37,7 +51,13 @@ make_EHelper(int) {
 }
 
 make_EHelper(iret) {
-  TODO();
+  //TODO();
+  if(decoding.is_operand_size_16)
+	  Assert(0,"iret operand size is 16");
+  rtl_pop(&decoding.jmp_eip);
+  rtl_pop(&cpu.CS);
+  rtl_pop(&cpu.eflags);
+  rtl_j(decoding.jmp_eip);
 
   print_asm("iret");
 }
