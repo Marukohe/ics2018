@@ -41,29 +41,6 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   //return len-1;
   return strlen(buf);
 }
-/*
-size_t events_read(void *buf, size_t offset, size_t len) {
-  int key = read_key();
-  bool down = false;
-  if(key & 0x8000){
-    key ^= 0x8000;
-    down = true;
-  } 
-  if(key != _KEY_NONE){
-    sprintf(buf, "%s %s\n", down?"kd":"ku", keyname[key]);
-  } 
-  else{
-    sprintf(buf, "t %d\n", uptime());
-  } 
-  if(strlen(buf) > len){
-    printf("\33[1;31mERROR: In events_read: buf is too long.\33[0m\n");
-    assert(0);
-  } 
-  ((char*)buf)[len] = '\0';
-  return strlen(buf);
-  //return 0;
-}
-*/
 
 static char dispinfo[128] __attribute__((used));
 
@@ -76,23 +53,8 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   return strlen(buf);
 }
 
-/*
-size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  for(int i = 0;i < len;i++){ 
-    ((char*)buf)[i] = dispinfo[offset+i];
-  }
-  ((char*)buf)[len] = '\0';
-  //return len;
-  //printf("dispinfo_read: len:%d\tstrlen:%d\n", len, strlen(buf));
-  return strlen(buf);
-}
-*/
 //int W = screen_width();
 //int H = screen_height();
-
-/*
-my fbwrite
-*/
 /*maybe it always draw a rectangle*/
 /*
 size_t fb_write(const void *buf, size_t offset, size_t len) {
