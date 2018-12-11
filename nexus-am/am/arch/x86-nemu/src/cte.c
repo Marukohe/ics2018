@@ -62,7 +62,7 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-	uint32_t *rstack = (uint32_t *)stack.start;
+	uint32_t *rstack = (uint32_t *)stack.end;
 	*(--rstack) = 0x0;              //eflags
 	*(--rstack) = 0x8;              //cs
 	*(--rstack) = (uint32_t)entry;  //eip
