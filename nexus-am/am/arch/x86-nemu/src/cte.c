@@ -75,8 +75,8 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
 	*(--rstack) = 0x12;   //ecx
 	*(--rstack) = 0x0;   //edx
 	*(--rstack) = 0x0;   //ebx
-	*(--rstack) = (uint32_t)stack.end;   //esp
-	*(--rstack) = 0x0;   //ebp
+	*(--rstack) = 0x0;   //esp
+	*(--rstack) = (uint32_t)stack.end;   //ebp
 	*(--rstack) = 0x0;   //esi
 	*(rstack) = 0x0;   //edi
 	rstack--;
