@@ -30,6 +30,7 @@ void init_proc() {
 }
 
 _Context* schedule(_Context *prev) {
+	Log("prev %x",prev->eip);
 	//save the context point
 	current->cp = prev;
 	//always select pcb[0] as the new process
