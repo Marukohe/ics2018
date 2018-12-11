@@ -64,8 +64,8 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
 	printf("at cte.c in kcontext %x\n\n",(uint32_t)entry);
 	uint32_t *rstack = (uint32_t *)stack.end;
-	rstack--;
-	rstack--;
+	//rstack--;
+	//rstack--;
 	*(--rstack) = 0x0;              //eflags
 	*(--rstack) = 0x8;              //cs
 	*(--rstack) = (uint32_t)entry;  //eip
@@ -79,6 +79,8 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
 	*(--rstack) = 0x0;   //ebp
 	*(--rstack) = 0x0;   //esi
 	*(rstack) = 0x0;   //edi
+	rstack--;
+	rstack--;
   return (_Context *)rstack;
 }
 
