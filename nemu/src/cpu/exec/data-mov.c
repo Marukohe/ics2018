@@ -53,8 +53,11 @@ make_EHelper(popa) {
 	rtl_pop(&cpu.edx);
 	rtl_pop(&cpu.ecx);
 	rtl_pop(&cpu.eax);
-	Log("edi: %x esi: %x ebp: %x esp %x",cpu.edi,cpu.esi,cpu.ebp,cpu.esp);
-	Log("ebx: %x edx: %x ecx: %x eax %x",cpu.ebx,cpu.edx,cpu.ecx,cpu.eax);
+	Log("edi: %x esi: %x",cpu.edi,cpu.esi);
+	Log("ebp: %x esp: %x",cpu.ebp,cpu.esp);
+	Log("ebx: %x edx: %x",cpu.ebx,cpu.edx);
+	Log("ecx: %x eax: %x",cpu.ecx,cpu.eax);
+	Log("eip: %x",cpu.eip);
   }
   print_asm("popa");
 }
