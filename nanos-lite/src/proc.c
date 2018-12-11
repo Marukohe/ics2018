@@ -34,6 +34,7 @@ _Context* schedule(_Context *prev) {
 	Log("prev %x",prev->eip);
 	//save the context point
 	current->cp = prev;
+	Log("eip %x",current->cp->eip);
 	//always select pcb[0] as the new process
 	current = &pcb[0];
 	//then return the new context
