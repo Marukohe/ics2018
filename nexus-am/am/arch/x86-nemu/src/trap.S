@@ -17,7 +17,7 @@ asm_trap:
   addl $4, %esp
 
   addl $4, %esp
-  movl $0x1d30000, %esp
+  movl $0x1d2ffc8, %esp
   popal
   addl $8, %esp
 
