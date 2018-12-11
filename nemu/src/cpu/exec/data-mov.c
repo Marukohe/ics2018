@@ -44,6 +44,7 @@ make_EHelper(popa) {
 	  Assert(0,"popa operand size is 16");
   }
   else{
+	Log("esp: %x",cpu.esp);
 	uint32_t throwaway;
 	rtl_pop(&cpu.edi);
 	rtl_pop(&cpu.esi);
