@@ -27,7 +27,19 @@ void init_proc() {
 	Log("%x",(uint32_t)hello_fun);
 	//Log("pcb %x",pcb[0].cp->eip);
 	context_kload(&pcb[0],(void *)hello_fun);
+	Log("pcb %x",(&pcb[0])->cp->edi);
+	Log("pcb %x",(&pcb[0])->cp->esi);
+	Log("pcb %x",(&pcb[0])->cp->ebp);
+	Log("pcb %x",(&pcb[0])->cp->esp);
+	Log("pcb %x",(&pcb[0])->cp->ebx);
+	Log("pcb %x",(&pcb[0])->cp->edx);
+	Log("pcb %x",(&pcb[0])->cp->ecx);
+	Log("pcb %x",(&pcb[0])->cp->eax);
+	Log("pcb %x",(&pcb[0])->cp->irq);
+	Log("pcb %x",(&pcb[0])->cp->err);
 	Log("pcb %x",(&pcb[0])->cp->eip);
+	Log("pcb %x",(&pcb[0])->cp->cs);
+	Log("pcb %x",(&pcb[0])->cp->eflags);
 	switch_boot_pcb();
 }
 
