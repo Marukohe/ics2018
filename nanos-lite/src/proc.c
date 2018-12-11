@@ -25,6 +25,7 @@ void naive_uload(PCB *pcb,const char *filename);
 void init_proc() {
 	//naive_uload(NULL,"/bin/init");
 	Log("%x",(uint32_t)hello_fun);
+	Log("pcb %x",pcb[0].cp->eip);
 	context_kload(&pcb[0],(void *)hello_fun);
 	switch_boot_pcb();
 }
