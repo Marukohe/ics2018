@@ -81,6 +81,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
 	*(rstack) = 0x0;   //edi
 	rstack--;
 	rstack--;
+	printf("rstack %x\n\n",rstack);
   return (_Context *)rstack;
 }
 
