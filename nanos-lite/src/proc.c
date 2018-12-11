@@ -27,6 +27,7 @@ void init_proc() {
 	Log("%x",(uint32_t)hello_fun);
 	//Log("pcb %x",pcb[0].cp->eip);
 	context_kload(&pcb[0],(void *)hello_fun);
+	Log("pcb %x",(&pcb[0])->cp->eip);
 	switch_boot_pcb();
 }
 
