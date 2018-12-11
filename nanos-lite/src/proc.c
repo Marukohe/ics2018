@@ -24,6 +24,7 @@ void hello_fun(void *arg) {
 void naive_uload(PCB *pcb,const char *filename);
 void init_proc() {
 	//naive_uload(NULL,"/bin/init");
+	Log("%x",(uint32_t)hello_fun);
 	context_kload(&pcb[0],(void *)hello_fun);
 	switch_boot_pcb();
 }
@@ -34,5 +35,6 @@ _Context* schedule(_Context *prev) {
 	//always select pcb[0] as the new process
 	current = &pcb[0];
 	//then return the new context
+	Log("%x",current->cp->eip);
   return current->cp;
 }
