@@ -62,7 +62,8 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-  return NULL;
+	(uint32_t *)entry = (uint32_t *)stack.start;
+  reture NULL;
 }
 
 void _yield() {
