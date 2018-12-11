@@ -63,19 +63,19 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
 	uint32_t *rstack = (uint32_t *)stack.start;
-	*(--rstack) = 0x0;
-	*(--rstack) = 0x0;
-	*(--rstack) = (uint32_t)entry;
-	*(--rstack) = 0x0;
+	*(--rstack) = 0x0;              //eflags
+	*(--rstack) = 0x8;              //cs
+	*(--rstack) = (uint32_t)entry;  //eip
+	*(--rstack) = 0x0;              //err
 	*(--rstack) = 0x81;  //irq
-	*(--rstack) = 0x0;
-	*(--rstack) = 0x0;
-	*(--rstack) = 0x0;
-	*(--rstack) = 0x0;
-	*(--rstack) = 0x0;
-	*(--rstack) = 0x0;
-	*(--rstack) = 0x0;
-	*(--rstack) = 0x0;
+	*(--rstack) = 0x0;   //eax
+	*(--rstack) = 0x0;   //ecx
+	*(--rstack) = 0x0;   //edx
+	*(--rstack) = 0x0;   //ebx
+	*(--rstack) = 0x0;   //esp
+	*(--rstack) = 0x0;   //ebp
+	*(--rstack) = 0x0;   //esi
+	*(--rstack) = 0x0;   //edi
   return (_Context *)rstack;
 }
 
