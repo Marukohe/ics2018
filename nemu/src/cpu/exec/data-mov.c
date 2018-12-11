@@ -45,6 +45,7 @@ make_EHelper(popa) {
   }
   else{
 	Log("esp: %x",cpu.esp);
+	Log("ebp: %x",cpu.ebp);
 	uint32_t throwaway;
 	rtl_pop(&cpu.edi);
 	rtl_pop(&cpu.esi);
