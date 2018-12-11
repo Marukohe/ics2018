@@ -11,6 +11,8 @@ asm_trap:
 
   pushl %esp
   call irq_handle
+  
+  movl %eax, %esp //mydo
 
   addl $4, %esp
 
