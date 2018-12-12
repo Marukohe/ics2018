@@ -44,8 +44,8 @@ make_EHelper(popa) {
 	  Assert(0,"popa operand size is 16");
   }
   else{
-	Log("esp: %x",cpu.esp);
-	Log("ebp: %x",cpu.ebp);
+//	Log("esp: %x",cpu.esp);
+//	Log("ebp: %x",cpu.ebp);
 	uint32_t throwaway;
 	rtl_pop(&cpu.edi);
 	rtl_pop(&cpu.esi);
@@ -55,11 +55,11 @@ make_EHelper(popa) {
 	rtl_pop(&cpu.edx);
 	rtl_pop(&cpu.ecx);
 	rtl_pop(&cpu.eax);
-	Log("edi: %x esi: %x",cpu.edi,cpu.esi);
-	Log("ebp: %x esp: %x",cpu.ebp,cpu.esp);
-	Log("ebx: %x edx: %x",cpu.ebx,cpu.edx);
-	Log("ecx: %x eax: %x",cpu.ecx,cpu.eax);
-	Log("eip: %x",cpu.eip);
+//	Log("edi: %x esi: %x",cpu.edi,cpu.esi);
+//	Log("ebp: %x esp: %x",cpu.ebp,cpu.esp);
+//	Log("ebx: %x edx: %x",cpu.ebx,cpu.edx);
+//	Log("ecx: %x eax: %x",cpu.ecx,cpu.eax);
+//	Log("eip: %x",cpu.eip);
   }
   print_asm("popa");
 }
