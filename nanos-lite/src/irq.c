@@ -4,7 +4,7 @@ extern _Context* do_syscall(_Context *c);
 extern _Context* schedule(_Context *prev);
 static _Context* do_event(_Event e, _Context* c) {
   switch (e.event) {
-	case _EVENT_YIELD: printf("Oh,yeah!\n");schedule(c); break;
+	case _EVENT_YIELD: printf("Oh,yeah!\n");return schedule(c); break;
 	case _EVENT_SYSCALL: do_syscall(c); break;
     default: panic("Unhandled event ID = %d", e.event);
   }
