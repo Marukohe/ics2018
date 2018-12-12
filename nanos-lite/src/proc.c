@@ -7,6 +7,7 @@ static PCB pcb_boot;
 PCB *current;
 
 extern void context_kload(PCB *pcb, void *entry);
+extern void context_uload(PCB *pcb, const char *filename);
 
 void switch_boot_pcb() {
   current = &pcb_boot;
@@ -26,7 +27,10 @@ void init_proc() {
 	//naive_uload(NULL,"/bin/init");
 	Log("%x",(uint32_t)hello_fun);
 	//Log("pcb %x",pcb[0].cp->eip);
+	
 	context_kload(&pcb[0],(void *)hello_fun);
+	context_uload(&pcb[1],"/bin/init");
+
 	Log("pcb edi %x",(&pcb[0])->cp->edi);
 	Log("pcb esi %x",(&pcb[0])->cp->esi);
 	Log("pcb ebp %x",(&pcb[0])->cp->ebp);
@@ -47,9 +51,12 @@ _Context* schedule(_Context *prev) {
 	Log("prev %x",prev->eip);
 	//save the context point
 	current->cp = prev;
+
 	Log("eip %x",current->cp->eip);
+
 	//always select pcb[0] as the new process
-	current = &pcb[0];
+	current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
+
 	//then return the new context
 	Log("%x",current->cp->eip);
   return current->cp;

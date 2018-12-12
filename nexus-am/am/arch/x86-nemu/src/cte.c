@@ -72,7 +72,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
 	*(--rstack) = 0x0;              //err
 	*(--rstack) = 0x81;  //irq
 	*(--rstack) = 0x0;   //eax
-	*(--rstack) = 0x12;   //ecx
+	*(--rstack) = 0x12;   //ecx (use for test)
 	*(--rstack) = 0x0;   //edx
 	*(--rstack) = 0x0;   //ebx
 	*(--rstack) = 0x0;   //esp
