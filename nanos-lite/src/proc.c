@@ -25,13 +25,13 @@ void hello_fun(void *arg) {
 void naive_uload(PCB *pcb,const char *filename);
 void init_proc() {
 	//naive_uload(NULL,"/bin/init");
-	Log("%x",(uint32_t)hello_fun);
+	//Log("%x",(uint32_t)hello_fun);
 	//Log("pcb %x",pcb[0].cp->eip);
 	
 	context_kload(&pcb[0],(void *)hello_fun);
 	context_uload(&pcb[1],"/bin/init");
 
-	Log("pcb edi %x",(&pcb[0])->cp->edi);
+/*	Log("pcb edi %x",(&pcb[0])->cp->edi);
 	Log("pcb esi %x",(&pcb[0])->cp->esi);
 	Log("pcb ebp %x",(&pcb[0])->cp->ebp);
 	Log("pcb esp %x",(&pcb[0])->cp->esp);
@@ -43,7 +43,7 @@ void init_proc() {
 	Log("pcb err %x",(&pcb[0])->cp->err);
 	Log("pcb eip %x",(&pcb[0])->cp->eip);
 	Log("pcb cs %x",(&pcb[0])->cp->cs);
-	Log("pcb eflags %x",(&pcb[0])->cp->eflags);
+	Log("pcb eflags %x",(&pcb[0])->cp->eflags);*/
 	switch_boot_pcb();
 }
 
