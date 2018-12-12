@@ -15,7 +15,7 @@ asm_trap:
   movl %eax, %esp //mydo
   //movl $0x1d
 
-  addl $4, %esp
+  //addl $4, %esp
 
   addl $4, %esp
   
