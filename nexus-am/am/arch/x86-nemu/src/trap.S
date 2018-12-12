@@ -13,6 +13,7 @@ asm_trap:
   call irq_handle
   
   movl %eax, %esp //mydo
+  //movl $0x1d
 
   addl $4, %esp
 
