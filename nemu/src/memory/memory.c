@@ -39,7 +39,7 @@ paddr_t page_translate(vaddr_t addr){
 		assert(pde.present);
 		pagte = (PTE*)(uintptr_t)(pde.page_frame<<12);
 		pte.val = paddr_read((uintptr_t)&pagte[(addr<<10)>>22],4);
-		paddr = pte.page_frame+((addr&0xfff)<<20);
+		paddr = (pte.page_frame<<12)+(addr&0xfff);
 	}
 	return paddr;
 }
