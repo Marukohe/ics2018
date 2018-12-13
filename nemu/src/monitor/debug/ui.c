@@ -92,7 +92,7 @@ static int cmd_info(char *args)
 			printf("CS\t0x%-16x%-d\n",cpu.CS,cpu.CS);
 			printf("eflags\t0x%-16x%-d\n",cpu.eflags,cpu.eflags);
 			printf("CF: %d  ZF: %d  SF: %d  IF: %d  OF: %d\n",cpu.CF,cpu.ZF,cpu.SF,cpu.IF,cpu.OF);
-			printf("cr0: %d  cr3: %d\n",cpu.cr0.val,cpu.cr3.val);
+			printf("cr0: %x  cr3: %x\n",cpu.cr0.val,cpu.cr3.val);
 			return 0;
 	 } 
 	 else if(strcmp(args,"w")==0)
