@@ -28,10 +28,36 @@ void paddr_write(paddr_t addr, uint32_t data, int len) {
 	mmio_write(addr,len,data,is_mmio(addr));
 }
 
+
+paddr_t page_translate(vaddr_t addr){
+	PDE *pagde,pde;
+	PTE *pagte,pte;
+	paddr_t paddr = addr;
+	if(cpu.cr0.paging){
+		pagde = (PDE*)(uintptr_t)(cpu.cr3.page_directory_base<<12);
+		pde.val = paddr_read((uintptr_t)&pagde[addr>>22],4);
+		assert(pde.present);
+		pagte = (PTE*)(uintptr_t)(pde.page_frame<<12);
+		pte.val = paddr_read((uintptr_t)&pagte[(addr<<10)>>22],4);
+		paddr = (pte.page_frame<<12)+(addr&0xfff);
+	}
+	return paddr;
+}
+
 uint32_t vaddr_read(vaddr_t addr, int len) {
-  return paddr_read(addr, len);
+	if(((addr+len-1)&(~PAGE_MASK))!=(addr&(~PAGE_MASK))){
+		/*This is a special case, you can handle it later*/
+		assert(0);
+	}
+	paddr_t paddr = page_translate(addr);
+  return paddr_read(paddr, len);
 }
 
 void vaddr_write(vaddr_t addr, uint32_t data, int len) {
-  paddr_write(addr, data, len);
+	if(((addr+len-1)&(~PAGE_MASK))!=(addr&(~PAGE_MASK))){
+		/*This is a special case, you can handle it later*/
+		assert(0);
+	}
+	paddr_t paddr = page_translate(addr);
+  paddr_write(paddr, data, len);
 }
