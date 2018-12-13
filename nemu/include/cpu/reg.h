@@ -59,10 +59,13 @@ typedef union {
 	  uint16_t limit;
 	  uint32_t base;
 	}IDTR;
-  };
 
   CR0 cr0;
-  CR3 cr3;
+  CR3 cr3; 
+  };
+
+  //CR0 cr0;
+  //CR3 cr3;
 
 } CPU_state;
 
