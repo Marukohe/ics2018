@@ -39,6 +39,7 @@ paddr_t page_translate(vaddr_t addr){
 		assert(pde.present);
 		pagte = (PTE*)(uintptr_t)(pde.page_frame<<12);
 		pte.val = paddr_read((uintptr_t)&pagte[(addr<<10)>>22],4);
+		assert(pte.present);
 		paddr = (pte.page_frame<<12)+(addr&0xfff);
 	}
 	return paddr;
@@ -49,8 +50,8 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
 		/*This is a special case, you can handle it later*/
 	//	assert(0);
 	//}
-	//paddr_t paddr = page_translate(addr);
-  return paddr_read(addr, len);
+	paddr_t paddr = page_translate(addr);
+  return paddr_read(paddr, len);
 }
 
 void vaddr_write(vaddr_t addr, uint32_t data, int len) {
@@ -58,6 +59,6 @@ void vaddr_write(vaddr_t addr, uint32_t data, int len) {
 		/*This is a special case, you can handle it later*/
 	//	assert(0);
 	//}
-	//paddr_t paddr = page_translate(addr);
-  paddr_write(addr, data, len);
+	paddr_t paddr = page_translate(addr);
+  paddr_write(paddr, data, len);
 }
