@@ -31,6 +31,7 @@ void init_proc() {
 	//context_kload(&pcb[0],(void *)hello_fun);
 	context_uload(&pcb[0],"/bin/dummy");
 
+	Log("pcb ptr %x",(uintptr_t)((&pcb[0])->as.ptr));
 /*	Log("pcb edi %x",(&pcb[0])->cp->edi);
 	Log("pcb esi %x",(&pcb[0])->cp->esi);
 	Log("pcb ebp %x",(&pcb[0])->cp->ebp);
@@ -57,7 +58,7 @@ _Context* schedule(_Context *prev) {
 	//always select pcb[0] as the new process
 	//current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
 	current = &pcb[0];
-	Log("%x",(uint32_t)current->as.ptr);
+	Log("%x",(uintptr_t)current->as.ptr);
 
 	//then return the new context
 	//Log("%x",current->cp->eip);
