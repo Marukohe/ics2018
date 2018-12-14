@@ -72,7 +72,7 @@ void get_cur_as(_Context *c) {
 }
 
 void _switch(_Context *c) {
-	printf("miaomiao\n");
+	printf("miaomiao: %x\n",(uint32_t)c->prot->ptr);
   set_cr3(c->prot->ptr);
   printf("yingyingying\n");
   cur_as = c->prot;
