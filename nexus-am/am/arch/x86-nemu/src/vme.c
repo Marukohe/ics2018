@@ -88,7 +88,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 		//assert(0);
 		pte = (PTE*)(pgalloc_usr(1));
 		//assert(0);
-		*pagde  = PTE_ADDR(pte) | PTE_P;
+		*pagde = PTE_ADDR(*pte) | PTE_P;
 		assert(0);
 	}
 	else{
