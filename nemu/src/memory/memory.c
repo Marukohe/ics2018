@@ -38,7 +38,7 @@ paddr_t page_translate(vaddr_t addr){
 		//assert(0);
 		pagde = (PDE*)(uintptr_t)(cpu.cr3.page_directory_base<<12);
 		pde.val = paddr_read((uintptr_t)&pagde[addr>>22],4);
-		assert(pde.present);
+		assert(pde.present==1);
 		pagte = (PTE*)(uintptr_t)(pde.page_frame<<12);
 		pte.val = paddr_read((uintptr_t)&pagte[(addr<<10)>>22],4);
 		assert(pte.present);
