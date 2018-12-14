@@ -73,7 +73,7 @@ void get_cur_as(_Context *c) {
 
 void _switch(_Context *c) {
   set_cr3(c->prot->ptr);
-  printf("yingyingying");
+  //printf("yingyingying");
   cur_as = c->prot;
 }
 int _map(_Protect *p, void *va, void *pa, int mode) {
@@ -125,6 +125,7 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
 	*(--rstack) = (uint32_t)ustack.end; //ebp
 	*(--rstack) = 0x0;    //esi
 	*(--rstack) = 0x0;    //edi
+	p->ptr =(void *)((uint32_t)p->ptr|0x1);
 	*(--rstack) = (uint32_t)p;
   return (_Context *)rstack;
 }
