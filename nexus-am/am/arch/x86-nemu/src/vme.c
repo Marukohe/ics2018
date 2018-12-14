@@ -124,6 +124,6 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
 	*(--rstack) = (uint32_t)ustack.end; //ebp
 	*(--rstack) = 0x0;    //esi
 	*(--rstack) = 0x0;    //edi
-	*(--rstack) = (uint32_t)p;
+	*(--rstack) = (uint32_t)p|0x1;
   return (_Context *)rstack;
 }
