@@ -49,7 +49,7 @@ paddr_t page_translate(vaddr_t addr){
 uint32_t vaddr_read(vaddr_t addr, int len) {
 	if(((addr+len-1)&(~PAGE_MASK))!=(addr&(~PAGE_MASK))){
 		/*This is a special case, you can handle it later*/
-		//assert(0);
+		assert(0);
 	}
 	paddr_t paddr = page_translate(addr);
   return paddr_read(paddr, len);
@@ -58,7 +58,7 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
 void vaddr_write(vaddr_t addr, uint32_t data, int len) {
 	if(((addr+len-1)&(~PAGE_MASK))!=(addr&(~PAGE_MASK))){
 		/*This is a special case, you can handle it later*/
-		//assert(0);
+		assert(0);
 	}
 	paddr_t paddr = page_translate(addr);
   paddr_write(paddr, data, len);
