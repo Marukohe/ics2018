@@ -12,25 +12,18 @@ extern int fs_close(int fd);
 extern int fs_filesz(int fd);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  //void *bufff=NULL;
-  //size_t len = get_ramdisk_size();
-  //ramdisk_read(bufff,0,len);
-  //ramdisk_write(buf,0x4000000,len);
-  //memcpy(&ramdisk_start+0x3EFEDA8,bufff,len);
-  //below
-  //size_t len=get_ramdisk_size();
-  //void *bufff=(void *)0x4000000;
-  //ramdisk_read(bufff,0,len);
-  //
-  //_Protect * ass = (_Protect *)(pcb->as);
   int fd = fs_open(filename,0,0);
+  Log("1");
   void *va = (void *)DEFAULT_ENTRY;
+  Log("2");
   int fz = fs_filesz(fd);
+  Log("3");
   for(;va < (void *)DEFAULT_ENTRY+fz;va+=PGSIZE){
 	void *pa = new_page(1);
 	_map(&pcb->as,va,pa,1);
 	fs_read(fd,pa,PGSIZE);
   }
+  Log("4");
   fs_close(fd);
   return DEFAULT_ENTRY;
 }
