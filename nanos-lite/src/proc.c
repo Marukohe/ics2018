@@ -57,8 +57,7 @@ _Context* schedule(_Context *prev) {
 	//always select pcb[0] as the new process
 	//current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
 	current = &pcb[0];
-	//Log("%x",(uint32_t)current->as.ptr);
-	current->as.ptr = (void *)((uint32_t)current->as.ptr|0x1);
+	Log("%x",(uint32_t)current->as.ptr);
 
 	//then return the new context
 	//Log("%x",current->cp->eip);
