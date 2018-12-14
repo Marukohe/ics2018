@@ -1,6 +1,6 @@
 #include "proc.h"
 #include <unistd.h>
-#define DEFAULT_ENTRY 0x4000000
+#define DEFAULT_ENTRY 0x8048000
 
 size_t get_ramdisk_size();
 size_t ramdisk_write(const void *buf,size_t offset,size_t len);
