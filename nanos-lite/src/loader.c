@@ -13,21 +13,15 @@ extern int fs_filesz(int fd);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   int fd = fs_open(filename,0,0);
-  Log("1");
   void *va = (void *)DEFAULT_ENTRY;
-  Log("2");
   int fz = fs_filesz(fd);
-  Log("3");
   for(;va <= (void *)DEFAULT_ENTRY+fz;va+=PGSIZE){
-	  Log("va: %x",(uint32_t)va);
+	  Log("va: %x",(long)va);
 	void *pa = new_page(1);
-	Log("pa: %x",(uint32_t)pa);
+	Log("pa: %x",(long)pa);
 	_map(&pcb->as,va,pa,1);
-	Log("dd");
 	fs_read(fd,pa,PGSIZE);
-	Log("cd");
   }
-  Log("4");
   fs_close(fd);
   return DEFAULT_ENTRY;
 }
@@ -51,8 +45,8 @@ void context_uload(PCB *pcb, const char *filename) {
   _Area stack;
   stack.start = pcb->stack;
   stack.end = stack.start + sizeof(pcb->stack);
-  Log("%x",(uint32_t)stack.start);
-  Log("%x",(uint32_t)stack.end);
+  //Log("%x",(uint32_t)stack.start);
+  //Log("%x",(uint32_t)stack.end);
 
   pcb->cp = _ucontext(&pcb->as, stack, stack, (void *)entry, NULL);
 }
