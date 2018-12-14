@@ -29,6 +29,7 @@ void init_proc() {
 	//Log("pcb %x",pcb[0].cp->eip);
 	
 	//context_kload(&pcb[0],(void *)hello_fun);
+	_protect(&pcb[0].as);
 	context_uload(&pcb[0],"/bin/dummy");
 
 	Log("pcb ptr %x",(uintptr_t)((&pcb[0])->as.ptr));
