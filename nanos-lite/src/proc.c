@@ -19,7 +19,7 @@ void hello_fun(void *arg) {
     Log("Hello World from Nanos-lite for the %dth time!", j);
     j ++;
     _yield();
-  }
+  } 
 }
 
 void naive_uload(PCB *pcb,const char *filename);
@@ -28,8 +28,8 @@ void init_proc() {
 	//Log("%x",(uint32_t)hello_fun);
 	//Log("pcb %x",pcb[0].cp->eip);
 	
-	context_kload(&pcb[0],(void *)hello_fun);
-	context_uload(&pcb[1],"/bin/init");
+	//context_kload(&pcb[0],(void *)hello_fun);
+	context_uload(&pcb[1],"/bin/dummy");
 
 /*	Log("pcb edi %x",(&pcb[0])->cp->edi);
 	Log("pcb esi %x",(&pcb[0])->cp->esi);
@@ -44,7 +44,7 @@ void init_proc() {
 	Log("pcb eip %x",(&pcb[0])->cp->eip);
 	Log("pcb cs %x",(&pcb[0])->cp->cs);
 	Log("pcb eflags %x",(&pcb[0])->cp->eflags);*/
-	switch_boot_pcb();
+	//switch_boot_pcb();
 }
 
 _Context* schedule(_Context *prev) {
@@ -55,7 +55,8 @@ _Context* schedule(_Context *prev) {
 	//Log("eip %x",current->cp->eip);
 
 	//always select pcb[0] as the new process
-	current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
+	//current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
+	current = &pcb[1];
 
 	//then return the new context
 	//Log("%x",current->cp->eip);
