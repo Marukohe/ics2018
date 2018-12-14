@@ -29,7 +29,7 @@ void init_proc() {
 	//Log("pcb %x",pcb[0].cp->eip);
 	
 	//context_kload(&pcb[0],(void *)hello_fun);
-	context_uload(&pcb[1],"/bin/dummy");
+	context_uload(&pcb[0],"/bin/dummy");
 
 /*	Log("pcb edi %x",(&pcb[0])->cp->edi);
 	Log("pcb esi %x",(&pcb[0])->cp->esi);
@@ -56,7 +56,7 @@ _Context* schedule(_Context *prev) {
 
 	//always select pcb[0] as the new process
 	//current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
-	current = &pcb[1];
+	current = &pcb[0];
 
 	//then return the new context
 	//Log("%x",current->cp->eip);
