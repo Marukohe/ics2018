@@ -21,8 +21,16 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //size_t len=get_ramdisk_size();
   //void *bufff=(void *)0x4000000;
   //ramdisk_read(bufff,0,len);
+  //
+  //_Protect * ass = (_Protect *)(pcb->as);
   int fd = fs_open(filename,0,0);
-  fs_read(fd,(void *)DEFAULT_ENTRY,fs_filesz(fd));
+  void *va = (void *)DEFAULT_ENTRY;
+  int fz = fs_filesz(fd);
+  for(;va < (void *)DEFAULT_ENTRY+fz;va+=PGSIZE){
+	void *pa = new_page(1);
+	_map(&pcb->as,va,pa,1);
+	fs_read(fd,pa,PGSIZE);
+  }
   fs_close(fd);
   return DEFAULT_ENTRY;
 }

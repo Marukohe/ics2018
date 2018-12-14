@@ -66,32 +66,6 @@ int fs_open(const char *pathname,int flags,int mode){
 extern size_t ramdisk_read(void *buf,size_t offset,size_t len);
 extern size_t ramdisk_write(const void *buf,size_t offset,size_t len);
 ssize_t fs_read(int fd,void *buf,size_t len){
-	/*
-	switch(fd){
-		case FD_DISPINFO:
-			Log("filesize:%d",file_table[FD_DISPINFO].size);
-			if(file_table[FD_DISPINFO].open_offset+len==file_table[FD_DISPINFO].size)
-				return 0;
-			else if(file_table[FD_DISPINFO].open_offset+len>file_table[FD_DISPINFO].size)
-				len = file_table[FD_DISPINFO].size - file_table[FD_DISPINFO].open_offset;
-			dispinfo_read(buf,file_table[FD_DISPINFO].open_offset,len);
-			file_table[FD_DISPINFO].open_offset+=len;
-			Log("filesize after read:%d",file_table[FD_DISPINFO].size);
-			return len;
-		case FD_EVENTS:
-			return events_read(buf,0,len);
-		default:	
-			if(file_table[fd].open_offset==file_table[fd].size)
-				return 0;
-			else if(file_table[fd].open_offset+len>file_table[fd].size)
-				len = file_table[fd].size - file_table[fd].open_offset;
-			//Log("%d",len);
-			ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len);
-			file_table[fd].open_offset+=len;
-			//Log("%s",file_table[fd].name);
-			return len;
-	}
-	*/
 	ssize_t size,newread;
 	size = file_table[fd].size - file_table[fd].open_offset;
 	newread = len>size?size:len;
@@ -107,32 +81,6 @@ ssize_t fs_read(int fd,void *buf,size_t len){
 }
 
 ssize_t fs_write(int fd,const void *buf,size_t len){
-	/*
-	switch(fd){
-		case FD_STDOUT:
-		case FD_STDERR:
-		{
-			char *buff = (char *)buf;
-			for(int i=0;i<len;i++)
-				_putc(buff[i]);
-			return len;
-		}
-		case FD_FB:
-			fb_write(buf,file_table[FD_FB].open_offset,len);
-			file_table[FD_FB].open_offset+=len;
-			return len;
-		default:
-			//assert(0);
-			if(file_table[fd].open_offset==file_table[fd].size)
-				return 0;
-			if(file_table[fd].open_offset+len>file_table[fd].size)
-				len = file_table[fd].size - file_table[fd].open_offset;
-			ramdisk_write(buf,file_table[fd].disk_offset+file_table[fd].open_offset,len);
-			file_table[fd].open_offset +=len;
-			return len;
-	}
-	return 0;
-	*/
 	size_t size,newrite;
 	size = file_table[fd].size-file_table[fd].open_offset;
 	newrite = len>size?size:len;

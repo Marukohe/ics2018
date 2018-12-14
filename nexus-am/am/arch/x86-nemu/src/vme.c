@@ -1,4 +1,5 @@
 #include <x86.h>
+#include <klib.h>
 
 #define PG_ALIGN __attribute((aligned(PGSIZE)))
 
@@ -76,6 +77,22 @@ void _switch(_Context *c) {
 }
 
 int _map(_Protect *p, void *va, void *pa, int mode) {
+
+	if(!mode&PTE_P)
+		printf("in map assert 0\n\n\n\n");
+
+	PDE *pagde = (PDE *)((uint32_t*)(p->ptr))[PDX(va)];
+	PTE *pte;
+	if(!(uint32_t)pagde&PTE_P){   //new page
+		pte = (PTE*)(pgalloc_usr(1));
+		*pagde  = PTE_ADDR(pte) | PTE_P;
+	}
+	else{
+		pte = (PTE*)(PTE_ADDR(*pagde) | PTE_P);
+	}
+
+	pte[PTX(va)] = PTE_ADDR(pa) | PTE_P;
+
   return 0;
 }
 
