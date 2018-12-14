@@ -96,7 +96,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 	}
 
 	pte[PTX(va)] = PTE_ADDR(pa) | PTE_P;
-
+    assert(0);
   return 0;
 }
 
