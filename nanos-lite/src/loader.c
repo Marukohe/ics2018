@@ -15,13 +15,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename,0,0);
   void *va = (void *)DEFAULT_ENTRY;
   int fz = fs_filesz(fd);
-  for(;va < (void *)DEFAULT_ENTRY+fz;va+=PGSIZE){
-	  Log("va: %x",(long)va);
+  void *end = (void *)DEFAULT_ENTRY + fz;
+  for(;va < end;va+=PGSIZE){
+	  //Log("va: %x",(long)va);
 	void *pa = new_page(1);
-	Log("pa: %x",(long)pa);
+	//Log("pa: %x",(long)pa);
 	_map(&pcb->as,va,pa,1);
-	fs_read(fd,pa,PGSIZE);
-	Log("pa1: %x",(uintptr_t)pa);
+	fs_read(fd,pa,end-va<PGSIZE?end-va:PGSIZE);
+	//Log("pa1: %x",(uintptr_t)pa);
   }
   fs_close(fd);
   return DEFAULT_ENTRY;
