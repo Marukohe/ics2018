@@ -47,7 +47,7 @@ void context_kload(PCB *pcb, void *entry) {
 
 void context_uload(PCB *pcb, const char *filename) {
   uintptr_t entry = loader(pcb, filename);
-assert(0);
+//assert(0);
   _Area stack;
   stack.start = pcb->stack;
   stack.end = stack.start + sizeof(pcb->stack);
