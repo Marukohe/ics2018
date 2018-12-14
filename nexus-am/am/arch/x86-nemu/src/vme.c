@@ -90,13 +90,13 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 		//assert(0);
 		for(int i=0;i<NR_PTE;i++)
 			pte[i]=0;
-		*pagde = PTE_ADDR(pte) | PTE_P;
+		//*pagde = PTE_ADDR(pte) | PTE_P;
 		//*pagde = ((uint32_t)(pte)&~0xfff) | PTE_P;
-		//((uint32_t *)(p->ptr))[PDX(va)] = PTE_ADDR(pte) | PTE_P;
+		((uint32_t *)(p->ptr))[PDX(va)] = PTE_ADDR(pte) | PTE_P;
 		//assert(0);
 	}
 	else{
-		pte = (PTE*)PTE_ADDR(*pagde);
+		pte = (PTE*)PTE_ADDR(pagde);
 	}
 	//assert(0);
 
