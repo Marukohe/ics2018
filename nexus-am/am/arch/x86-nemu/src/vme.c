@@ -72,9 +72,9 @@ void get_cur_as(_Context *c) {
 }
 
 void _switch(_Context *c) {
-	printf("miaomiao");
+	printf("miaomiao\n");
   set_cr3(c->prot->ptr);
-  printf("yingyingying");
+  printf("yingyingying\n");
   cur_as = c->prot;
 }
 int _map(_Protect *p, void *va, void *pa, int mode) {
