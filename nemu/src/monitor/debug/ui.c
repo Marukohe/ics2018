@@ -197,10 +197,10 @@ static int cmd_help(char *args) {
 }
 
 void ui_mainloop(int is_batch_mode) {
-  if (is_batch_mode) {
-    cmd_c(NULL);
-    return;
-  }
+  //if (is_batch_mode) {
+  //  cmd_c(NULL);
+  //  return;
+  //} 
 
   while (1) {
     char *str = rl_gets();
@@ -212,9 +212,9 @@ void ui_mainloop(int is_batch_mode) {
 
     /* treat the remaining string as the arguments,
      * which may need further parsing
-     */
+      */
     char *args = cmd + strlen(cmd) + 1;
-    if (args >= str_end) {
+     if (args >= str_end) {
       args = NULL;
     }
 
