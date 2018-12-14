@@ -44,7 +44,7 @@ void init_proc() {
 	Log("pcb eip %x",(&pcb[0])->cp->eip);
 	Log("pcb cs %x",(&pcb[0])->cp->cs);
 	Log("pcb eflags %x",(&pcb[0])->cp->eflags);*/
-	//switch_boot_pcb();
+	switch_boot_pcb();
 }
 
 _Context* schedule(_Context *prev) {
