@@ -88,7 +88,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 		*pagde  = PTE_ADDR(pte) | PTE_P;
 	}
 	else{
-		pte = (PTE*)(PTE_ADDR(*pagde) | PTE_P);
+		pte = (PTE*)PTE_ADDR(*pagde);
 	}
 
 	pte[PTX(va)] = PTE_ADDR(pa) | PTE_P;
