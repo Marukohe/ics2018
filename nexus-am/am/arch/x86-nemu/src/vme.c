@@ -98,10 +98,10 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 	else{
 		pte = (PTE*)PTE_ADDR(*pagde);
 	}
-	assert(0);
+	//assert(0);
 
 	pte[PTX(va)] = PTE_ADDR(pa) | PTE_P;
-    assert(0);
+    //assert(0);
   return 0;
 }
 
