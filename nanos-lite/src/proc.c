@@ -29,7 +29,7 @@ void init_proc() {
 	//Log("pcb %x",pcb[0].cp->eip);
 	
 	//context_kload(&pcb[0],(void *)hello_fun);
-	_protect(&pcb[0].as);
+	//_protect(&pcb[0].as);
 	context_uload(&pcb[0],"/bin/dummy");
 
 	Log("pcb ptr %x",(uintptr_t)((&pcb[0])->as.ptr));
@@ -45,7 +45,7 @@ void init_proc() {
 	Log("pcb err %x",(&pcb[0])->cp->err);
 	Log("pcb eip %x",(&pcb[0])->cp->eip);
 	Log("pcb cs %x",(&pcb[0])->cp->cs);
-	Log("pcb eflags %x",(&pcb[0])->cp->eflags);*/
+	Lo g("pcb eflags %x",(&pcb[0])->cp->eflags);*/
 	switch_boot_pcb();
 }
 
