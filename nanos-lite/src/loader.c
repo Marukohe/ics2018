@@ -21,8 +21,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for(;va <= (void *)DEFAULT_ENTRY+fz;va+=PGSIZE){
 	  Log("va: %x",(uint32_t)va);
 	void *pa = new_page(1);
+	Log("pa: %x",(uint32_t)pa);
 	_map(&pcb->as,va,pa,1);
+	Log("dd");
 	fs_read(fd,pa,PGSIZE);
+	Log("cd");
   }
   Log("4");
   fs_close(fd);
