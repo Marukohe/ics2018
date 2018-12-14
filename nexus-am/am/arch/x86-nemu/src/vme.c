@@ -78,6 +78,7 @@ void _switch(_Context *c) {
 
 int _map(_Protect *p, void *va, void *pa, int mode) {
 
+	printf("in map\n\n");
 	if(!mode&PTE_P)
 		printf("in map assert 0\n\n\n\n");
 
@@ -86,8 +87,9 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 	if(!(uint32_t)pagde&PTE_P){   //new page
 		//assert(0);
 		pte = (PTE*)(pgalloc_usr(1));
-		assert(0);
+		//assert(0);
 		*pagde  = PTE_ADDR(pte) | PTE_P;
+		//assert(0);
 	}
 	else{
 		pte = (PTE*)PTE_ADDR(*pagde);
