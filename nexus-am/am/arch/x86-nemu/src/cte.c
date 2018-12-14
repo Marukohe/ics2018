@@ -42,7 +42,7 @@ _Context* irq_handle(_Context *tf) {
     }
   }
   printf("at irq before switch\n");
-  _switch(tf);
+  _switch(next);
 
   printf("at irq after switch\n");
   return next;
