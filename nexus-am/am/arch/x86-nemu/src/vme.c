@@ -78,7 +78,7 @@ void _switch(_Context *c) {
 
 int _map(_Protect *p, void *va, void *pa, int mode) {
 
-	printf("in map\n\n");
+	printf("in map\n");
 	if(!mode&PTE_P)
 		printf("in map assert 0\n\n\n\n");
 
