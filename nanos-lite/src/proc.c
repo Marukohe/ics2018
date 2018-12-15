@@ -45,7 +45,7 @@ void init_proc() {
 	Log("pcb err %x",(&pcb[0])->cp->err);
 	Log("pcb eip %x",(&pcb[0])->cp->eip);
 	Log("pcb cs %x",(&pcb[0])->cp->cs);
-	Lo g("pcb eflags %x",(&pcb[0])->cp->eflags);*/
+	Log("pcb eflags %x",(&pcb[0])->cp->eflags);*/
 	switch_boot_pcb();
 }
 
@@ -59,7 +59,7 @@ _Context* schedule(_Context *prev) {
 	//always select pcb[0] as the new process
 	//current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
 	current = &pcb[0];
-	Log("%x",(uintptr_t)current->as.ptr);
+//	Log("%x",(uintptr_t)current->as.ptr);
 
 	//then return the new context
 	//Log("%x",current->cp->eip);
