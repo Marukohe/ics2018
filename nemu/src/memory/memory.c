@@ -29,7 +29,7 @@ void paddr_write(paddr_t addr, uint32_t data, int len) {
 }
 
 paddr_t page_translate(vaddr_t addr){
-	Log("addr: %x",addr);
+	//Log("addr: %x",addr);
 	PDE *pagde,pde;
 	PTE *pagte,pte;
 	paddr_t paddr = addr;
