@@ -248,7 +248,10 @@ void exec_wrapper(bool print_flag) {
     puts(decoding.asm_buf);
   }
 #endif
-  printf("%x %x %x %x\n",cpu.eip,cpu.esp,cpu.ebp,decoding.opcode);/*debug*/
+  /*printf("%x %x %x %x\n",cpu.eip,cpu.esp,cpu.ebp,decoding.opcode);*debug*/
+
+  update_eip();
+
   if(cpu.INTR & cpu.IF){
 	  cpu.INTR = false;
 	  raise_intr(IRQ_TIMER,cpu.eip);
