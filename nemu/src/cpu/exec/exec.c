@@ -1,5 +1,6 @@
 #include "cpu/exec.h"
 #include "all-instr.h"
+#define IRQ_TIMER 32
 
 typedef struct {
   DHelper decode;
@@ -12,6 +13,9 @@ typedef struct {
 #define EXW(ex, w)         {NULL, concat(exec_, ex), w}
 #define EX(ex)             EXW(ex, 0)
 #define EMPTY              EX(inv)
+
+void raise_intr(uint8_t NO, vaddr_t ret_addr);
+
 
 static inline void set_width(int width) {
   if (width == 0) {
@@ -245,7 +249,11 @@ void exec_wrapper(bool print_flag) {
   }
 #endif
   /*printf("%x %x %x %x\n",cpu.eip,cpu.esp,cpu.ebp,decoding.opcode);*debug*/
-  update_eip();
+  if(cpu.INTR & cpu.IF){
+	  cpu.INTR = false;
+	  raise_intr(IRQ_TIMER,cpu.eip);
+	update_eip();
+  }
 
 #if defined(DIFF_TEST)
   void difftest_step(uint32_t);

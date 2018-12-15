@@ -105,7 +105,7 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
 	*(--rstack) = 0x0;
 	*(--rstack) = 0x0;
 	//context
-	*(--rstack) = 0x0;   //eflags
+	*(--rstack) = 0x200;   //eflags
 	*(--rstack) = 0x8;   //cs
 	*(--rstack) = (uint32_t)entry;  //eip
 	*(--rstack) = 0x0;    //err

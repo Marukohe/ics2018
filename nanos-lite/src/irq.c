@@ -7,6 +7,7 @@ static _Context* do_event(_Event e, _Context* c) {
 	//case _EVENT_YIELD: printf("Oh,yeah!\n");return schedule(c);
 	case _EVENT_YIELD: return schedule(c);
 	case _EVENT_SYSCALL: do_syscall(c); break;
+	case _EVENT_IRQ_TIMER: Log("Time machine works successfully");_yield(); break;
     default: panic("Unhandled event ID = %d", e.event);
   }
 

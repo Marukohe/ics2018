@@ -7,6 +7,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    */
 
  // TODO();
+	cpu.INTR = true;
+
     union{
 		GateDesc Gatedesc;
 		uint32_t val[2];
@@ -16,6 +18,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 	//if(cpu.eflags==2)
 		//cpu.eflags=0x12;
 	rtl_push(&cpu.eflags);
+	
+	cpu.IF=0;
 
 	/*push CS*/
 	rtl_push(&cpu.CS);
