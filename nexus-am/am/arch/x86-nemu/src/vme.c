@@ -89,7 +89,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 	pde+=dir;
 	PTE *pte;
 	if(*pde & PTE_P){
-		pte = (PTE*)(PTE_ADDR(*pde) | PTE_P);
+		pte = (PTE*)PTE_ADDR(*pde);
 	}
 	else{
 		pte = (PTE*)pgalloc_usr(1);
