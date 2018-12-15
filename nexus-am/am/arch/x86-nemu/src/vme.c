@@ -92,7 +92,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 		pte = (PTE*)(PTE_ADDR(*pde) | PTE_P);
 	}
 	else{
-		pte = pgalloc_usr(1);
+		pte = (PTE*)pgalloc_usr(1);
 		*pde = PTE_ADDR(pte) | PTE_P;
 	}
 
