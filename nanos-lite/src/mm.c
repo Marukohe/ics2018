@@ -16,12 +16,13 @@ void free_page(void  *p) {
   panic("not implement yet");
 }
 
+extern uintptr_t heapstart;
 /* The brk() system call handler. */
 int mm_brk(uintptr_t new_brk) {
 	//Log("cur_brk: %x\nmax_brk: %x\nnew_brk: %x",current->cur_brk,current->max_brk,new_brk);
 	if(current->cur_brk == 0){
-		//current->cur_brk = current->max_brk = (uintptr_t)heaps;
-		current->cur_brk = current->max_brk = 0x8045000+(uintptr_t)(pf-hstart);
+		current->cur_brk = current->max_brk = heapstart;
+		//current->cur_brk = current->max_brk = 0x8045000+(uintptr_t)(pf-hstart);
 	}
 	//else{
 		if(new_brk > current->max_brk){

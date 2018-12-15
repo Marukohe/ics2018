@@ -10,6 +10,7 @@ extern int fs_open(const char *pathname,int flags,int mode);
 extern ssize_t fs_read(int fd,void *buf,size_t len);
 extern int fs_close(int fd);
 extern int fs_filesz(int fd);
+uintptr_t heapstart;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   int fd = fs_open(filename,0,0);
@@ -25,8 +26,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	//fs_read(fd,pa,(end-va)<PGSIZE?end-va:PGSIZE);
 	//Log("pa1: %x",(uintptr_t)pa);
   }
-  //heaps = va;
-  current->cur_brk=current->max_brk = (uintptr_t)va;
+  heapstart = (uintptr_t)va;
+  //current->cur_brk=current->max_brk = (uintptr_t)va;
   //Log("%x",current->cur_brk);
   fs_close(fd);
   return DEFAULT_ENTRY;
