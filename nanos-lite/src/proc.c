@@ -30,7 +30,7 @@ void init_proc() {
 	
 	//context_kload(&pcb[0],(void *)hello_fun);
 	//_protect(&pcb[0].as);
-	context_uload(&pcb[0],"/bin/hello");
+	context_uload(&pcb[0],"/bin/pal");
 
 	Log("pcb ptr %x",(uintptr_t)((&pcb[0])->as.ptr));
 /*	Log("pcb edi %x",(&pcb[0])->cp->edi);
