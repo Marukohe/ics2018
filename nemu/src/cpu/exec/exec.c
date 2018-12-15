@@ -254,7 +254,7 @@ void exec_wrapper(bool print_flag) {
 
   if(cpu.INTR & cpu.IF){
 	  cpu.INTR = false;
-	  raise_intr(IRQ_TIMER,decoding.seq_eip);
+	  raise_intr(IRQ_TIMER,cpu.eip);
 	update_eip();
   }
 
