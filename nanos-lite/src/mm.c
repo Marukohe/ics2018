@@ -35,7 +35,7 @@ int mm_brk(uintptr_t new_brk) {
 		}
 		current->cur_brk = new_brk;
 	}
-	Log("cur_brk: %x\n max_brk: %x",current->cur_brk,current->max_brk);
+	Log("cur_brk: %x   max_brk: %x\n",current->cur_brk,current->max_brk);
   return 0;
 }
 
