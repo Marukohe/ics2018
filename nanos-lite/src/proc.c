@@ -30,8 +30,8 @@ void init_proc() {
 	
 	//context_kload(&pcb[0],(void *)hello_fun);
 	//_protect(&pcb[0].as);
-	context_uload(&pcb[0],"/bin/pal");
-	//context_uload(&pcb[1],"/bin/hello");
+	context_uload(&pcb[0],"/bin/hello");
+	context_uload(&pcb[1],"/bin/pal");
 
 	//Log("pcb ptr %x",(uintptr_t)((&pcb[0])->as.ptr));
 /*	Log("pcb edi %x",(&pcb[0])->cp->edi);
@@ -58,8 +58,8 @@ _Context* schedule(_Context *prev) {
 	//Log("eip %x",current->cp->eip);
 
 	//always select pcb[0] as the new process
-	//current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
-	current = &pcb[0];
+	current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
+	//current = &pcb[0];
 //	Log("%x",(uintptr_t)current->as.ptr);
 
 	//then return the new context
