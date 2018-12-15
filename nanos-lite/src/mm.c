@@ -26,7 +26,7 @@ int mm_brk(uintptr_t new_brk) {
 			uintptr_t va;
 			void *pa;
 			uintptr_t begin = (current->max_brk&~0xfff)==current->max_brk?current->max_brk:(current->max_brk&~0xfff);
-			for(va = begin;va<=new_brk;va+=PGSIZE){
+			for(va = begin;va<new_brk;va+=PGSIZE){
 				pa = new_page(1);
 				Log("pa: %x",(uintptr_t)pa);
 				_map(&current->as,(void*)va,pa,1);
