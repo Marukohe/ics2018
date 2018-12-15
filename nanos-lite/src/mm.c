@@ -20,7 +20,7 @@ int mm_brk(uintptr_t new_brk) {
 	//Log("cur_brk: %x\nmax_brk: %x\nnew_brk: %x",current->cur_brk,current->max_brk,new_brk);
 	if(current->cur_brk == 0){
 		//current->cur_brk = current->max_brk = new_brk;
-		current->cur_brk = current->max_brk = 0x8048000;
+		current->cur_brk = current->max_brk = (uintptr_t)pf;
 	}
 	//else{
 		if(new_brk > current->max_brk){
