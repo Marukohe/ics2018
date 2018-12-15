@@ -41,7 +41,7 @@ _Context* irq_handle(_Context *tf) {
       next = tf;
     }
   }
-  printf("cte next: %x\n",(uint32_t)next->prot->ptr);
+  //printf("cte next: %x\n",(uint32_t)next->prot->ptr);
   //printf("cte tf: %x\n",(uint32_t)tf->prot->ptr);
   //printf("at irq before switch\n");
   _switch(next);

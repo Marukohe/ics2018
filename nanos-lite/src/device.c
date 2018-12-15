@@ -2,7 +2,7 @@
 #include <amdev.h>
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
-	_yield();
+//	_yield();
   //char *buff = (char *)buf;
   for(int i=0;i<len;i++)
 	_putc(((char *)buf)[i]);
@@ -19,7 +19,7 @@ static const char *keyname[256] __attribute__((used)) = {
 
 /* my events_read*/
 size_t events_read(void *buf, size_t offset, size_t len) {
-	_yield();
+//	_yield();
   int key = read_key();
   if(key!=_KEY_NONE){
 	if((key&0x8000)==0)  //down
@@ -81,7 +81,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
 */
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-	_yield();
+//	_yield();
   
   //Log("offset %d",offset);
   int row,col;
