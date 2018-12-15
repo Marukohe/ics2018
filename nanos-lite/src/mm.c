@@ -17,7 +17,7 @@ void free_page(void *p) {
 
 /* The brk() system call handler. */
 int mm_brk(uintptr_t new_brk) {
-	Log("cur_brk: %x\nmax_brk: %x\nnew_brk: %x\n",current->cur_brk,current->max_brk,new_brk);
+	Log("cur_brk: %x\nmax_brk: %x\nnew_brk: %x",current->cur_brk,current->max_brk,new_brk);
 	if(current->cur_brk == 0){
 		current->cur_brk = current->max_brk = new_brk;
 	}
@@ -35,6 +35,7 @@ int mm_brk(uintptr_t new_brk) {
 		}
 		current->cur_brk = new_brk;
 	}
+	Log("cur_brk: %x\n max_brk: %x",current->cur_brk,current->max_brk);
   return 0;
 }
 
