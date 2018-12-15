@@ -77,35 +77,29 @@ void _switch(_Context *c) {
   printf("yingyingying\n");
   cur_as = c->prot;
 }
+
 int _map(_Protect *p, void *va, void *pa, int mode) {
 
 	printf("in map\n");
 	if(!mode&PTE_P)
 		printf("in map assert 0\n\n\n\n");
-
-	PDE *pagde = (PDE *)((uint32_t*)(p->ptr))[PDX(va)];
+	
+	uint32_t dir = PDX(va);
+	PDE *pde = (PDE *)p->ptr;
+	pde+=dir;
 	PTE *pte;
-	if(!(uint32_t)pagde&PTE_P){   //new page
-		//assert(0);
-		pte = (PTE*)(pgalloc_usr(1));
-		//assert(0);
-		for(int i=0;i<NR_PTE;i++)
-			pte[i]=0;
-		//*pagde = PTE_ADDR(pte) | PTE_P;
-		//*pagde = ((uint32_t)(pte)&~0xfff) | PTE_P;
-		((uint32_t *)(p->ptr))[PDX(va)] = PTE_ADDR(pte) | PTE_P;
-		//assert(0);
+	if(*pde & PTE_P){
+		pte = (PTE*)(PTE_ADDR(*pde) | PTE_P);
 	}
 	else{
-		pte = (PTE*)PTE_ADDR(*pagde);
+		pte = pgalloc_usr(1);
+		*pde = PTE_ADDR(pte) | PTE_P;
 	}
-	//assert(0);
 
 	pte[PTX(va)] = PTE_ADDR(pa) | PTE_P;
     //assert(0);
   return 0;
 }
-
 
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
 	//stack frame of start()
