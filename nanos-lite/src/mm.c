@@ -32,7 +32,7 @@ int mm_brk(uintptr_t new_brk) {
 				Log("pa: %x",(uintptr_t)pa);
 				_map(&current->as,(void*)va,pa,1);
 			}
-			current->max_brk = va;
+			current->max_brk = new_brk;
 		}
 		current->cur_brk = new_brk;
 	}
