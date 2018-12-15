@@ -3,6 +3,8 @@
 
 static void *pf = NULL;
 
+static void *hstart = NULL;
+
 void* new_page(size_t nr_page) {
   void *p = pf;
   pf += PGSIZE * nr_page;
@@ -20,7 +22,7 @@ int mm_brk(uintptr_t new_brk) {
 	//Log("cur_brk: %x\nmax_brk: %x\nnew_brk: %x",current->cur_brk,current->max_brk,new_brk);
 	if(current->cur_brk == 0){
 		//current->cur_brk = current->max_brk = new_brk;
-		current->cur_brk = current->max_brk = (uintptr_t)pf;
+		current->cur_brk = current->max_brk = 8048000+(uintptr_t)(pf-hstart);
 	}
 	//else{
 		if(new_brk > current->max_brk){
@@ -45,5 +47,6 @@ void init_mm() {
   pf = (void *)PGROUNDUP((uintptr_t)_heap.start);
   Log("free physical pages starting from %p", pf);
 
+  hstart = pf;
   _vme_init(new_page, free_page);
 }
