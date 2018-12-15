@@ -30,7 +30,7 @@ int mm_brk(uintptr_t new_brk) {
 			uintptr_t begin = (current->max_brk)&~0xfff;
 			for(va = begin;va<=new_brk;va+=PGSIZE){
 				pa = new_page(1);
-				//Log("pa: %x",(uintptr_t)pa);
+				Log("pa: %x",(uintptr_t)pa);
 				_map(&current->as,(void*)va,pa,1);
 			}
 			current->max_brk = new_brk;
