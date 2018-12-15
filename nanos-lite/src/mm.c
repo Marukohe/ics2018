@@ -24,7 +24,7 @@ int mm_brk(uintptr_t new_brk) {
 		if(new_brk > current->max_brk){
 			uintptr_t va;
 			void *pa;
-			for(va = current->max_brk;va<new_brk;va+=PGSIZE){
+			for(va = current->max_brk&~0xfff;va<new_brk;va+=PGSIZE){
 				pa = new_page(1);
 				_map(&current->as,(void*)va,pa,1);
 			}
