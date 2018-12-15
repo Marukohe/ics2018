@@ -46,6 +46,7 @@ paddr_t page_translate(vaddr_t addr){
 	return paddr;
 }
 
+
 uint32_t vaddr_read(vaddr_t addr, int len) {
 	if(((addr+len-1)&(~PAGE_MASK))!=(addr&(~PAGE_MASK))){
 	/*This is a special case, you can handle it later*/

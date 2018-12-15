@@ -55,11 +55,11 @@ int fs_open(const char *pathname,int flags,int mode){
  	for(int i=0;i<NR_FILES;i++){
 		if(strcmp(file_table[i].name,pathname)==0)
 		{
-			Log("%s fd:%d",pathname,i);
+			//Log("%s fd:%d",pathname,i);
 			return i;
  	 	}
  	} 
-	Log("to see assert %s",pathname);
+	//Log("to see assert %s",pathname);
 	assert(0);
 	return 0;
 }
@@ -122,7 +122,7 @@ off_t fs_lseek(int fd,off_t offset,int whence){
  	}
 }
 int fs_close(int fd){
-	Log("fd: %d",fd);
+	//Log("fd: %d",fd);
 	file_table[fd].open_offset = 0;
 	return 0;
 }
