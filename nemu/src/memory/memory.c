@@ -28,7 +28,6 @@ void paddr_write(paddr_t addr, uint32_t data, int len) {
 	mmio_write(addr,len,data,is_mmio(addr));
 }
 
-
 paddr_t page_translate(vaddr_t addr){
 	//Log("addr: %x",addr);
 	PDE *pagde,pde;
@@ -38,10 +37,10 @@ paddr_t page_translate(vaddr_t addr){
 		//assert(0);
 		pagde = (PDE*)(uintptr_t)(cpu.cr3.page_directory_base<<12);
 		pde.val = paddr_read((uintptr_t)&pagde[addr>>22],4);
-		assert(pde.present);
+		Assert(pde.present,"pde addr: 0x%x",addr);
 		pagte = (PTE*)(uintptr_t)(pde.page_frame<<12);
 		pte.val = paddr_read((uintptr_t)&pagte[(addr<<10)>>22],4);
-		assert(pte.present);
+		Assert(pte.present,"pte addr: 0x%x",addr);
 		paddr = (pte.page_frame<<12)+(addr&0xfff);
 	}
 	return paddr;
