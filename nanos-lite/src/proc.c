@@ -58,7 +58,7 @@ _Context* schedule(_Context *prev) {
 	//Log("eip %x",current->cp->eip);
 
 	//always select pcb[0] as the new process
-	current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
+	//current = (current == &pcb[0]?&pcb[1]:&pcb[0]);
 	//current = &pcb[0];
 //	Log("%x",(uintptr_t)current->as.ptr);
 
