@@ -72,15 +72,13 @@ void get_cur_as(_Context *c) {
 }
 
 void _switch(_Context *c) {
-	printf("miaomiao: %x\n",(uint32_t)c->prot->ptr);
   set_cr3(c->prot->ptr);
-  printf("yingyingying\n");
   cur_as = c->prot;
 }
 
 int _map(_Protect *p, void *va, void *pa, int mode) {
 
-	printf("in map\n");
+	//printf("in map\n");
 	if(!mode&PTE_P)
 		printf("in map assert 0\n\n\n\n");
 	
