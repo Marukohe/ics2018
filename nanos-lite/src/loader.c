@@ -11,12 +11,12 @@ extern ssize_t fs_read(int fd,void *buf,size_t len);
 extern int fs_close(int fd);
 extern int fs_filesz(int fd);
 uintptr_t heapstart;
-//void *va = (void *)DEFAULT_ENTRY;
+void *va = (void *)DEFAULT_ENTRY;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   int fd = fs_open(filename,0,0);
   int fz = fs_filesz(fd);
-  void *va = (void *)DEFAULT_ENTRY;
+  //void *va = (void *)DEFAULT_ENTRY;
   void *end = (void *)DEFAULT_ENTRY + fz;
   for(;va < end;va+=PGSIZE){
 	  //Log("va: %x",(long)va);
@@ -58,5 +58,8 @@ void context_uload(PCB *pcb, const char *filename) {
   //Log("%x",(uint32_t)stack.end);
 
   pcb->cp = _ucontext(&pcb->as, stack, stack, (void *)entry, NULL);
-  //pcb->cur_brk=pcb->max_brk = (uintptr_t)va;
+  if(pcb->cur_brk==0){
+	pcb->cur_brk=pcb->max_brk = (uintptr_t)va;
+	Log("cur_brk: %x",pcb->cur_brk);
+  }
 }
