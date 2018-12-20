@@ -17,6 +17,7 @@ typedef union {
   };
 } PCB;
 
+extern PCB *fg_pcb;
 extern PCB *current;
 
 #endif
