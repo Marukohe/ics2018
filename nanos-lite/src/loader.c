@@ -14,6 +14,7 @@ uintptr_t heapstart;
 void *va = (void *)DEFAULT_ENTRY;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
+  Log("file %s",filename);
   int fd = fs_open(filename,0,0);
   int fz = fs_filesz(fd);
   //void *va = (void *)DEFAULT_ENTRY;
