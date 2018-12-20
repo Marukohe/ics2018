@@ -57,5 +57,5 @@ void context_uload(PCB *pcb, const char *filename) {
   //Log("%x",(uint32_t)stack.end);
 
   pcb->cp = _ucontext(&pcb->as, stack, stack, (void *)entry, NULL);
-  pcb->cur_brk=pcb->max_brk = (uintptr_t)va;
+  //pcb->cur_brk=pcb->max_brk = (uintptr_t)va;
 }
