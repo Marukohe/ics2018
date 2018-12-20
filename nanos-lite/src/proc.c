@@ -6,6 +6,7 @@ static PCB pcb[MAX_NR_PROC] __attribute__((used));
 static PCB pcb_boot;
 PCB *current;
 PCB *fg_pcb;
+extern int pcbnum;
 
 extern void context_kload(PCB *pcb, void *entry);
 extern void context_uload(PCB *pcb, const char *filename);
@@ -57,6 +58,7 @@ void init_proc() {
 _Context* schedule(_Context *prev) {
 	//Log("prev %x",prev->eip);
 	//save the context point
+	fg_pcb = &pcb[pcbnum];
 	current->cp = prev;
 
 	//Log("eip %x",current->cp->eip);

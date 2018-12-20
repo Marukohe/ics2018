@@ -1,6 +1,8 @@
 #include "common.h"
 #include <amdev.h>
 
+int pcbnum=1;
+
 size_t serial_write(const void *buf, size_t offset, size_t len) {
 //	_yield();
   //char *buff = (char *)buf;
@@ -21,6 +23,12 @@ static const char *keyname[256] __attribute__((used)) = {
 size_t events_read(void *buf, size_t offset, size_t len) {
 //	_yield();
   int key = read_key();
+  if(key==_KEY_F1)
+	pcbnum = 1;
+  else if(key==_KEY_F2)
+	pcbnum = 2;
+  else if(key==_KEY_F3)
+	pcbnum = 3;
   if(key!=_KEY_NONE){
 	if((key&0x8000)==0)  //down
 	{
