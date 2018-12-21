@@ -62,6 +62,6 @@ void context_uload(PCB *pcb, const char *filename) {
   pcb->cp = _ucontext(&pcb->as, stack, stack, (void *)entry, NULL);
   if(pcb->cur_brk==0){
 	pcb->cur_brk=pcb->max_brk = heapcur;
-	Log("cur_brk: %x",pcb->cur_brk);
+	//Log("cur_brk: %x",pcb->cur_brk);
   }
 }
