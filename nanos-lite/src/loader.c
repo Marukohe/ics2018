@@ -14,7 +14,7 @@ uintptr_t heapstart;
 uintptr_t heapcur;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  Log("file %s",filename);
+  //Log("file %s",filename);
   int fd = fs_open(filename,0,0);
   int fz = fs_filesz(fd);
   void *va = (void *)DEFAULT_ENTRY;
@@ -22,7 +22,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for(;va < end;va+=PGSIZE){
 	  //Log("va: %x",(long)va);
 	void *pa = new_page(1);
-	Log("va: %x",(long)va);
+	//Log("va: %x",(long)va);
 	_map(&pcb->as,va,pa,1);
 	fs_read(fd,pa,PGSIZE);
 	//fs_read(fd,pa,(end-va)<PGSIZE?end-va:PGSIZE);
@@ -63,5 +63,5 @@ void context_uload(PCB *pcb, const char *filename) {
   if(pcb->cur_brk==0){
 	pcb->cur_brk=pcb->max_brk = heapcur;
 	//Log("cur_brk: %x",pcb->cur_brk);
-  }
+  } 
 }
